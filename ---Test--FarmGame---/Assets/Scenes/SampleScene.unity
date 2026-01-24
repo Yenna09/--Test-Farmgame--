@@ -164,9 +164,9 @@ GameObject:
   m_Component:
   - component: {fileID: 531783031}
   - component: {fileID: 531783032}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bunny
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 531783030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: -6.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 2115296305}
   - component: {fileID: 2115296304}
   - component: {fileID: 2115296303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -610,6 +610,14 @@ PrefabInstance:
     - target: {fileID: 1169656350088081474, guid: 5ecdae6bd0cc7de4c8c9e2bb8c0dbcce, type: 3}
       propertyPath: m_Name
       value: Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169656350088081474, guid: 5ecdae6bd0cc7de4c8c9e2bb8c0dbcce, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169656350088081474, guid: 5ecdae6bd0cc7de4c8c9e2bb8c0dbcce, type: 3}
+      propertyPath: m_TagString
+      value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 5071967378722501000, guid: 5ecdae6bd0cc7de4c8c9e2bb8c0dbcce, type: 3}
       propertyPath: m_LocalPosition.x
