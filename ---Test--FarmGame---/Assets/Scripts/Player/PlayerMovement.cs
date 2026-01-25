@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+    public float verticalCompensation = 1.25f;
     
     
     private Rigidbody rb;
@@ -13,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
     }
 
@@ -28,7 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 movement = moveInput * speed * Time.fixedDeltaTime;
         
-        rb.MovePosition(rb.position + moveInput * speed * Time.fixedDeltaTime);
+        movement.z *= verticalCompensation;
+
+        rb.MovePosition(rb.position + movement);
     }
 }
