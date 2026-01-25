@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1654417}
   - component: {fileID: 1654418}
   - component: {fileID: 1654419}
+  - component: {fileID: 1654420}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -150,8 +151,8 @@ Transform:
   m_GameObject: {fileID: 1654415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.95, y: 1.098, z: 12.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.043, y: 1.663, z: 11.307}
+  m_LocalScale: {x: 0.9801, y: 1, z: -0.012951}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 531783031}
@@ -217,8 +218,31 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!136 &1654420
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654415}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4271811
+  m_Height: 1.0271118
+  m_Direction: 1
+  m_Center: {x: -0.54600936, y: -0.5966631, z: -4.8816996}
 --- !u!1 &9038178
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +854,6 @@ GameObject:
   m_Component:
   - component: {fileID: 531783031}
   - component: {fileID: 531783032}
-  - component: {fileID: 531783033}
   m_Layer: 3
   m_Name: Bunny
   m_TagString: Player
@@ -846,13 +869,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531783030}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.549, y: -0.704, z: -2.0217}
-  m_LocalScale: {x: 1, y: 1, z: 0.037197}
+  m_LocalRotation: {x: 0, y: -0.9997365, z: -0, w: 0.022955246}
+  m_LocalPosition: {x: -0.58002, y: -0.704, z: -1.9744}
+  m_LocalScale: {x: 1.1188, y: 1, z: 0.037197}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1654416}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -177.369, z: 0}
 --- !u!212 &531783032
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -905,29 +928,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &531783033
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531783030}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.271806
-  m_Height: 0.9816766
-  m_Direction: 1
-  m_Center: {x: -0.006121874, y: 0.0849812, z: -1.9211597}
 --- !u!1 &587955944
 GameObject:
   m_ObjectHideFlags: 0

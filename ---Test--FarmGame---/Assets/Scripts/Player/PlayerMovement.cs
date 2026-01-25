@@ -29,10 +29,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = moveInput * speed * Time.fixedDeltaTime;
-        
-        movement.z *= verticalCompensation;
+        Vector3 targetVelocity = moveInput * speed;
 
-        rb.MovePosition(rb.position + movement);
+        targetVelocity.z *= verticalCompensation;
+
+        targetVelocity.y = rb.velocity.y;
+
+        rb.velocity = targetVelocity;
     }
 }
