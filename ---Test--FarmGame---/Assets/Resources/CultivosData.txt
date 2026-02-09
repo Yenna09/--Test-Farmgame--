@@ -1,0 +1,16 @@
+{
+  "listaCultivos": [
+    {
+      "id": 1,
+      "nombre": "Papa",
+      "velocidadDeCrecimiento": 120.0,
+      "temporada": "Invierno"
+    },
+    {
+      "id": 2,
+      "nombre": "Trigo",
+      "velocidadDeCrecimiento": 180.0,
+      "temporada": "Primavera"
+    }
+  ]
+}
