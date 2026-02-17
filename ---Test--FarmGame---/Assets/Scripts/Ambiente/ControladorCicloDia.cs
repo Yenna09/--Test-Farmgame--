@@ -41,22 +41,39 @@ public class ControladorCicloDia : MonoBehaviour
                 cicloSiguiente += 1;
         }
 
-        // Lerp de Color
+        
         Color colorLerp = Color.Lerp(cicloDias[cicloActual].colorCiclo, cicloDias[cicloSiguiente].colorCiclo, porcentajeCiclo);
         
-        // Lerp de Intensidad (Potencia de la luz)
+        
         float intensidadLerp = Mathf.Lerp(cicloDias[cicloActual].intensidad, cicloDias[cicloSiguiente].intensidad, porcentajeCiclo);
 
         AplicarCambios(colorLerp, intensidadLerp);
     }
 
-    private void AplicarCambios(Color color, float intensidad)
-    {
-        
-        luzGlobal.color = color;
-        luzGlobal.intensity = intensidad;
 
-        
-        RenderSettings.ambientLight = color * 0.5f; 
+    private void AplicarCambios(Color color, float intensidad)
+{
+    
+    luzGlobal.color = color;
+    luzGlobal.intensity = intensidad;
+    RenderSettings.ambientLight = color * 0.5f; 
+
+    
+    GameObject player = GameObject.FindWithTag("Player");
+    if (player != null)
+    {
+        SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            
+            sr.color = Color.white;
+            sr.material.SetColor("_EmissionColor", Color.white);
+            sr.material.SetColor("_Color", Color.white);
+            sr.material.SetFloat("_Exposure", 1.0f);
+
+            
+            
+        }
     }
+}
 }

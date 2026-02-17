@@ -7,18 +7,19 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))] // Nos aseguramos que siempre haya un Animator
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Configuración de Movimiento")]
+    [Header("Configuracion de Movimiento")]
     public float speed = 5f;
     public float verticalCompensation = 1.25f;
+    
 
     private Rigidbody rb;
-    private Animator animator; // 1. Referencia al Animator
+    private Animator animator; 
     private Vector3 moveInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>(); // 2. Inicializamos el Animator
+        animator = GetComponent<Animator>(); 
         rb.freezeRotation = true;
     }
 
@@ -29,32 +30,41 @@ public class PlayerMovement : MonoBehaviour
 
         moveInput = new Vector3(horizontal, 0, vertical).normalized;
 
-        // 3. Enviamos los datos al Animator
-        // "Horizontal" y "Vertical" le dicen al Blend Tree hacia dónde mirar.
+        
         animator.SetFloat("Horizontal", horizontal);
         animator.SetFloat("Vertical", vertical);
 
-        // "Speed" sirve para saber si el personaje se está moviendo (mayor a 0) o está quieto (0).
-        // Usamos sqrMagnitude porque es más eficiente que calcular la distancia exacta.
+        
         animator.SetFloat("Speed", moveInput.sqrMagnitude);
 
-        // Opcional: Esto guarda la última dirección para que al dejar de moverte
-        // el personaje se quede mirando hacia donde caminaba en lugar de resetearse.
+    
         if (horizontal != 0 || vertical != 0)
         {
             animator.SetFloat("LastHorizontal", horizontal);
             animator.SetFloat("LastVertical", vertical);
         }
+
     }
 
     void FixedUpdate()
     {
-        // Tu lógica de movimiento física se mantiene igual
-        Vector3 targetVelocity = moveInput * speed;
-        targetVelocity.z *= verticalCompensation; // Compensación de perspectiva 2.5D
+        if (InventarioToggle.instance.inventarioAbierto)
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            return; 
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            Vector3 targetVelocity = moveInput * speed;
+            targetVelocity.z *= verticalCompensation; 
 
-        targetVelocity.y = -5f; // Gravedad manual para mantenerlo al suelo
+            targetVelocity.y = -5f; 
 
-        rb.velocity = targetVelocity;
+            rb.velocity = targetVelocity;
+        }
+        
     }
 }
