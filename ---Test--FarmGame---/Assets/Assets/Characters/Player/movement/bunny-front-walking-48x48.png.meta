@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ebc678a8657ef24d9d50fed0585b61b
+guid: 119ea90db7eb1c44e892978ca1e0c945
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,94 +93,68 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny-right-walking-Sheet-32x32_0
+      name: bunny-front-walking-48x48_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 9, y: 3, z: 7, w: 1}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10aba1f595c1ee84a8228c05f50d4c63
-      internalID: -1161134679
+      spriteID: 0674bc2b207143c4cbd866d4cf6f9c9b
+      internalID: 1392788722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny-right-walking-Sheet-32x32_1
+      name: bunny-front-walking-48x48_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 9, y: 3, z: 7, w: 0}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23991c4c45326114dba72f167d2f7eab
-      internalID: -405923096
+      spriteID: 195434eb638e10d408120c6f6df1d404
+      internalID: -1493193355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny-right-walking-Sheet-32x32_2
+      name: bunny-front-walking-48x48_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 9, y: 3, z: 7, w: 1}
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfe8f3a78f91ee6439761e16c19458d6
-      internalID: 2036726359
+      spriteID: a3266d46dc945d54aa1c510b001725d7
+      internalID: 1882227141
       vertices: []
       indices: 
       edges: []
@@ -188,7 +162,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 94aa7f307066316468f78c86bdca58d6
+    spriteID: db40b788b8f5ecf4d90a847e4dcb3f43
     internalID: 0
     vertices: []
     indices: 
@@ -196,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny-right-walking-Sheet-32x32_0: -1161134679
-      bunny-right-walking-Sheet-32x32_1: -405923096
-      bunny-right-walking-Sheet-32x32_2: 2036726359
+      bunny-front-walking-48x48_0: 1392788722
+      bunny-front-walking-48x48_1: -1493193355
+      bunny-front-walking-48x48_2: 1882227141
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

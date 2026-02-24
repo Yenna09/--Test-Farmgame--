@@ -93,32 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -130,15 +104,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 16, y: 11, z: 15, w: 8}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17e47e160d2e7f240a222ddd3a5417d3
-      internalID: -1194753482
+      spriteID: 32293c7142d965746b7e17a2dfd7742b
+      internalID: -1632182016
       vertices: []
       indices: 
       edges: []
@@ -151,15 +125,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 16, y: 11, z: 15, w: 9}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31e7b7aa17857a34d95fa3e18c9ba23e
-      internalID: 1575827967
+      spriteID: 3d9d33e60f51bce47bb3b4960408eb97
+      internalID: 1564368508
       vertices: []
       indices: 
       edges: []
@@ -172,15 +146,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 16, y: 11, z: 15, w: 9}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ec5d0ecda238034a839bb01225b6192
-      internalID: 1067921359
+      spriteID: d06cd79ec836f6a48b6738357b201069
+      internalID: 1799552690
       vertices: []
       indices: 
       edges: []
@@ -193,15 +167,15 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 16, y: 11, z: 15, w: 8}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 884e1e43ab43ad74587d04c64b19072b
-      internalID: 1160045783
+      spriteID: 104e1a8fd6e411c43b9506deeaa127a9
+      internalID: -89451367
       vertices: []
       indices: 
       edges: []
@@ -209,7 +183,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 14034a9054534d448b8d5225a4a96a59
+    spriteID: 7061451b695998f4580d3e4acb6cf14e
     internalID: 0
     vertices: []
     indices: 
@@ -217,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny-front-idle-48x48_0: -1194753482
-      bunny-front-idle-48x48_1: 1575827967
-      bunny-front-idle-48x48_2: 1067921359
-      bunny-front-idle-48x48_3: 1160045783
+      bunny-front-idle-48x48_0: -1632182016
+      bunny-front-idle-48x48_1: 1564368508
+      bunny-front-idle-48x48_2: 1799552690
+      bunny-front-idle-48x48_3: -89451367
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fd559b67358ac7a4297c42bcd83d760e
+guid: f78ad05c318b38f4d8010b13705e33cc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,94 +93,68 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny-front-walking-Sheet-32x32_0
+      name: bunny-left-walking-48x48_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 9
-      pivot: {x: 0.5189179, y: 0.4545971}
-      border: {x: 9, y: 3, z: 8, w: 0}
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4d1c5f01d4ae0b4fa3379407cfc6992
-      internalID: 170049289
+      spriteID: f3973770d905a5047bc9f2794c864ea9
+      internalID: 227453225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny-front-walking-Sheet-32x32_1
+      name: bunny-left-walking-48x48_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 9
-      pivot: {x: 0.51513433, y: 0.48486573}
-      border: {x: 8, y: 3, z: 7, w: 0}
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c32ba3b7fa48dc4dbfe7fb4a0434ea1
-      internalID: -653545640
+      spriteID: d2471c2defaf28640aa903b535b880fa
+      internalID: 65077564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny-front-walking-Sheet-32x32_2
+      name: bunny-left-walking-48x48_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 32
-        height: 32
+        width: 48
+        height: 48
       alignment: 9
-      pivot: {x: 0.5189178, y: 0.45838067}
-      border: {x: 9, y: 3, z: 8, w: 0}
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3c6795de999d884a844ec7a5b67676e
-      internalID: -74754008
+      spriteID: 2cf873c743ba85b40b2917677f0fdf34
+      internalID: 1433042073
       vertices: []
       indices: 
       edges: []
@@ -188,7 +162,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5628bf4e34b21704e83c5e9a484f021a
+    spriteID: 53db554ca3d2aae42986b86478e8faed
     internalID: 0
     vertices: []
     indices: 
@@ -196,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny-front-walking-Sheet-32x32_0: 170049289
-      bunny-front-walking-Sheet-32x32_1: -653545640
-      bunny-front-walking-Sheet-32x32_2: -74754008
+      bunny-left-walking-48x48_0: 227453225
+      bunny-left-walking-48x48_1: 65077564
+      bunny-left-walking-48x48_2: 1433042073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
