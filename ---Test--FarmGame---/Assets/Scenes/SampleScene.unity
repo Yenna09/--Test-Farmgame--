@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelInventario: {fileID: 268541445}
+  inventarioAbierto: 0
 --- !u!1 &9038178
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,8 +683,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 15.916}
-  m_SizeDelta: {x: 856.4, y: 786.0225}
+  m_AnchoredPosition: {x: -0.00000095367, y: -0.000014782}
+  m_SizeDelta: {x: 757.0146, y: 673.2644}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &268541447
 MonoBehaviour:
