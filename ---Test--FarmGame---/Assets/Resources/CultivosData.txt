@@ -2,15 +2,51 @@
   "listaCultivos": [
     {
       "id": 1,
-      "nombre": "Papa",
-      "velocidadDeCrecimiento": 120.0,
-      "temporada": "Invierno"
+      "nombre": "Potato",
+      "velocidadDeCrecimiento": 0.0,
+      "temporada": "Invierno",
+      "tipo": "Crops",
+      "spriteName": "Crops/potato-16x16"
     },
     {
       "id": 2,
-      "nombre": "Trigo",
-      "velocidadDeCrecimiento": 180.0,
-      "temporada": "Primavera"
+      "nombre": "Onion",
+      "velocidadDeCrecimiento": 0.0,
+      "temporada": "Otonio",
+      "tipo": "Crops",
+      "spriteName": "Crops/onion-16x16"
+    },
+    {
+      "id": 3,
+      "nombre": "Carrot",
+      "velocidadDeCrecimiento": 0.0,
+      "temporada": "Invierno",
+      "tipo": "Crops",
+      "spriteName": "Crops/carrot-16x16"
+    },
+    {
+      "id": 4,
+      "nombre": "Potato Seed",
+      "velocidadDeCrecimiento": 120.0,
+      "temporada": "Invierno",
+      "tipo": "Seeds",
+      "spriteName": "Seeds/potato-seed-16x16"
+    },
+    {
+      "id": 5,
+      "nombre": "Onion Seed",
+      "velocidadDeCrecimiento": 160.0,
+      "temporada": "Invierno",
+      "tipo": "Seeds",
+      "spriteName": "Seeds/onion-seed-16x16"
+    },
+    {
+      "id": 6,
+      "nombre": "Carrot Seed",
+      "velocidadDeCrecimiento": 180,
+      "temporada": "Invierno",
+      "tipo": "Seeds",
+      "spriteName": "Seeds/carrot-seed-16x16"
     }
   ]
 }

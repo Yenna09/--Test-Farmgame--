@@ -5,11 +5,17 @@ using UnityEngine;
 public class CultivoManager : MonoBehaviour
 {
     public static CultivoManager Instance;
+
+    
+
     private void Awake()
     {
         Instance = this;
     }
     public Dictionary<int, DatosCultivos> diccionarioCultivos = new Dictionary<int, DatosCultivos>();
+
+    public List<int> inventarioIDs = new List<int>();
+
     void Start()
     {
         CargarDatos();
@@ -44,4 +50,5 @@ public class CultivoManager : MonoBehaviour
             Debug.LogError("<color=red> ERROR EN BASE DE DATOS:</color> El diccionario está vacío. Revisa el JSON o la ruta.");
         }
     }
+
 }

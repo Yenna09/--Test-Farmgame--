@@ -9,6 +9,8 @@ public class DatosCultivos
     public string nombre;
     public float velocidadDeCrecimiento;
     public string temporada;
+    public string tipo;
+    public string spriteName;
 
 }
 

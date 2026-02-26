@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-       
+    
         if (offset == Vector3.zero)
         {
             offset = transform.position - target.position;
@@ -24,7 +24,7 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-       
+    
         Vector3 targetPosition = target.position + offset;
 
         
