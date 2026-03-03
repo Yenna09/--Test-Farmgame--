@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c929eb27729ae44eadbdc2302d77185, type: 3}
+  m_Name: DataBase
+  m_EditorClassIdentifier: 
+  dataBase:
+  - nombre: Papa
+    ID: 0
+    icono: {fileID: 0}
+    tipo: 0
+    acumulable: 0
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Zanahoria
+    ID: 1
+    icono: {fileID: 0}
+    tipo: 0
+    acumulable: 0
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Cebolla
+    ID: 2
+    icono: {fileID: 0}
+    tipo: 0
+    acumulable: 0
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}

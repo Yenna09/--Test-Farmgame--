@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cultivo
+  - Item_UI
+  - Slot
   layers:
   - Default
   - TransparentFX
