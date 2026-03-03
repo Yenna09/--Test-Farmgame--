@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2767810674469710216}
+  - component: {fileID: 1386181585277300268}
   m_Layer: 0
   m_Name: ItemUI
   m_TagString: Item_UI
@@ -31,3 +32,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386181585277300268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140774899578258593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea59e25f01ba5645aef929d8ffd05fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  quantity: 0
+  db: {fileID: 11400000, guid: a58cc2f0199c71344b61bd17c38c4d65, type: 2}
+  itemData:
+    nombre: 
+    ID: 0
+    icono: {fileID: 0}
+    tipo: 0
+    acumulable: 0
+    maxStack: 0
+    descripcion: 
+    item: {fileID: 0}
+  exParent: {fileID: 0}
+  deleteButton: {fileID: 778815520432677114, guid: 143ab5c40e0763e4d81fc01e2f867f9f, type: 3}

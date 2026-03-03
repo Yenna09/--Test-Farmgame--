@@ -11,9 +11,14 @@ public class Inventory : MonoBehaviour
     public int slotsCount = 35;
     public bool isOpen;
 
-    [SerializeField] private GameObject inventoryToggle;
-    [SerializeField] private Transform slotPrefab;
-    [SerializeField] private Transform itemPrefab;
+    [SerializeField] 
+    private GameObject inventoryToggle;
+    [SerializeField] 
+    private Transform slotPrefab;
+    [SerializeField] 
+    private Transform itemPrefab;
+    [SerializeField] 
+    //private Player player;
 
     public List<ItemUI> items = new List<ItemUI>();
     bool itemsDeleteModeEnabled;

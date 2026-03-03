@@ -1,53 +1,69 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using TMPro;
 
 public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField]
+    private Database db;
+
+    [SerializeField]
+    private GameObject deleteButton;
+
     public int id;
     public int quantity;
 
-    [HideInInspector] public Database.InventoryItem itemData;
-    [HideInInspector] public Transform exParent;
+    [HideInInspector]
+    public Database.InventoryItem itemData;
+    [HideInInspector]
+    public Transform exParent;
 
-    public GameObject deleteButton;
-    private TextMeshProUGUI quantityText;
-    private Image iconoImage;
-    private Vector3 dragOffset;
+    TextMeshProUGUI quantityText;
+    Image iconoImage;
+    Vector3 dragOffset;
 
-    void Awake() 
+    void Awake()
     {
-        quantityText = GetComponentInChildren<TextMeshProUGUI>();
+        quantityText = transform.GetComponentInChildren<TextMeshProUGUI>();
         iconoImage = GetComponent<Image>();
+
         exParent = transform.parent;
-        
-        if (exParent != null && exParent.GetComponent<Image>() != null) 
+        if (exParent.GetComponent<Image>())
+        {
             exParent.GetComponent<Image>().fillCenter = true;
+        }
 
         InitializeItem(id, quantity);
     }
 
     void Update()
     {
-        if (quantityText != null) quantityText.text = quantity.ToString();
-    }
-
-    public void InitializeItem(int _id, int _quantity)
-    {
-        id = _id;
-        quantity = _quantity;
-        var database = Inventory.Instance.db;
-        
-        if (database != null && id < database.dataBase.Length)
+        if (quantityText != null)
         {
-            itemData = database.dataBase[id];
-            iconoImage.sprite = itemData.icono;
+            quantityText.text = quantity.ToString();
         }
-        if(deleteButton != null) deleteButton.SetActive(false);
     }
 
+    public void InitializeItem(int id, int quantity)
+    {
+        itemData.ID = id;
+        itemData.acumulable = db.dataBase[id].acumulable;
+        itemData.descripcion = db.dataBase[id].descripcion;
+        itemData.icono = db.dataBase[id].icono;
+        itemData.nombre = db.dataBase[id].nombre;
+        itemData.tipo = db.dataBase[id].tipo;
+        itemData.maxStack = db.dataBase[id].maxStack;
+        itemData.item = db.dataBase[id].item;
+
+        deleteButton.SetActive(false);
+        iconoImage.sprite = itemData.icono;
+
+        this.quantity = quantity;
+    }
+
+    // Métodos solicitados agregados
     public void EnableDeletion(bool enable) { if(deleteButton != null) deleteButton.SetActive(enable); }
     public void Delete() { Inventory.Instance.DeleteItem(this, quantity, true); }
     public void OnPointerEnter(PointerEventData eventData) { }
@@ -56,49 +72,72 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (quantityText != null) quantityText.enabled = false;
+        //Inventory.Instance.HideDescription();
+        quantityText.enabled = false;
         exParent = transform.parent;
-        if (exParent.GetComponent<Image>()) exParent.GetComponent<Image>().fillCenter = false;
+        exParent.GetComponent<Image>().fillCenter = false;
         transform.SetParent(Inventory.Instance.transform);
         dragOffset = transform.position - Input.mousePosition;
     }
 
-    public void OnDrag(PointerEventData eventData) { transform.position = Input.mousePosition + dragOffset; }
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition + dragOffset;
+    }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (quantityText != null) quantityText.enabled = true;
+        quantityText.enabled = true;
+
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         Transform slot = null;
-        
+
+        // Casteo un ray desde la posicion del mouse y guardo todo lo que toca en raycastResults
         Inventory.Instance.graphRay.Raycast(eventData, raycastResults);
 
-        foreach(RaycastResult hit in raycastResults)
+        // Itero todos los colliders tocados
+        foreach (RaycastResult hit in raycastResults)
         {
-            var hitObj = hit.gameObject; 
-            if (hitObj.CompareTag("Slot") && hitObj.transform.childCount == 0)
+            var hitObj = hit.gameObject;
+
+            if (hitObj.CompareTag("Slot") && hit.gameObject.transform.childCount == 0)
             {
-                slot = hitObj.transform;
+                slot = hit.gameObject.transform;
                 break;
             }
-            if (hitObj.CompareTag("Item_UI") && hitObj != this.gameObject)
+
+            if (hitObj.CompareTag("Item_UI"))
             {
-                ItemUI hitObjItemData = hitObj.GetComponent<ItemUI>();
-                if (hitObjItemData.itemData.ID != id)
+                // Verifico que no tome el hit con el objeto mismo que estoy arrastrando
+                if (hitObj != this.gameObject)
                 {
-                    slot = hitObjItemData.transform.parent;
-                    Inventory.Instance.UpdateParent(hitObjItemData, exParent);
-                    break;
-                }
-                else if (itemData.acumulable && hitObjItemData.quantity + quantity <= itemData.maxStack)
-                {
-                    quantity += hitObjItemData.quantity;
-                    slot = hitObjItemData.transform.parent;
-                    Inventory.Instance.DeleteItem(hitObjItemData, hitObjItemData.quantity, true);
-                    break;
+                    ItemUI hitObjItemData = hitObj.GetComponent<ItemUI>();
+                    if (hitObjItemData.itemData.ID != id)
+                    {
+                        slot = hitObjItemData.transform.parent;
+                        Inventory.Instance.UpdateParent(hitObjItemData, exParent);
+                        break;
+                    }
+                    else
+                    {
+                        if (itemData.acumulable && hitObjItemData.quantity + quantity <= itemData.maxStack)
+                        {
+                            quantity += hitObjItemData.quantity;
+                            slot = hitObjItemData.transform.parent;
+                            Inventory.Instance.DeleteItem(hitObjItemData, hitObjItemData.quantity, true);
+                            break;
+                        }
+                        else
+                        {
+                            slot = hitObjItemData.transform.parent;
+                            Inventory.Instance.UpdateParent(hitObjItemData, exParent);
+                            break;
+                        }
+                    }
                 }
             }
         }
+
         Inventory.Instance.UpdateParent(this, slot != null ? slot : exParent);
     }
 }
