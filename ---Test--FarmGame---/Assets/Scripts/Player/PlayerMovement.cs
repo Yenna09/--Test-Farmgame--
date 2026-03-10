@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (InventarioToggle.instance.inventarioAbierto)
         {
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             return; 
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
             targetVelocity.y = -5f; 
 
-            rb.velocity = targetVelocity;
+            rb.linearVelocity = targetVelocity;
         }
         
     }
