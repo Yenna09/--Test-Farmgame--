@@ -132,13 +132,14 @@ public class Inventory : MonoBehaviour
 
     public void ToogleInventory()
     {
-        if(isOpen && itemsDeleteModeEnabled)
-        
-            ToggleDeleteMode();
+        isOpen = !isOpen;
+        inventoryToggle.SetActive(isOpen);
 
-            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            inventoryToggle.SetActive(!isOpen);
-            isOpen = !isOpen;
+        // NUEVO: Le avisamos al script del conejo que el inventario cambió
+        if (player != null)
+        {
+            player.inventarioAbierto = isOpen;
+        }
     }
 
     public void ShowDescription(ItemUI item)

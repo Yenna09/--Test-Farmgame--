@@ -60,15 +60,17 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator UsarHerramientaRoutine()
     {
         estaUsandoHerramienta = true;
-
-        // Frenamos el Rigidbody de golpe
         rb.linearVelocity = Vector3.zero;
 
-        // Disparamos la animación
+        // ASEGURATE DE ESTO: 
+        // Forzamos al Animator a usar la última dirección guardada antes del swing
+        animator.SetFloat("LastHorizontal", animator.GetFloat("LastHorizontal"));
+        animator.SetFloat("LastVertical", animator.GetFloat("LastVertical"));
+
         animator.SetTrigger("doSwing");
 
-        // Esperamos a que la animación termine (ajustá 0.5f según dure tu clip)
-        yield return new WaitForSeconds(0.5f);
+        // Esperamos el tiempo del clip (ej: 0.6 segundos)
+        yield return new WaitForSeconds(0.6f);
 
         estaUsandoHerramienta = false;
     }
@@ -76,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Bloqueo total si el inventario está abierto o está trabajando
-        if (PlayerInventory.instance.inventarioAbierto || estaUsandoHerramienta)
+        if (Inventory.Instance.isOpen || estaUsandoHerramienta)
         {
             rb.linearVelocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;

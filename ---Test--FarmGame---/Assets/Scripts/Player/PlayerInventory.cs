@@ -24,21 +24,31 @@ public class PlayerInventory : MonoBehaviour
     
     void Start()
     {
-    
+
+        // Forzamos que empiece cerrado
+        inventarioAbierto = false;
         if (panelInventario != null)
         {
             panelInventario.SetActive(false);
-            inventarioAbierto = false; // Nos aseguramos que empiece cerrado
         }
+    }
+
+    // Agregá esta función para que el botón pueda "hablarle" al código
+    public void EquiparAzada()
+    {
+        tieneAzadaEquipada = true;
+        Debug.Log("Azada equipada!");
     }
 
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventarioAbierto = !inventarioAbierto;
-            panelInventario.SetActive(inventarioAbierto);
+            // En lugar de manejarlo él mismo, llama al Singleton del inventario grande
+            if (Inventory.Instance != null)
+            {
+                Inventory.Instance.ToogleInventory();
+            }
         }
     }
 
