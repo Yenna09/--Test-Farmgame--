@@ -8,9 +8,18 @@ public class PlayerInventory : MonoBehaviour
     public bool inventarioAbierto;
     public static PlayerInventory instance;
 
+    public bool tieneAzadaEquipada = false;
+
     void Awake() 
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     
     void Start()
@@ -19,6 +28,7 @@ public class PlayerInventory : MonoBehaviour
         if (panelInventario != null)
         {
             panelInventario.SetActive(false);
+            inventarioAbierto = false; // Nos aseguramos que empiece cerrado
         }
     }
 
@@ -31,4 +41,5 @@ public class PlayerInventory : MonoBehaviour
             panelInventario.SetActive(inventarioAbierto);
         }
     }
+
 }
