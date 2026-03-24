@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventarioToggle : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private GameObject panelInventario;
     public bool inventarioAbierto;
-    public static InventarioToggle instance;
+    public static PlayerInventory instance;
 
     void Awake() 
     {

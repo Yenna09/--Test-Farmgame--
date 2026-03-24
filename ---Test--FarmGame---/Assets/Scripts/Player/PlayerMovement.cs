@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (InventarioToggle.instance.inventarioAbierto)
+        if (PlayerInventory.instance.inventarioAbierto)
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = Vector3.zero;

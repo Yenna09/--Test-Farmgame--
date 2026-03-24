@@ -46,6 +46,20 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         }
     }
 
+    public void Delete()
+    {
+        Inventory.Instance.HideDescription();
+
+        if(quantity > 1)
+        {
+            Inventory.Instance.ShowDeletionPrompt(this);
+        }
+        else
+        {
+            Inventory.Instance.DeleteItem(this, 1, false);
+        }
+    }
+
     public void InitializeItem(int id, int quantity)
     {
         itemData.ID = id;
@@ -65,14 +79,31 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     // Métodos solicitados agregados
     public void EnableDeletion(bool enable) { if(deleteButton != null) deleteButton.SetActive(enable); }
-    public void Delete() { Inventory.Instance.DeleteItem(this, quantity, true); }
-    public void OnPointerEnter(PointerEventData eventData) { }
-    public void OnPointerClick(PointerEventData eventData) { }
-    public void OnPointerExit(PointerEventData eventData) { }
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(!eventData.dragging)
+        {
+            Inventory.Instance.ShowDescription(this);
+        }
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount == 2)
+        {
+            Inventory.Instance.HideDescription();
+            itemData.item.Use();
+            Inventory.Instance.DeleteItem(this, 1, true);
+        }
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //Inventory.Instance.HideDescription(this);
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Inventory.Instance.HideDescription();
+        Inventory.Instance.HideDescription();
         quantityText.enabled = false;
         exParent = transform.parent;
         exParent.GetComponent<Image>().fillCenter = false;
@@ -124,7 +155,7 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                         {
                             quantity += hitObjItemData.quantity;
                             slot = hitObjItemData.transform.parent;
-                            Inventory.Instance.DeleteItem(hitObjItemData, hitObjItemData.quantity, true);
+                            //Inventory.Instance.DeleteItem(hitObjItemData, hitObjItemData.quantity, true);
                             break;
                         }
                         else

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class BaseItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public virtual void Use() 
+    { 
+    // Lógica base de uso (o vacía)
     }
 
-    // Update is called once per frame
-    void Update()
+public void SetDataById(int id) 
     {
-        
+        // Lógica para asignar datos según ID
     }
 }
