@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c42b689c73759d419744d2c210456f5
+guid: daaf550489455fe449638c6c688870a6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -80,34 +80,8 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -123,60 +97,113 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny-left-plantSeed-48x48_0
+      name: bunny-left-plantCucumber-48x48_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 11, z: 17, w: 8}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1333e078297cfae48b00a201aadfcc45
-      internalID: 1443849461
+      spriteID: 4e8dcdef636e7cd4bb8bf2b7340a5ed2
+      internalID: -954087858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny-left-plantSeed-48x48_1
+      name: bunny-left-plantCucumber-48x48_1
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 4, z: 17, w: 8}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b59689172503f84fa125bec758e6b37
-      internalID: 425669941
+      spriteID: 2857c2608cf226c438d3e35781c886d2
+      internalID: -1482603763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny-left-plantCucumber-48x48_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b20545cbd807c44ea555102375c7f02
+      internalID: 1705731631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny-left-plantCucumber-48x48_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2082357bd56892c4c827312f0b165126
+      internalID: -457905509
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
-    spriteID: 55dff7588aeb33746b1a7e8829f48424
+    spriteID: 4c007fb3da2f9c7459c3e74d4a8822a8
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      bunny-left-plantSeed-48x48_0: 1443849461
-      bunny-left-plantSeed-48x48_1: 425669941
+      bunny-left-plantCucumber-48x48_0: -954087858
+      bunny-left-plantCucumber-48x48_1: -1482603763
+      bunny-left-plantCucumber-48x48_2: 1705731631
+      bunny-left-plantCucumber-48x48_3: -457905509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
