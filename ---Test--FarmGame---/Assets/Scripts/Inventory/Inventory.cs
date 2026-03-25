@@ -35,7 +35,9 @@ public class Inventory : MonoBehaviour
     private Transform slotsContainer;
     private List<Transform> slots = new List<Transform>();
 
-    
+    [SerializeField] private RectTransform selectorVisual; // Arrastra aquí la imagen del marco/brillo
+    public int slotSeleccionadoIndex = 0; // Para saber cuál es el actual
+
 
     private void Awake()
     {
@@ -64,7 +66,46 @@ public class Inventory : MonoBehaviour
         item.EnableDeletion(itemsDeleteModeEnabled);
     }
 
-    
+    void Update()
+    {
+        // Solo permitimos cambiar de slot si el inventario está abierto
+        // Opcional: si quieres que el "Hotbar" funcione siempre, quita el 'if'
+        if (isOpen)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                {
+                    SeleccionarSlot(i);
+                }
+            }
+        }
+
+        // Movimiento suave del selector
+        if (selectorVisual != null && selectorVisual.gameObject.activeSelf)
+        {
+            // Interpola la posición actual hacia la posición del slot seleccionado
+            selectorVisual.position = Vector3.Lerp(selectorVisual.position, slots[slotSeleccionadoIndex].position, Time.deltaTime * 15f);
+        }
+    }
+
+    public void SeleccionarSlot(int index)
+    {
+        // Validamos que el índice no sea mayor a la cantidad de slots que existen
+        if (index < slots.Count)
+        {
+            slotSeleccionadoIndex = index;
+            Debug.Log("Slot seleccionado: " + index);
+
+            // Movemos el selector visual a la posición del slot seleccionado
+            if (selectorVisual != null)
+            {
+                selectorVisual.gameObject.SetActive(true);
+                selectorVisual.position = slots[index].position;
+            }
+        }
+    }
+
 
     public void AddItem(int id, int quantity)
     {
@@ -99,6 +140,16 @@ public class Inventory : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public ItemUI GetSelectedItem()
+    {
+        // Revisamos si el slot actual tiene un objeto adentro
+        if (slots[slotSeleccionadoIndex].childCount > 0)
+        {
+            return slots[slotSeleccionadoIndex].GetChild(0).GetComponent<ItemUI>();
+        }
+        return null; // El slot está vacío
     }
 
     public void DeleteItem( ItemUI item, int quantity, bool byUse)

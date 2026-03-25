@@ -37,14 +37,15 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
         InitializeItem(id, quantity);
     }
-
-    void Update()
+    public void RefreshUI()
     {
         if (quantityText != null)
         {
-            quantityText.text = quantity.ToString();
+            // Solo muestra el número si es mayor a 1 (típico de juegos de granja)
+            quantityText.text = quantity > 1 ? quantity.ToString() : "";
         }
     }
+
 
     public void Delete()
     {
@@ -75,6 +76,7 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         iconoImage.sprite = itemData.icono;
 
         this.quantity = quantity;
+        RefreshUI();
     }
 
     // Métodos solicitados agregados
@@ -154,6 +156,7 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                         if (itemData.acumulable && hitObjItemData.quantity + quantity <= itemData.maxStack)
                         {
                             quantity += hitObjItemData.quantity;
+                            RefreshUI();
                             slot = hitObjItemData.transform.parent;
                             //Inventory.Instance.DeleteItem(hitObjItemData, hitObjItemData.quantity, true);
                             break;
