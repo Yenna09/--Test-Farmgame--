@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "--Test-Farmgame--.slnx"
+    "dotnet.defaultSolution": "---Test--FarmGame---.slnx"
 }
