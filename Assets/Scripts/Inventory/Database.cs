@@ -22,7 +22,8 @@ public class Database : ScriptableObject
     public enum Tipo
     {
         consumible,
-        equipable
+        equipable, 
+        mision,
     }
 
     public InventoryItem[] dataBase;
