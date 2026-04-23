@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -34,7 +33,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    // Agregï¿½ esta funciï¿½n para que el botï¿½n pueda "hablarle" al cï¿½digo
+    // Agregá esta función para que el botón pueda "hablarle" al código
     public void EquiparAzada()
     {
         tieneAzadaEquipada = true;
@@ -43,9 +42,9 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            // En lugar de manejarlo ï¿½l mismo, llama al Singleton del inventario grande
+            // En lugar de manejarlo él mismo, llama al Singleton del inventario grande
             if (Inventory.Instance != null)
             {
                 Inventory.Instance.ToogleInventory();
