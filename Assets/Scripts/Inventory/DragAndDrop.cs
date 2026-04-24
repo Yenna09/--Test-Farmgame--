@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems; // Para IBeginDragHandler y IDragHandler
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {   
+    [SerializeField]public Image image;
     UnityEngine.Vector3 dragOffset;
-    Transform parentAfterDrag;
+    [HideInInspector]public Transform parentAfterDrag;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Begin Drag");
-        throw new System.NotImplementedException();
-
+        parentAfterDrag = transform.parent;
+        transform.SetParent(transform.root);
+        transform.SetAsLastSibling();
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -24,6 +29,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnEndDrag (PointerEventData eventData)
     {
         Debug.Log("End Drag");
-        throw new System.NotImplementedException();
+        transform.SetParent(parentAfterDrag);
+        image.raycastTarget = true;
     }
 }
