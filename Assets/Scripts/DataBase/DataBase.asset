@@ -13,27 +13,129 @@ MonoBehaviour:
   m_Name: DataBase
   m_EditorClassIdentifier: 
   dataBase:
-  - nombre: Papa
+  - nombre: Apple
     ID: 0
-    icono: {fileID: 0}
+    icono: {fileID: 21300000, guid: 570facf2b7c492249a5668128ed1983d, type: 3}
     tipo: 0
-    acumulable: 0
+    accion: 1
+    acumulable: 1
     maxStack: 99
     descripcion: 
     item: {fileID: 0}
-  - nombre: Zanahoria
+  - nombre: Apple_Seed
     ID: 1
-    icono: {fileID: 0}
-    tipo: 0
-    acumulable: 0
+    icono: {fileID: 21300000, guid: cbd0fb10269effb48bf8dc6ac3006aa8, type: 3}
+    tipo: 1
+    accion: 2
+    acumulable: 1
     maxStack: 99
     descripcion: 
     item: {fileID: 0}
-  - nombre: Cebolla
+  - nombre: Axe
     ID: 2
-    icono: {fileID: 0}
-    tipo: 0
+    icono: {fileID: 21300000, guid: d1672dc2eb1502847a5d59d679cb2309, type: 3}
+    tipo: 1
+    accion: 5
     acumulable: 0
+    maxStack: 1
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Carrot
+    ID: 3
+    icono: {fileID: 21300000, guid: e7517a5ccdbe86d4ca342872b1da1f78, type: 3}
+    tipo: 0
+    accion: 1
+    acumulable: 1
     maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Carrot_Seed
+    ID: 4
+    icono: {fileID: 21300000, guid: ae966c08a8885cf4e97cedd9de6f5ed5, type: 3}
+    tipo: 1
+    accion: 2
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Cucumber
+    ID: 5
+    icono: {fileID: 21300000, guid: c375c979b67cc2546983c1e43b84f107, type: 3}
+    tipo: 0
+    accion: 1
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Cucumber_Seed
+    ID: 6
+    icono: {fileID: 21300000, guid: e0c075830e5b1704db8d2239fe8bc195, type: 3}
+    tipo: 0
+    accion: 2
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Hoe
+    ID: 7
+    icono: {fileID: 21300000, guid: a4a09919a45a9694aa12dcc95aa399ac, type: 3}
+    tipo: 1
+    accion: 0
+    acumulable: 0
+    maxStack: 1
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Onion
+    ID: 8
+    icono: {fileID: 21300000, guid: 691e5b8acd2f1324ebf6354ffc735c91, type: 3}
+    tipo: 0
+    accion: 1
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Onion_Seed
+    ID: 9
+    icono: {fileID: 21300000, guid: ab82e947ff756b14fa5bad96d44100e8, type: 3}
+    tipo: 1
+    accion: 2
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Pick
+    ID: 10
+    icono: {fileID: 21300000, guid: c81b0a1473e6c8342a5db81ba8a98fc3, type: 3}
+    tipo: 1
+    accion: 3
+    acumulable: 0
+    maxStack: 1
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Potato
+    ID: 11
+    icono: {fileID: 21300000, guid: 1d61206362aa0584e9b17ec68069db00, type: 3}
+    tipo: 0
+    accion: 1
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Potato_Seed
+    ID: 12
+    icono: {fileID: 21300000, guid: 9524a0960d369494bbe2760071eff8b9, type: 3}
+    tipo: 1
+    accion: 2
+    acumulable: 1
+    maxStack: 99
+    descripcion: 
+    item: {fileID: 0}
+  - nombre: Watering_Can
+    ID: 13
+    icono: {fileID: 21300000, guid: 364234e564da76d4cab1913af74b4fe9, type: 3}
+    tipo: 1
+    accion: 4
+    acumulable: 0
+    maxStack: 1
     descripcion: 
     item: {fileID: 0}
