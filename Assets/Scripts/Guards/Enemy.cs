@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     public bool vivo = true;
 
-    private void Awake() 
+    public void Awake() 
     {
         if (autoseleccionarTarget) 
         {
