@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyBear : Enemy
+public class EnemigoPatrol : Enemy
 {
     private NavMeshAgent agent;
+    public Transform[] Waypoints;
+    private int indice;
+    public float distanciaWaypoints;
+    private float distanciaWaypoints2;
     public float damage = 3;
 
     private float tiempoSiguienteAtaque;
@@ -15,6 +20,7 @@ public class EnemyBear : Enemy
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
 
         //GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -1, 0);
     }
@@ -22,7 +28,11 @@ public class EnemyBear : Enemy
     public override void IdleState()
     {
         base.IdleState();
-        agent.SetDestination(transform.position);
+        agent.SetDestination(Waypoints[indice].position);
+        if ((Waypoints[indice].position - transform.position).sqrMagnitude < distanciaWaypoints2)
+        {
+            indice = (indice + 1) % Waypoints.Length;
+        }
     }
 
     public override void FollowState()
