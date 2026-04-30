@@ -7,143 +7,100 @@ using TMPro;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance { get; private set; }
-    public GraphicRaycaster graphRay;
-    public Database db; // Asegúrate que tu script de base de datos se llame "Database"
-    //public int slotsCount = 27;
-    public bool isOpen;
-    
+    public Database db;
+    public Transform itemPrefab; // El prefab UI de la manzana/item
+    public Transform slotsContainer; // El panel donde el Controller creó los slots
 
-    [SerializeField] 
-    private GameObject inventoryToggle;
-
-    [SerializeField] 
-    private Transform itemPrefab;
-
-    [SerializeField] 
-    private PlayerInventory player;
-    bool itemsDeleteModeEnabled;
-
-    [SerializeField] 
-    private Transform slotsContainer;
-    private List<Transform> slots = new List<Transform>();
-
-    
-
-
+    public GameObject inventoryToggle;
+    public bool isOpen; // Esta es la variable global
     private void Awake()
     {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            Debug.Log("Slot índice " + i + " se llama: " + slots[i].name);
-        }
         if (Instance != null && Instance != this) { Destroy(this); }
         else { Instance = this; }
+        inventoryToggle.SetActive(false);
     }
-    
-    void Start()
+
+   public void PickUpItem(int id, int quantity)
     {
-        // Buscamos todos los slots que pusimos manualmente en el Container
-        foreach (Transform child in slotsContainer)
+        // --- CHEQUEOS DE SEGURIDAD ---
+        if (db == null) {
+            Debug.LogError("ERROR: No asignaste la Database en el objeto Inventory del Inspector.");
+            return;
+        }
+        
+        if (slotsContainer == null) {
+            Debug.LogError("ERROR: No asignaste el slotsContainer en el Inspector.");
+            return;
+        }
+
+        // 1. Lógica de STACK
+        if (db.dataBase[id].acumulable)
         {
-            if (child.GetComponent<InventorySlot>())
+            foreach (Transform slot in slotsContainer)
             {
-                slots.Add(child);
+                if (slot.childCount > 0)
+                {
+                    ItemUI itemInSlot = slot.GetChild(0).GetComponent<ItemUI>();
+                    if (itemInSlot != null && itemInSlot.id == id && itemInSlot.quantity < db.dataBase[id].maxStack)
+                    {
+                        itemInSlot.quantity += quantity;
+                        itemInSlot.RefreshUI();
+                        return;
+                    }
+                }
             }
         }
 
-        isOpen = true;
-        ToogleInventory(); //
+        // 2. Lógica de ESPACIO VACÍO
+        foreach (Transform slot in slotsContainer)
+        {
+            if (slot.childCount == 0)
+            {
+                SpawnItemInSlot(id, quantity, slot);
+                return;
+            }
+        }
+        
+        Debug.Log("Inventario lleno");
     }
 
-    public void UpdateParent(ItemUI item, Transform newParent)
+    private void SpawnItemInSlot(int id, int quantity, Transform targetSlot)
     {
-        item.exParent = newParent;
-        item.transform.SetParent(newParent);
-        item.transform.parent.GetComponent<Image>().fillCenter = true;
-        item.transform.localPosition = Vector3.zero;
+        // 1. Instanciamos el objeto SIN emparentarlo en el mismo paso
+        GameObject newItemGO = Instantiate(itemPrefab.gameObject);
+        
+        // 2. EL FIX DEFINITIVO: SetParent con 'false'. 
+        // El 'false' le prohíbe a Unity aplicar ese offset de -1920.
+        newItemGO.transform.SetParent(targetSlot, false);
+
+        newItemGO.name = "Item_UI_ID_" + id;
+
+        // Inicializamos datos
+        ItemUI itemUI = newItemGO.GetComponent<ItemUI>();
+        if (itemUI != null)
+        {
+            itemUI.InitializeItem(id, quantity);
+        }
+
+        // 3. Forzamos posición 0 por seguridad
+        RectTransform rect = newItemGO.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            rect.anchoredPosition = Vector2.zero; // Ahora sí funcionará
+            rect.localPosition = Vector3.zero;
+        }
     }
-
-    void Update()
-    {
-                
-    }
-
-
-
+    
 
     public void ToogleInventory()
     {
         isOpen = !isOpen;
         inventoryToggle.SetActive(isOpen);
 
-        // NUEVO: Le avisamos al script del conejo que el inventario cambió
-        if (player != null)
+        // Actualizamos la variable en el PlayerInventory para que el movimiento se entere
+        if (PlayerInventory.instance != null)
         {
-            player.inventarioAbierto = isOpen;
+            PlayerInventory.instance.inventarioAbierto = isOpen;
         }
     }
-
-
-    public void SpawnItemInSlot(int id, int quantity, Transform targetSlot)
-    {
-        // Instanciamos el prefab
-        GameObject newItemGO = Instantiate(itemPrefab.gameObject);
-        newItemGO.name = itemPrefab.name; // Esto evita el "(Clone)" y ayuda a la consistencia
-        
-        // IMPORTANTE: Primero configuramos los datos
-        ItemUI newItemUI = newItemGO.GetComponent<ItemUI>();
-        newItemUI.InitializeItem(id, quantity);
-
-        // Obtenemos el RectTransform
-        RectTransform rect = newItemGO.GetComponent<RectTransform>();
-
-        // 1. Lo emparentamos con 'false' para que no intente mantener su escala del mundo
-        rect.SetParent(targetSlot, false);
-
-        // 2. Reseteamos escala y posición
-        rect.localScale = Vector3.one;
-        rect.localPosition = Vector3.zero;
-
-        // 3. FORZAMOS EL STRETCH (Esto es lo que evita que se vea chico)
-        // Ponemos los anclajes de esquina a esquina (0 a 1)
-        rect.anchorMin = new Vector2(0, 0);
-        rect.anchorMax = new Vector2(1, 1);
-        
-        // Ponemos los offsets en 0 para que se pegue a los bordes del slot
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
-    }
-    // Fragmento corregido de Inventory.cs
-    public void PickUpItem(int id, int quantity)
-    {
-        // 1. BUSCAR STACK EXISTENTE: Verificamos si ya tenemos el item y si es acumulable
-        if (db.dataBase[id].acumulable) 
-        {
-            foreach (Transform slot in slots)
-            {
-                if (slot.childCount > 0)
-                {
-                    ItemUI itemInSlot = slot.GetChild(0).GetComponent<ItemUI>();
-                    // Si el ID coincide y no hemos superado el máximo stack
-                    if (itemInSlot.id == id && itemInSlot.quantity < db.dataBase[id].maxStack)
-                    {
-                        itemInSlot.quantity += quantity;
-                        itemInSlot.RefreshUI();
-                        return; // Terminamos: se sumó al stack existente
-                    }
-                }
-            }
-        }
-
-        // 2. SI NO HAY STACK: Buscar primer slot vacío (Prioridad Hotbar 0-8)
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if (slots[i].childCount == 0)
-            {
-                SpawnItemInSlot(id, quantity, slots[i]);
-                return;
-            }
-        }
-    }
-
 }

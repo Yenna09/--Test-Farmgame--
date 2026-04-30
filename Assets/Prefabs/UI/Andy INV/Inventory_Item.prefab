@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 8869667469345445230}
   - component: {fileID: 8343764362557718327}
   - component: {fileID: 7193537937881509789}
+  - component: {fileID: -367713029011395894}
   - component: {fileID: 8986932051855586953}
   - component: {fileID: 5361749562641624328}
   m_Layer: 5
@@ -222,8 +223,8 @@ RectTransform:
   - {fileID: 3352709596365106704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1920, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -265,6 +266,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &-367713029011395894
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982770983308820999}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &8986932051855586953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +307,7 @@ MonoBehaviour:
   db: {fileID: 11400000, guid: a58cc2f0199c71344b61bd17c38c4d65, type: 2}
   Text: {fileID: 1559232553968525939}
   id: 0
-  quantity: 0
+  quantity: 1
   itemData:
     nombre: 
     ID: 0

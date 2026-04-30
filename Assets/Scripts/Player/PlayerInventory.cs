@@ -6,35 +6,19 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private GameObject panelInventario;
-    public bool inventarioAbierto;
+    public bool inventarioAbierto; // Se sincroniza desde Inventory.cs
     public static PlayerInventory instance;
-
     public bool tieneAzadaEquipada = false;
 
     void Awake() 
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
     
-    void Start()
-    {
+    // Quitamos el panelInventario.SetActive del Start de aquí 
+    // porque ya lo debería manejar el Inventory.cs o el InventoryController.
 
-        // Forzamos que empiece cerrado
-        inventarioAbierto = false;
-        if (panelInventario != null)
-        {
-            panelInventario.SetActive(false);
-        }
-    }
-
-    // Agreg� esta funci�n para que el bot�n pueda "hablarle" al c�digo
     public void EquiparAzada()
     {
         tieneAzadaEquipada = true;
@@ -43,14 +27,13 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
+        // El jugador solo da la orden, el Manager (Inventory) ejecuta
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
         {
-            // En lugar de manejarlo �l mismo, llama al Singleton del inventario grande
             if (Inventory.Instance != null)
             {
                 Inventory.Instance.ToogleInventory();
             }
         }
     }
-
 }

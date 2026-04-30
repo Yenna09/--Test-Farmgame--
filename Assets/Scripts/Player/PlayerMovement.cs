@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector3 moveInput;
 
-    // NUEVO: Variable para saber si está animando
+    // NUEVO: Variable para saber si estï¿½ animando
     private bool estaUsandoHerramienta = false;
 
     void Start()
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("LastVertical", vertical);
         }
 
-        // Lógica del click
+        // Lï¿½gica del click
         if (Input.GetMouseButtonDown(0) && PlayerInventory.instance.tieneAzadaEquipada)
         {
             // Disparamos la corrutina para bloquear el movimiento
@@ -56,14 +56,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // NUEVO: Corrutina que gestiona el tiempo de la acción
+    // NUEVO: Corrutina que gestiona el tiempo de la acciï¿½n
     IEnumerator UsarHerramientaRoutine()
     {
         estaUsandoHerramienta = true;
         rb.linearVelocity = Vector3.zero;
 
         // ASEGURATE DE ESTO: 
-        // Forzamos al Animator a usar la última dirección guardada antes del swing
+        // Forzamos al Animator a usar la ï¿½ltima direcciï¿½n guardada antes del swing
         animator.SetFloat("LastHorizontal", animator.GetFloat("LastHorizontal"));
         animator.SetFloat("LastVertical", animator.GetFloat("LastVertical"));
 
@@ -76,12 +76,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        // Bloqueo total si el inventario está abierto o está trabajando
+    {    
+        // Usamos el estado centralizado del Inventario
         if (Inventory.Instance.isOpen || estaUsandoHerramienta)
         {
             rb.linearVelocity = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            // Ojo: FreezeAll puede dar tirones si se hace cada frame, 
+            // pero para un inventario estÃ¡tico estÃ¡ bien.
+            rb.constraints = RigidbodyConstraints.FreezeAll; 
             return;
         }
         else
