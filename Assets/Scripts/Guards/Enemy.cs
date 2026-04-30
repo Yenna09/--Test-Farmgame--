@@ -20,14 +20,15 @@ public class Enemy : MonoBehaviour
 
     public void Awake() 
     {
+        StartCoroutine(CalcularDistancia());
+    }
+
+    private void Start()
+    {
         if (autoseleccionarTarget) 
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) target = player.transform;
+            target = Personaje.singleton.transform;
         }
-        
-        
-        StartCoroutine(CalcularDistancia());
     }
 
     private void LateUpdate() 
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
                 vivo = false;
                 break;
             case States.seguir: 
+                transform.LookAt(target, Vector3.up);
                 FollowState(); 
                 break;
         }
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
         state = e;
     }
 
-    // Máquina de estados (Virtuales para que puedas heredarlos)
+    
     public virtual void IdleState()
     {
         if (distancia < distanceFollow)
@@ -94,13 +96,14 @@ public class Enemy : MonoBehaviour
     {
         while(vivo)
         {
-            
+            yield return new WaitForSeconds(0.2f); 
             if (target != null)
             {
+                
                 distancia = Vector3.Distance(transform.position, target.position);
             }
 
-            yield return new WaitForSeconds(0.3f); 
+            
         }
     }
 
@@ -127,7 +130,7 @@ public class Enemy : MonoBehaviour
         int icono = (int) state;
         icono++;
         
-        Gizmos.DrawIcon(transform.position + Vector3.up * 1.2f, "0" + icono + ".png");
+        Gizmos.DrawIcon(transform.position + Vector3.up * 2f, "0" + icono + ".png");
     }
 }
 

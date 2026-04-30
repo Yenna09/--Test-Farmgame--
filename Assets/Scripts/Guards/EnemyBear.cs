@@ -7,6 +7,10 @@ using UnityEngine.AI;
 public class EnemyBear : Enemy
 {
     private NavMeshAgent agent;
+    public float damage = 3;
+
+    private float tiempoSiguienteAtaque;
+    public float velocidadAtaque = 1.5f;
     public void Awake() 
     {
         base.Awake();
@@ -28,13 +32,29 @@ public class EnemyBear : Enemy
     public override void AttackState()
     {
         base.AttackState();
-        agent.SetDestination(transform.position);
-        transform.LookAt(target, Vector3.up);
+        agent.SetDestination(transform.position); // Se detiene
+        
+        // Mirar al jugador (Eje Y solamente para que no se incline)
+        Vector3 direccion = (target.position - transform.position).normalized;
+        direccion.y = 0;
+        transform.rotation = Quaternion.LookRotation(direccion);
+
+        // Lógica de daño por tiempo
+        if (Time.time >= tiempoSiguienteAtaque)
+        {
+            Atacar();
+            tiempoSiguienteAtaque = Time.time + velocidadAtaque;
+        }
     }
 
     public override void DeathState()
     {
         base.IdleState();
         agent.enabled = false;
+    }
+
+    public void Atacar()
+    {
+        Personaje.singleton.vida.CausarDamage(damage);
     }
 }

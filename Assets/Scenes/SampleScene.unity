@@ -169,9 +169,11 @@ GameObject:
   - component: {fileID: 1654417}
   - component: {fileID: 1654418}
   - component: {fileID: 1654421}
+  - component: {fileID: 1654422}
+  - component: {fileID: 1654424}
+  - component: {fileID: 1654423}
   - component: {fileID: 1654419}
   - component: {fileID: 1654420}
-  - component: {fileID: 1654422}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -314,6 +316,36 @@ MonoBehaviour:
     m_Bits: 256
   sphereRadius: 0.72
   targetOffset: {x: -0.54, y: -0.45, z: -0.3}
+--- !u!114 &1654423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59dd8818e69d2f24ca45ec3951393254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Personaje
+  vida: {fileID: 1654424}
+--- !u!114 &1654424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75b0ca2a4a8cd34986648adeb5d4675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Vida
+  vidaInicial: 20
+  vidaActual: 20
+  eventoMorir:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9038178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,6 +1674,8 @@ MonoBehaviour:
   target: {fileID: 0}
   distancia: 0
   vivo: 1
+  damage: 3
+  velocidadAtaque: 1.5
 --- !u!195 &567221661
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3370,6 +3404,8 @@ MonoBehaviour:
   target: {fileID: 0}
   distancia: 0
   vivo: 1
+  damage: 3
+  velocidadAtaque: 1.5
 --- !u!195 &1217299160
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3816,7 +3852,7 @@ Transform:
   m_GameObject: {fileID: 1832211842}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -104.91, y: -0, z: 10.10161}
+  m_LocalPosition: {x: -92.61, y: -0, z: 10.231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3843,6 +3879,8 @@ MonoBehaviour:
   target: {fileID: 0}
   distancia: 0
   vivo: 1
+  damage: 3
+  velocidadAtaque: 1.5
 --- !u!195 &1832211846
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4684,15 +4722,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2811984536420607705, guid: e0f5804e37065754b8a2682b91705c4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.11
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 2811984536420607705, guid: e0f5804e37065754b8a2682b91705c4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2811984536420607705, guid: e0f5804e37065754b8a2682b91705c4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: -0.122
       objectReference: {fileID: 0}
     - target: {fileID: 2811984536420607705, guid: e0f5804e37065754b8a2682b91705c4b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4760,8 +4798,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3040069747924286574}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
+  m_Mass: 50
+  m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -4777,8 +4815,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 80
+  m_CollisionDetection: 1
 --- !u!1001 &3041142889578926691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4898,7 +4936,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1001 &3412859889973593098
 PrefabInstance:
@@ -4971,6 +5009,10 @@ PrefabInstance:
     - target: {fileID: 4678661711904997450, guid: 3d6a3b098defba743922c3e3d47556cc, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520007445361503788, guid: 3d6a3b098defba743922c3e3d47556cc, type: 3}
+      propertyPath: m_Constraints
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
