@@ -10,6 +10,7 @@ public class InventoryController : MonoBehaviour
 
     void Awake() // Usamos Awake para que los slots existan antes que nada
     {
+
         for(int i = 0; i < slotCount; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, inventoryPanel.transform);

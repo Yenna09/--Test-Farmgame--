@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 // 1. EL FIX PRINCIPAL: Descomentar la interfaz IDropHandler
 public class InventorySlot : MonoBehaviour, IDropHandler
 {

@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     public Database db;
     public Transform itemPrefab; // El prefab UI de la manzana/item
     public Transform slotsContainer; // El panel donde el Controller creó los slots
+    public Transform hotbarContainer; // NUEVO: Acá vamos a arrastrar la Hotbar
 
     public GameObject inventoryToggle;
     public bool isOpen; // Esta es la variable global
@@ -20,48 +21,70 @@ public class Inventory : MonoBehaviour
         inventoryToggle.SetActive(false);
     }
 
-   public void PickUpItem(int id, int quantity)
+    public void PickUpItem(int id, int quantity)
     {
-        // --- CHEQUEOS DE SEGURIDAD ---
-        if (db == null) {
-            Debug.LogError("ERROR: No asignaste la Database en el objeto Inventory del Inspector.");
-            return;
-        }
-        
-        if (slotsContainer == null) {
-            Debug.LogError("ERROR: No asignaste el slotsContainer en el Inspector.");
-            return;
+        var itemData = db.dataBase[id];
+
+        // 1. Primero intentamos APILAR (Stackear) si el ítem es acumulable
+        if (itemData.acumulable)
+        {
+            // Busca lugar en Hotbar
+            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) return;
+            // Busca lugar en Inventario Principal
+            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) return;
         }
 
-        // 1. Lógica de STACK
-        if (db.dataBase[id].acumulable)
+        // 2. Si no es acumulable o sobró cantidad, buscamos un SLOT VACÍO
+        // Busca vacío en Hotbar
+        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) return;
+        // Busca vacío en Inventario Principal
+        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) return;
+
+        // 3. Si llega acá, es porque no hay lugar en ningún lado
+        Debug.LogWarning("¡Inventario y Hotbar llenos! No se pudo agarrar el ítem.");
+    }
+
+    // --- FUNCIONES AYUDANTES (Hacen que el código de arriba sea más limpio) ---
+
+    private bool TryStackItem(Transform container, int id, ref int quantity, int maxStack)
+    {
+        foreach (Transform slot in container)
         {
-            foreach (Transform slot in slotsContainer)
+            if (slot.childCount > 0)
             {
-                if (slot.childCount > 0)
+                ItemUI itemInSlot = slot.GetChild(0).GetComponent<ItemUI>();
+                if (itemInSlot != null && itemInSlot.id == id && itemInSlot.quantity < maxStack)
                 {
-                    ItemUI itemInSlot = slot.GetChild(0).GetComponent<ItemUI>();
-                    if (itemInSlot != null && itemInSlot.id == id && itemInSlot.quantity < db.dataBase[id].maxStack)
+                    int spaceLeft = maxStack - itemInSlot.quantity;
+                    if (quantity <= spaceLeft)
                     {
                         itemInSlot.quantity += quantity;
                         itemInSlot.RefreshUI();
-                        return;
+                        return true; // Se acomodó todo el stack
+                    }
+                    else
+                    {
+                        itemInSlot.quantity = maxStack;
+                        itemInSlot.RefreshUI();
+                        quantity -= spaceLeft; // Acomodamos lo que entró, pero sobra cantidad
                     }
                 }
             }
         }
+        return false;
+    }
 
-        // 2. Lógica de ESPACIO VACÍO
-        foreach (Transform slot in slotsContainer)
+    private bool TrySpawnInEmptySlot(Transform container, int id, int quantity)
+    {
+        foreach (Transform slot in container)
         {
-            if (slot.childCount == 0)
+            if (slot.childCount == 0) // Si el slot está vacío
             {
                 SpawnItemInSlot(id, quantity, slot);
-                return;
+                return true;
             }
         }
-        
-        Debug.Log("Inventario lleno");
+        return false;
     }
 
     private void SpawnItemInSlot(int id, int quantity, Transform targetSlot)
@@ -101,6 +124,33 @@ public class Inventory : MonoBehaviour
         if (PlayerInventory.instance != null)
         {
             PlayerInventory.instance.inventarioAbierto = isOpen;
+        }
+    }
+
+    public void SpawnItemForSave(int id, int quantity, Transform targetSlot)
+    {
+        // Reutilizamos la lógica con el SetParent en false
+        GameObject newItemGO = Instantiate(itemPrefab.gameObject);
+        newItemGO.transform.SetParent(targetSlot, false);
+        newItemGO.name = "Item_UI_ID_" + id;
+
+        ItemUI itemUI = newItemGO.GetComponent<ItemUI>();
+        if (itemUI != null)
+        {
+            itemUI.InitializeItem(id, quantity);
+        }
+
+        // Forzamos el centrado
+        RectTransform rect = newItemGO.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            rect.anchoredPosition = Vector2.zero;
+            rect.localPosition = Vector3.zero;
+            rect.localScale = Vector3.one;
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
         }
     }
 }
