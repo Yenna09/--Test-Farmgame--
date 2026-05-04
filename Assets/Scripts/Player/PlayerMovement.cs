@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         // L�gica del click
         if (Input.GetMouseButtonDown(0) && PlayerInventory.instance.tieneAzadaEquipada)
         {
+            Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z );
             // Disparamos la corrutina para bloquear el movimiento
             StartCoroutine(UsarHerramientaRoutine());
         }
