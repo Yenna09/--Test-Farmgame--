@@ -8,7 +8,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject panelInventario;
     public bool inventarioAbierto; // Se sincroniza desde Inventory.cs
     public static PlayerInventory instance;
-    public bool tieneAzadaEquipada = false;
 
     void Awake() 
     {
@@ -18,12 +17,6 @@ public class PlayerInventory : MonoBehaviour
     
     // Quitamos el panelInventario.SetActive del Start de aquí 
     // porque ya lo debería manejar el Inventory.cs o el InventoryController.
-
-    public void EquiparAzada()
-    {
-        tieneAzadaEquipada = true;
-        Debug.Log("Azada equipada!");
-    }
 
     void Update()
     {

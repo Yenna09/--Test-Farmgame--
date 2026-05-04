@@ -10,11 +10,14 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float verticalCompensation = 1.25f;
 
+    [Header("Configuración de Herramientas")]
+    // NUEVO: Poné acá el ID que tiene la Azada en tu Base de Datos (ej: 0, 1, 2)
+    public int idDeLaAzada = 7; 
+
     private Rigidbody rb;
     private Animator animator;
     private Vector3 moveInput;
 
-    // NUEVO: Variable para saber si est� animando
     private bool estaUsandoHerramienta = false;
 
     void Start()
@@ -26,8 +29,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Si estamos usando la herramienta, no leemos el input de movimiento
-        if (estaUsandoHerramienta || PlayerInventory.instance.inventarioAbierto)
+        // Centralizamos el chequeo del inventario acá
+        bool inventarioAbierto = false;
+        if (Inventory.Instance != null) inventarioAbierto = Inventory.Instance.isOpen;
+
+        if (estaUsandoHerramienta || inventarioAbierto)
         {
             moveInput = Vector3.zero;
             return;
@@ -48,29 +54,28 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("LastVertical", vertical);
         }
 
-        // L�gica del click
-        if (Input.GetMouseButtonDown(0) && PlayerInventory.instance.tieneAzadaEquipada)
+        // --- LA MAGIA ACÁ ---
+        // Si hace clic izquierdo, preguntamos a la Hotbar si tiene la Azada
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3Int position = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z );
-            // Disparamos la corrutina para bloquear el movimiento
-            StartCoroutine(UsarHerramientaRoutine());
+            if (HotbarController.Instance != null && HotbarController.Instance.GetEquippedItemID() == idDeLaAzada)
+            {
+                StartCoroutine(UsarHerramientaRoutine());
+            }
+            // FUTURO: Podés agregar un 'else if' para el Hacha, Pico, etc.
         }
     }
 
-    // NUEVO: Corrutina que gestiona el tiempo de la acci�n
     IEnumerator UsarHerramientaRoutine()
     {
         estaUsandoHerramienta = true;
         rb.linearVelocity = Vector3.zero;
 
-        // ASEGURATE DE ESTO: 
-        // Forzamos al Animator a usar la �ltima direcci�n guardada antes del swing
         animator.SetFloat("LastHorizontal", animator.GetFloat("LastHorizontal"));
         animator.SetFloat("LastVertical", animator.GetFloat("LastVertical"));
 
         animator.SetTrigger("doSwing");
 
-        // Esperamos el tiempo del clip (ej: 0.6 segundos)
         yield return new WaitForSeconds(0.6f);
 
         estaUsandoHerramienta = false;
@@ -78,12 +83,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {    
-        // Usamos el estado centralizado del Inventario
-        if (Inventory.Instance.isOpen || estaUsandoHerramienta)
+        bool inventarioAbierto = false;
+        if (Inventory.Instance != null) inventarioAbierto = Inventory.Instance.isOpen;
+
+        if (inventarioAbierto || estaUsandoHerramienta)
         {
             rb.linearVelocity = Vector3.zero;
-            // Ojo: FreezeAll puede dar tirones si se hace cada frame, 
-            // pero para un inventario estático está bien.
             rb.constraints = RigidbodyConstraints.FreezeAll; 
             return;
         }
@@ -92,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             Vector3 targetVelocity = moveInput * speed;
             targetVelocity.z *= verticalCompensation;
-            targetVelocity.y = -5f; // Gravedad manual
+            targetVelocity.y = -5f; 
             rb.linearVelocity = targetVelocity;
         }
     }
