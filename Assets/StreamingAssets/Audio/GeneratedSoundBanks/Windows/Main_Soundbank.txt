@@ -1,0 +1,34 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3854155799	Play_Footsteps			\Default Work Unit\Play_Footsteps	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	2528658256	Ground			\Default Work Unit\Ground	
+
+State	ID	Name	State Group			Notes
+	748895195	None	Ground			
+	841620460	Concrete	Ground			
+	2058049674	Wood	Ground			
+	4248645337	Grass	Ground			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	22958223	Grass_Footsteps-002	.cache\C1\{C10806AC-38CC-62AF-77C3-E82D259B2BCB}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-002		75292
+	121779137	Concrete_Footsteps-003	.cache\21\{21A93E0C-977E-86B6-E989-DA0037C13B0A}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-003		78448
+	149283665	Concrete_Footsteps-001	.cache\4E\{4E735E33-2E14-4936-F3D7-1019E0652FB5}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-001		74888
+	241987115	Grass_Footsteps-007	.cache\F6\{F687880F-2735-172E-F369-3EAC93D3E0B2}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-007		94476
+	266571907	Concrete_Footsteps-004	.cache\19\{199A3F85-B311-179B-0381-82666EDB3F4B}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-004		32444
+	474198600	Grass_Footsteps-004	.cache\C6\{C6785151-43E4-35D7-6460-948042D2C61F}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-004		75776
+	484519480	Grass_Footsteps-006	.cache\BD\{BD3D23B0-4F1A-02B2-65D6-B8A3A969CF21}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-006		83792
+	537292352	Concrete_Footsteps-006	.cache\6F\{6FEB5BCB-8CDF-4B8D-3041-27CBEC17B36D}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-006		75776
+	556381637	Wood_Footsteps-001	.cache\F1\{F1B01B34-AB1B-9057-5434-E8D21D727112}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-001		71576
+	570001535	Wood_Footsteps-002	.cache\81\{81FF78FA-31DB-1BE1-C9AF-01AA719B3733}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-002		52764
+	573414573	Grass_Footsteps-001	.cache\39\{392F9D18-AADC-EDE0-57A9-968FDA3F54DC}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-001		67764
+	619598543	Wood_Footsteps-005	.cache\F6\{F6FE64FF-B747-7E35-6C23-82CF8F7778B6}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-005		75776
+	708432397	Concrete_Footsteps-007	.cache\80\{80F0710D-4A7E-F06C-929A-65CE180810A6}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-007		73996
+	751474673	Grass_Footsteps-003	.cache\25\{2553FC60-DB89-3F7B-2266-990DF5BC8608}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-003		56188
+	768718239	Wood_Footsteps-004	.cache\87\{8790E70D-41B9-D13F-39C6-B860B9B1E15D}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-004		47180
+	862825252	Grass_Footsteps-005	.cache\22\{22A7525F-B9BB-8D9C-D1D9-9AAAA2B26194}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-005		79340
+	898231176	Grass_Footsteps-008	.cache\47\{47BADC16-9AD0-3801-07ED-6C3ACFA918F5}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-008		75776
+	978215307	Concrete_Footsteps-002	.cache\5A\{5A8DADBE-B2E0-5583-74CB-8B1124A58D8C}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-002		65092
+	1003821109	Concrete_Footsteps-005	.cache\FE\{FE2D57A4-C213-755A-DEBE-8FF6388CFA46}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-005		80228
+	1030958506	Wood_Footsteps-003	.cache\B9\{B9637993-2B52-8337-8981-CECFD1A2ADE9}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-003		72784
+
