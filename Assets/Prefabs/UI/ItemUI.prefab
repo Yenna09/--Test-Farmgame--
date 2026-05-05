@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2767810674469710216}
   - component: {fileID: 1386181585277300268}
+  - component: {fileID: -5790207538669236793}
   m_Layer: 0
   m_Name: ItemUI
   m_TagString: Item_UI
@@ -44,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea59e25f01ba5645aef929d8ffd05fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  db: {fileID: 11400000, guid: a58cc2f0199c71344b61bd17c38c4d65, type: 2}
+  deleteButton: {fileID: 778815520432677114, guid: 143ab5c40e0763e4d81fc01e2f867f9f, type: 3}
   id: 0
   quantity: 0
-  db: {fileID: 11400000, guid: a58cc2f0199c71344b61bd17c38c4d65, type: 2}
   itemData:
     nombre: 
     ID: 0
@@ -57,4 +59,15 @@ MonoBehaviour:
     descripcion: 
     item: {fileID: 0}
   exParent: {fileID: 0}
-  deleteButton: {fileID: 778815520432677114, guid: 143ab5c40e0763e4d81fc01e2f867f9f, type: 3}
+--- !u!225 &-5790207538669236793
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140774899578258593}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
