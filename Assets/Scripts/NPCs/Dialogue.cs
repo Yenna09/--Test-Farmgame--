@@ -1,22 +1,31 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI; 
 using TMPro;
-using Unity.VisualScripting;
+
+// 1. Creamos la clase que contiene los datos de cada línea de diálogo
+[System.Serializable]
+public class DialogueLine
+{
+    public string speakerName;
+    public Sprite speakerPhoto;
+    [TextArea(4, 6)]
+    public string text;
+}
 
 public class Dialogue : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject dialogueMark; 
+    [Header("UI References (Canvas)")]
+    [SerializeField] private GameObject dialogueMark; 
+    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private Image npcPhotoUI;   
+    [SerializeField] private TMP_Text npcNameUI; 
 
-    [SerializeField]
-    private GameObject dialoguePanel;
+    [Header("Dialogue Data")]
+    // 2. Reemplazamos los datos sueltos por un array de nuestra nueva clase
+    [SerializeField] private DialogueLine[] conversation;
 
-    [SerializeField, TextArea(4, 6)]
-    private string[] dialogueLines;
-
-    [SerializeField]
-    private TMP_Text dialogueText;
-    
     private bool isPlayerInRange;
     private bool didDialogueStart;
     private int lineIndex;
@@ -24,21 +33,21 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        
         if(isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
             if (!didDialogueStart)
             {
                 StartDialogue();
             }
-            else if(dialogueText.text == dialogueLines[lineIndex])
+            // Comparamos contra el texto de la línea actual
+            else if(dialogueText.text == conversation[lineIndex].text)
             {
                 NextDialogueLine();
             }
             else
             {
                 StopAllCoroutines();
-                dialogueText.text = dialogueLines[lineIndex];
+                dialogueText.text = conversation[lineIndex].text;
             }
         }
     }
@@ -48,8 +57,8 @@ public class Dialogue : MonoBehaviour
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
         dialogueMark.SetActive(false);
+        
         lineIndex = 0;
-        // CORRECCIÓN: Se usa Time.timeScale, no typingTime.timeScale
         Time.timeScale = 0f; 
         StartCoroutine(ShowLine());
     }
@@ -57,7 +66,7 @@ public class Dialogue : MonoBehaviour
     private void NextDialogueLine()
     {
         lineIndex++;
-        if (lineIndex < dialogueLines.Length)
+        if (lineIndex < conversation.Length)
         {
             StartCoroutine(ShowLine());
         }
@@ -66,19 +75,26 @@ public class Dialogue : MonoBehaviour
             didDialogueStart = false;
             dialoguePanel.SetActive(false);
             dialogueMark.SetActive(true);
-            // CORRECCIÓN: Se usa Time.timeScale, no typingTime.timeScale
             Time.timeScale = 1f; 
         }
     }
 
     private IEnumerator ShowLine()
     {
+        // 3. Obtenemos la información de la línea actual
+        DialogueLine currentLine = conversation[lineIndex];
+
+        // 4. Actualizamos la UI con la foto y nombre del que habla AHORA
+        if (npcNameUI != null) npcNameUI.text = currentLine.speakerName;
+        if (npcPhotoUI != null) npcPhotoUI.sprite = currentLine.speakerPhoto;
+
+        // Limpiamos el texto principal
         dialogueText.text = string.Empty;
 
-        foreach (char ch in dialogueLines[lineIndex])
+        // Escribimos el texto letra por letra
+        foreach (char ch in currentLine.text)
         {
             dialogueText.text += ch;
-            // CORRECCIÓN: Es WaitForSecondsRealtime (con la 't' minúscula)
             yield return new WaitForSecondsRealtime(typingTime);
         }
     }
@@ -100,6 +116,4 @@ public class Dialogue : MonoBehaviour
             dialogueMark.SetActive(false);
         }
     }
-
-    
 }
