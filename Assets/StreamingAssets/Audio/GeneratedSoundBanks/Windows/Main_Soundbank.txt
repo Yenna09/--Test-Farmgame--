@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	3854155799	Play_Footsteps			\Default Work Unit\Play_Footsteps	
+	4237703276	Play_Musica			\Default Work Unit\Play_Musica	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	2528658256	Ground			\Default Work Unit\Ground	
@@ -12,6 +13,7 @@ State	ID	Name	State Group			Notes
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	22958223	Grass_Footsteps-002	.cache\C1\{C10806AC-38CC-62AF-77C3-E82D259B2BCB}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-002		75292
+	65093811	MSX_Farm_Day_111BPM	.cache\86\{86C88B3D-9C02-6A4D-F1E9-C082111696FC}.wem		\Containers\Default Work Unit\Interactive Music\Musica\MSX_Farm_Day_111BPM		12586476
 	121779137	Concrete_Footsteps-003	.cache\21\{21A93E0C-977E-86B6-E989-DA0037C13B0A}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-003		78448
 	149283665	Concrete_Footsteps-001	.cache\4E\{4E735E33-2E14-4936-F3D7-1019E0652FB5}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-001		74888
 	241987115	Grass_Footsteps-007	.cache\F6\{F687880F-2735-172E-F369-3EAC93D3E0B2}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-007		94476

@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{13C4886E-2FE5-4AA9-93A9-3CA0642BB8EC}",
     "Language": "SFX",
-    "Hash": "{3C430E9A-4836-EBB2-2DBF-3629A3341DC6}",
+    "Hash": "{D7C4F1DC-ED29-07DA-3B5A-4AEE855D3D14}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_Soundbank",
     "ShortName": "Main_Soundbank",
     "Path": "Main_Soundbank.bnk",
@@ -22,6 +22,14 @@
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-002.wav",
       "CachePath": "C1/{C10806AC-38CC-62AF-77C3-E82D259B2BCB}.wem"
+     },
+     {
+      "Id": "65093811",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MSX_Farm_Day_111BPM.wav",
+      "CachePath": "86/{86C88B3D-9C02-6A4D-F1E9-C082111696FC}.wem"
      },
      {
       "Id": "121779137",
@@ -312,6 +320,18 @@
         ]
        }
       ]
+     },
+     {
+      "Id": "4237703276",
+      "Name": "Play_Musica",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_Musica",
+      "GUID": "{B83C08D4-8921-4C2C-A5F1-FA1322AE35BA}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "65093811"
+       }
+      ]
      }
     ],
     "StateGroups": [
@@ -350,6 +370,6 @@
     ]
    }
   ],
-  "FileHash": "{444F2F6E-4DC5-2033-70F3-984F2E369AA3}"
+  "FileHash": "{AA8C7020-A4B4-8E38-2801-C5D953A0B32E}"
  }
 }
