@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6ceffbe3bb124484d80d51a97bf4c672
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - dialogueMark: {instanceID: 0}
+  - dialoguePanel: {instanceID: 0}
+  - dialogueText: {instanceID: 0}
+  - npcPhotoUI: {instanceID: 0}
+  - npcNameUI: {instanceID: 0}
+  - npcPhoto: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

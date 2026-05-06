@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -15,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
         else Destroy(gameObject);
     }
     
+
     // Quitamos el panelInventario.SetActive del Start de aquí 
     // porque ya lo debería manejar el Inventory.cs o el InventoryController.
 
@@ -23,6 +23,7 @@ public class PlayerInventory : MonoBehaviour
         // El jugador solo da la orden, el Manager (Inventory) ejecuta
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Tab))
         {
+
             if (Inventory.Instance != null)
             {
                 Inventory.Instance.ToogleInventory();
