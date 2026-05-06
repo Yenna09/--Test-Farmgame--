@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{13C4886E-2FE5-4AA9-93A9-3CA0642BB8EC}",
     "Language": "SFX",
-    "Hash": "{D7C4F1DC-ED29-07DA-3B5A-4AEE855D3D14}",
+    "Hash": "{71A79A61-BF46-EA77-E61A-88B3FC2B99F2}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_Soundbank",
     "ShortName": "Main_Soundbank",
     "Path": "Main_Soundbank.bnk",
@@ -21,7 +21,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-002.wav",
-      "CachePath": "C1/{C10806AC-38CC-62AF-77C3-E82D259B2BCB}.wem"
+      "CachePath": "CF/{CF6F9280-87B5-F600-037A-F3C93DF65C67}.wem"
+     },
+     {
+      "Id": "48705713",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-013.wav",
+      "CachePath": "06/{06AF10C9-3059-B246-F75D-6E9B6C4D4FE4}.wem"
      },
      {
       "Id": "65093811",
@@ -29,7 +37,23 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MSX_Farm_Day_111BPM.wav",
-      "CachePath": "86/{86C88B3D-9C02-6A4D-F1E9-C082111696FC}.wem"
+      "CachePath": "0B/{0BA686E2-22C3-C60F-47D4-7EE13D1C0447}.wem"
+     },
+     {
+      "Id": "81633491",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-001.wav",
+      "CachePath": "D9/{D9FFF1D7-26B1-F53F-0453-CF3229AF2929}.wem"
+     },
+     {
+      "Id": "83368441",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-006.wav",
+      "CachePath": "21/{21283D80-ED3B-B0D0-D915-69F2117B802C}.wem"
      },
      {
       "Id": "121779137",
@@ -37,7 +61,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-003.wav",
-      "CachePath": "21/{21A93E0C-977E-86B6-E989-DA0037C13B0A}.wem"
+      "CachePath": "1D/{1DC5B487-6D3A-B594-0335-320AD20D2F49}.wem"
+     },
+     {
+      "Id": "129130768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-005.wav",
+      "CachePath": "90/{90AE352D-98F9-79EF-4865-072ACA9B42FB}.wem"
      },
      {
       "Id": "149283665",
@@ -45,7 +77,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-001.wav",
-      "CachePath": "4E/{4E735E33-2E14-4936-F3D7-1019E0652FB5}.wem"
+      "CachePath": "65/{6527944D-D2E8-618F-DED4-CE7A26B3437E}.wem"
      },
      {
       "Id": "241987115",
@@ -53,7 +85,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-007.wav",
-      "CachePath": "F6/{F687880F-2735-172E-F369-3EAC93D3E0B2}.wem"
+      "CachePath": "5D/{5DAFAD2F-8AEB-D572-16AE-8E5D2A1400B8}.wem"
+     },
+     {
+      "Id": "258778035",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-009.wav",
+      "CachePath": "20/{2070505A-50A8-C82C-F98E-95FEA02E9588}.wem"
      },
      {
       "Id": "266571907",
@@ -61,7 +101,31 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-004.wav",
-      "CachePath": "19/{199A3F85-B311-179B-0381-82666EDB3F4B}.wem"
+      "CachePath": "7A/{7ABAFBA5-96B6-5B55-CF0C-7FFDABA37302}.wem"
+     },
+     {
+      "Id": "295632300",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-003.wav",
+      "CachePath": "3F/{3F636228-CBF1-5767-E46E-24187E1E9DA5}.wem"
+     },
+     {
+      "Id": "370910692",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-011.wav",
+      "CachePath": "77/{77360F2D-3BF2-EDE3-EBB9-35C1260FE8FA}.wem"
+     },
+     {
+      "Id": "427451120",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-012.wav",
+      "CachePath": "21/{21F8E0BF-FD56-01A4-838C-E83D8C2CFF9C}.wem"
      },
      {
       "Id": "474198600",
@@ -69,7 +133,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-004.wav",
-      "CachePath": "C6/{C6785151-43E4-35D7-6460-948042D2C61F}.wem"
+      "CachePath": "BB/{BB86BDAF-486D-B4C9-20A3-B18FBA466598}.wem"
      },
      {
       "Id": "484519480",
@@ -77,7 +141,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-006.wav",
-      "CachePath": "BD/{BD3D23B0-4F1A-02B2-65D6-B8A3A969CF21}.wem"
+      "CachePath": "71/{710B09FA-37B0-A29D-2E16-F2E34171D979}.wem"
      },
      {
       "Id": "537292352",
@@ -85,7 +149,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-006.wav",
-      "CachePath": "6F/{6FEB5BCB-8CDF-4B8D-3041-27CBEC17B36D}.wem"
+      "CachePath": "77/{77461C4B-C34A-A47A-130E-09BFE35E469E}.wem"
+     },
+     {
+      "Id": "548128531",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-008.wav",
+      "CachePath": "12/{12425592-038A-C239-CBDF-5C022EC05FCC}.wem"
      },
      {
       "Id": "556381637",
@@ -93,7 +165,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Wood_Footsteps-001.wav",
-      "CachePath": "F1/{F1B01B34-AB1B-9057-5434-E8D21D727112}.wem"
+      "CachePath": "34/{34DE3979-F8D2-FCC1-D952-04CEFF769CBA}.wem"
      },
      {
       "Id": "570001535",
@@ -101,7 +173,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Wood_Footsteps-002.wav",
-      "CachePath": "81/{81FF78FA-31DB-1BE1-C9AF-01AA719B3733}.wem"
+      "CachePath": "E5/{E5626DB5-2421-AE20-1F0A-CB394BCFB887}.wem"
      },
      {
       "Id": "573414573",
@@ -109,7 +181,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-001.wav",
-      "CachePath": "39/{392F9D18-AADC-EDE0-57A9-968FDA3F54DC}.wem"
+      "CachePath": "27/{275F2668-9EF3-2226-18F9-672C55C25DE2}.wem"
      },
      {
       "Id": "619598543",
@@ -117,7 +189,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Wood_Footsteps-005.wav",
-      "CachePath": "F6/{F6FE64FF-B747-7E35-6C23-82CF8F7778B6}.wem"
+      "CachePath": "67/{675DE30A-1CCC-BD5F-CC73-A79486E9D9EB}.wem"
+     },
+     {
+      "Id": "693616081",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-002.wav",
+      "CachePath": "8B/{8BD5ED4F-E5C0-C747-413A-9B2FED33CF13}.wem"
      },
      {
       "Id": "708432397",
@@ -125,7 +205,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-007.wav",
-      "CachePath": "80/{80F0710D-4A7E-F06C-929A-65CE180810A6}.wem"
+      "CachePath": "AB/{ABA064B5-0B82-14EF-8418-5CFEFE5D90F9}.wem"
+     },
+     {
+      "Id": "712536897",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-007.wav",
+      "CachePath": "DF/{DF0084CC-86DB-77CC-3BE2-FA91405695F4}.wem"
      },
      {
       "Id": "751474673",
@@ -133,7 +221,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-003.wav",
-      "CachePath": "25/{2553FC60-DB89-3F7B-2266-990DF5BC8608}.wem"
+      "CachePath": "92/{92124B5F-CC57-A037-2225-584706A58EA7}.wem"
      },
      {
       "Id": "768718239",
@@ -141,7 +229,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Wood_Footsteps-004.wav",
-      "CachePath": "87/{8790E70D-41B9-D13F-39C6-B860B9B1E15D}.wem"
+      "CachePath": "40/{40E4AA98-8E3B-6B55-66A5-2E9117165749}.wem"
+     },
+     {
+      "Id": "829133488",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-010.wav",
+      "CachePath": "B1/{B1497AA7-5DE3-D838-B39E-D29168D1F6EB}.wem"
      },
      {
       "Id": "862825252",
@@ -149,7 +245,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-005.wav",
-      "CachePath": "22/{22A7525F-B9BB-8D9C-D1D9-9AAAA2B26194}.wem"
+      "CachePath": "8A/{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem"
      },
      {
       "Id": "898231176",
@@ -157,7 +253,15 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-008.wav",
-      "CachePath": "47/{47BADC16-9AD0-3801-07ED-6C3ACFA918F5}.wem"
+      "CachePath": "26/{26C6AC13-B21A-E03B-EF9C-B6CCE3182DEF}.wem"
+     },
+     {
+      "Id": "950546272",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaDia-004.wav",
+      "CachePath": "D0/{D0CFE2F5-B5B7-57AC-C340-6BB10938EEF1}.wem"
      },
      {
       "Id": "978215307",
@@ -165,7 +269,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-002.wav",
-      "CachePath": "5A/{5A8DADBE-B2E0-5583-74CB-8B1124A58D8C}.wem"
+      "CachePath": "A7/{A7FEE251-E357-41AF-BB14-D2E8EE328CEF}.wem"
      },
      {
       "Id": "1003821109",
@@ -173,7 +277,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Concrete_Footsteps-005.wav",
-      "CachePath": "FE/{FE2D57A4-C213-755A-DEBE-8FF6388CFA46}.wem"
+      "CachePath": "80/{80FF74D5-8D6C-7B67-CC85-BAE5BFC578CA}.wem"
      },
      {
       "Id": "1030958506",
@@ -181,7 +285,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Wood_Footsteps-003.wav",
-      "CachePath": "B9/{B9637993-2B52-8337-8981-CECFD1A2ADE9}.wem"
+      "CachePath": "C3/{C372FD47-FD45-6FC8-9904-F77B78493458}.wem"
      }
     ],
     "Events": [
@@ -322,14 +426,53 @@
       ]
      },
      {
-      "Id": "4237703276",
-      "Name": "Play_Musica",
-      "ObjectPath": "\\Events\\Default Work Unit\\Play_Musica",
+      "Id": "2596494084",
+      "Name": "Play_MusicaYAmbiente",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_MusicaYAmbiente",
       "GUID": "{B83C08D4-8921-4C2C-A5F1-FA1322AE35BA}",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
+        "Id": "48705713"
+       },
+       {
         "Id": "65093811"
+       },
+       {
+        "Id": "81633491"
+       },
+       {
+        "Id": "83368441"
+       },
+       {
+        "Id": "129130768"
+       },
+       {
+        "Id": "258778035"
+       },
+       {
+        "Id": "295632300"
+       },
+       {
+        "Id": "370910692"
+       },
+       {
+        "Id": "427451120"
+       },
+       {
+        "Id": "548128531"
+       },
+       {
+        "Id": "693616081"
+       },
+       {
+        "Id": "712536897"
+       },
+       {
+        "Id": "829133488"
+       },
+       {
+        "Id": "950546272"
        }
       ]
      }
@@ -370,6 +513,6 @@
     ]
    }
   ],
-  "FileHash": "{AA8C7020-A4B4-8E38-2801-C5D953A0B32E}"
+  "FileHash": "{ECA37334-8325-6065-39C9-A42CC4A1A339}"
  }
 }
