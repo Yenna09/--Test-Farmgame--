@@ -1,11 +1,15 @@
 State Group	ID	Name			Wwise Object Path	Notes
 	2528658256	Ground			\Default Work Unit\Ground	
+	2654366170	Time			\Default Work Unit\Time	
 
 State	ID	Name	State Group			Notes
 	748895195	None	Ground			
 	841620460	Concrete	Ground			
 	2058049674	Wood	Ground			
 	4248645337	Grass	Ground			
+	311764537	Day	Time			
+	748895195	None	Time			
+	1011622525	Night	Time			
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	988953028	SFXVolume			\Default Work Unit\SFXVolume	

@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{2053057C-C4CC-EF2E-022A-6A8C998C8C74}",
+    "Hash": "{A31CCCD0-230E-EAA6-12E9-7FA8534BFA64}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -106,10 +106,36 @@
         "GUID": "{A7C44D29-8B46-4237-A8D3-BEB8C2518907}"
        }
       ]
+     },
+     {
+      "Id": "2654366170",
+      "Name": "Time",
+      "ObjectPath": "\\States\\Default Work Unit\\Time",
+      "GUID": "{B8EF5A02-7A0E-4450-837A-D558ECFB324B}",
+      "States": [
+       {
+        "Id": "311764537",
+        "Name": "Day",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\Day",
+        "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\None",
+        "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}"
+       },
+       {
+        "Id": "1011622525",
+        "Name": "Night",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\Night",
+        "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{683244E4-4C70-359C-6968-A2ACBC6BEC45}"
+  "FileHash": "{F0DB6E35-1ABC-1448-3C80-D08C4204429A}"
  }
 }
