@@ -6542,6 +6542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 3345266111704941824, guid: 11db26a856fae7845bf916c4153c9ca8, type: 3}
+      propertyPath: inventoryPanel
+      value: 
+      objectReference: {fileID: 1554212618}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9838,6 +9842,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544796004}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1554212618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 521396114733276560, guid: 64e3029236df54e44a083c54c7428668, type: 3}
+  m_PrefabInstance: {fileID: 3954490155004806161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1583908102
 GameObject:
   m_ObjectHideFlags: 0
