@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float verticalCompensation = 1.25f;
 
     [Header("Configuración de Herramientas")]
-    // NUEVO: Poné acá el ID que tiene la Azada en tu Base de Datos (ej: 0, 1, 2)
     public int idDeLaAzada = 7; 
+    public int idDeLaRegadera = 13;
 
     private Rigidbody rb;
     private Animator animator;
@@ -58,29 +58,34 @@ public class PlayerMovement : MonoBehaviour
         // Si hace clic izquierdo, preguntamos a la Hotbar si tiene la Azada
         if (Input.GetMouseButtonDown(0))
         {
-            if (HotbarController.Instance != null && HotbarController.Instance.GetEquippedItemID() == idDeLaAzada)
+            int itemEquipado = HotbarController.Instance.GetEquippedItemID();
+            
+            if (itemEquipado == idDeLaAzada || itemEquipado == idDeLaRegadera)
             {
-                StartCoroutine(UsarHerramientaRoutine());
+                StartCoroutine(AccionHerramientaRoutine(itemEquipado));
             }
-            // FUTURO: Podés agregar un 'else if' para el Hacha, Pico, etc.
         }
     }
 
-    IEnumerator UsarHerramientaRoutine()
+    IEnumerator AccionHerramientaRoutine(int itemID)
     {
         estaUsandoHerramienta = true;
         rb.linearVelocity = Vector3.zero;
 
-        animator.SetFloat("LastHorizontal", animator.GetFloat("LastHorizontal"));
-        animator.SetFloat("LastVertical", animator.GetFloat("LastVertical"));
+        // Disparamos el trigger según qué tengamos en la mano
+        if (itemID == idDeLaAzada) animator.SetTrigger("doSwing");
+        else if (itemID == idDeLaRegadera) animator.SetTrigger("doWater"); // Asegurate de tener este trigger
 
-        animator.SetTrigger("doSwing");
+        yield return new WaitForSeconds(0.3f);
 
-        yield return new WaitForSeconds(0.6f);
+        if (FarmingController.Instance != null)
+        {
+            FarmingController.Instance.UsarHerramienta();
+        }
 
+        yield return new WaitForSeconds(0.3f);
         estaUsandoHerramienta = false;
     }
-
     void FixedUpdate()
     {    
         bool inventarioAbierto = false;
