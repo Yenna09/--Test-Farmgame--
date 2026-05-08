@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{13C4886E-2FE5-4AA9-93A9-3CA0642BB8EC}",
     "Language": "SFX",
-    "Hash": "{29D28000-E5F0-071E-FCA4-78428CCA9CEB}",
+    "Hash": "{2DC2520E-AEBA-801B-0ACB-B753F2057619}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_Soundbank",
     "ShortName": "Main_Soundbank",
     "Path": "Main_Soundbank.bnk",
@@ -144,12 +144,28 @@
       "CachePath": "3F/{3F636228-CBF1-5767-E46E-24187E1E9DA5}.wem"
      },
      {
+      "Id": "334462037",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Plowing-001.wav",
+      "CachePath": "F7/{F7A97B71-8CB3-F283-9560-5EB6858D41C4}.wem"
+     },
+     {
       "Id": "370910692",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_GranjaDia-011.wav",
       "CachePath": "77/{77360F2D-3BF2-EDE3-EBB9-35C1260FE8FA}.wem"
+     },
+     {
+      "Id": "396635671",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-002.wav",
+      "CachePath": "4B/{4B12412B-8377-D958-9A65-4D59D03C9880}.wem"
      },
      {
       "Id": "427451120",
@@ -232,6 +248,14 @@
       "CachePath": "67/{675DE30A-1CCC-BD5F-CC73-A79486E9D9EB}.wem"
      },
      {
+      "Id": "638975541",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-004.wav",
+      "CachePath": "F6/{F6B1C7D2-64BC-FF2D-F98B-5B42E2EB2D76}.wem"
+     },
+     {
       "Id": "647074372",
       "Language": "SFX",
       "Streaming": "false",
@@ -296,6 +320,14 @@
       "CachePath": "40/{40E4AA98-8E3B-6B55-66A5-2E9117165749}.wem"
      },
      {
+      "Id": "776098298",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Plowing-002.wav",
+      "CachePath": "3B/{3B9E4117-8059-EB9D-2B95-ED18C2B1C9DB}.wem"
+     },
+     {
       "Id": "829133488",
       "Language": "SFX",
       "Streaming": "false",
@@ -310,6 +342,22 @@
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-005.wav",
       "CachePath": "8A/{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem"
+     },
+     {
+      "Id": "883429283",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-001.wav",
+      "CachePath": "8A/{8A3FCA38-5105-D224-9B98-49478F0D6172}.wem"
+     },
+     {
+      "Id": "890741007",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-003.wav",
+      "CachePath": "89/{893F170A-A461-D3C4-7597-102DC0B5B005}.wem"
      },
      {
       "Id": "898231176",
@@ -761,6 +809,46 @@
         ]
        }
       ]
+     },
+     {
+      "Id": "2770939616",
+      "Name": "Play_Plowing",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_Plowing",
+      "GUID": "{E968F194-FB2E-4A7D-A28B-44DE137318FE}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.24527669",
+      "DurationMax": "0.3065723",
+      "MediaRefs": [
+       {
+        "Id": "334462037"
+       },
+       {
+        "Id": "776098298"
+       }
+      ]
+     },
+     {
+      "Id": "346398545",
+      "Name": "Play_WateringCan",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_WateringCan",
+      "GUID": "{4DD04B54-AC1F-404E-ADD7-4E6F51500567}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.91144395",
+      "DurationMax": "1.3955436",
+      "MediaRefs": [
+       {
+        "Id": "396635671"
+       },
+       {
+        "Id": "638975541"
+       },
+       {
+        "Id": "883429283"
+       },
+       {
+        "Id": "890741007"
+       }
+      ]
      }
     ],
     "StateGroups": [
@@ -825,6 +913,6 @@
     ]
    }
   ],
-  "FileHash": "{B7D6A883-A9B7-9780-CCE7-B7D544BD45F4}"
+  "FileHash": "{542DA989-8BCC-AB9E-028F-8E9C3422766B}"
  }
 }

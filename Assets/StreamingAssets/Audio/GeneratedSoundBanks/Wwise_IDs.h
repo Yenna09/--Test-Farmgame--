@@ -16,6 +16,8 @@ namespace AK
         static const AkUniqueID PLAY_DAYNIGHTSTART = 2577162886U;
         static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
         static const AkUniqueID PLAY_MUSICAYAMBIENTE = 2596494084U;
+        static const AkUniqueID PLAY_PLOWING = 2770939616U;
+        static const AkUniqueID PLAY_WATERINGCAN = 346398545U;
     } // namespace EVENTS
 
     namespace STATES

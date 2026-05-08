@@ -428,6 +428,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 98f67cbd03e41834abd846e8cbe9ead1, type: 2}
+  hoeSFXEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 22e2480bb1115c94fa0aae7ba16e387d, type: 2}
 --- !u!1 &9038178
 GameObject:
   m_ObjectHideFlags: 0
