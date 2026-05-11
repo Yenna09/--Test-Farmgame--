@@ -5,8 +5,10 @@ using UnityEngine.Rendering.Universal;
 
 public class ControladorCicloDia : MonoBehaviour
 {
+    [SerializeField] private Light luzGlobal;
+    [SerializeField] private CicloDia[] cicloDias;
+    [SerializeField] private float tiempoPorCiclo;
     
-
     private float tiempoActualCiclo = 0;
     private float porcentajeCiclo;
     private int cicloActual = 0;
