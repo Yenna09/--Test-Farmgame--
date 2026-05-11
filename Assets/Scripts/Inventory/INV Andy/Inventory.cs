@@ -21,27 +21,25 @@ public class Inventory : MonoBehaviour
         inventoryToggle.SetActive(false);
     }
 
-    public void PickUpItem(int id, int quantity)
+    // Le cambiamos el 'void' por 'bool'
+    public bool PickUpItem(int id, int quantity)
     {
         var itemData = db.dataBase[id];
 
-        // 1. Primero intentamos APILAR (Stackear) si el ítem es acumulable
+        // 1. Primero intentamos APILAR (Stackear)
         if (itemData.acumulable)
         {
-            // Busca lugar en Hotbar
-            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) return;
-            // Busca lugar en Inventario Principal
-            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) return;
+            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
+            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
         }
 
-        // 2. Si no es acumulable o sobró cantidad, buscamos un SLOT VACÍO
-        // Busca vacío en Hotbar
-        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) return;
-        // Busca vacío en Inventario Principal
-        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) return;
+        // 2. Buscamos un SLOT VACÍO
+        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) return true; // ¡Éxito!
+        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) return true; // ¡Éxito!
 
-        // 3. Si llega acá, es porque no hay lugar en ningún lado
+        // 3. Si llega acá, no hay lugar
         Debug.LogWarning("¡Inventario y Hotbar llenos! No se pudo agarrar el ítem.");
+        return false; // Falló, no hay espacio
     }
 
     // --- FUNCIONES AYUDANTES (Hacen que el código de arriba sea más limpio) ---

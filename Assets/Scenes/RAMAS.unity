@@ -307,8 +307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   verticalCompensation: 1
-  idDeLaAzada: 7
-  idDeLaRegadera: 13
 --- !u!54 &1654419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5510,7 +5508,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3891826827717853369, guid: 29375b06fa573cc459361ce4a119e820, type: 3}
       propertyPath: itemID
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3891826827717853369, guid: 29375b06fa573cc459361ce4a119e820, type: 3}
       propertyPath: uniqueWorldID
@@ -5519,7 +5517,7 @@ PrefabInstance:
     - target: {fileID: 254108103370310372, guid: 29375b06fa573cc459361ce4a119e820, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 570facf2b7c492249a5668128ed1983d, type: 3}
+      objectReference: {fileID: 21300000, guid: cbd0fb10269effb48bf8dc6ac3006aa8, type: 3}
     - target: {fileID: 254108103370310372, guid: 29375b06fa573cc459361ce4a119e820, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -11622,6 +11620,7 @@ GameObject:
   - component: {fileID: 1915104661}
   - component: {fileID: 1915104662}
   - component: {fileID: 1915104663}
+  - component: {fileID: 1915104664}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -11707,6 +11706,38 @@ MonoBehaviour:
   tierraAradaTile: {fileID: 11400000, guid: 35d4ffc08fb61ee43bc571c49668c470, type: 2}
   tierraMojadaTile: {fileID: 11400000, guid: b4daed9be9ca23944a77fdafc7c543b4, type: 2}
   cursorObjeto: {fileID: 852132754}
+--- !u!114 &1915104664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915104658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a187d21f8577249b1ebb25370ce5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropManager
+  catalogoSemillas:
+  - idSemilla: 1
+    etapasCrecimiento:
+    - {fileID: 0}
+    - {fileID: 378810548, guid: 7aaf8379e2b0c1043a2a126041ecec77, type: 3}
+    - {fileID: 21300000, guid: 570facf2b7c492249a5668128ed1983d, type: 3}
+    idItemCosecha: 0
+  - idSemilla: 4
+    etapasCrecimiento: []
+    idItemCosecha: 0
+  - idSemilla: 6
+    etapasCrecimiento: []
+    idItemCosecha: 0
+  - idSemilla: 9
+    etapasCrecimiento: []
+    idItemCosecha: 0
+  - idSemilla: 12
+    etapasCrecimiento: []
+    idItemCosecha: 0
+  prefabPlantaBase: {fileID: 8361436939084295293, guid: 0177da2eff366214fbbc9d5aab49218f, type: 3}
 --- !u!1 &1919525791
 GameObject:
   m_ObjectHideFlags: 0

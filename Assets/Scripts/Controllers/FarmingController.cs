@@ -70,42 +70,68 @@ public class FarmingController : MonoBehaviour
         cursorObjeto.position = posicionCursor;
         cursorObjeto.rotation = Quaternion.Euler(90f, 0f, 0f); 
 
-        // Chequeamos qué tiene en la mano
         int idEnMano = HotbarController.Instance.GetEquippedItemID();
         TileBase tileActual = groundTilemap.GetTile(celdaObjetivo);
-
         bool mostrarCursor = false;
 
-        // Lógica para Azada -> Solo en Pasto
-        if (idEnMano == playerMovement.idDeLaAzada && tileActual == pastoTile)
+        // Comprobamos que el ID sea válido dentro de tu base de datos
+        if (idEnMano >= 0 && idEnMano < Inventory.Instance.db.dataBase.Length)
         {
-            mostrarCursor = true;
-        }
-        // Lógica para Regadera -> Solo en Tierra Arada Seca
-        else if (idEnMano == playerMovement.idDeLaRegadera && tileActual == tierraAradaTile)
-        {
-            mostrarCursor = true;
+            // Obtenemos tu struct InventoryItem
+            Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
+
+            // Usamos TU enum ActionType (en minúsculas como lo definiste)
+            if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)
+            {
+                mostrarCursor = true;
+            }
+            else if (itemEquipado.accion == Database.ActionType.regar && tileActual == tierraAradaTile)
+            {
+                mostrarCursor = true;
+            }
+            else if (itemEquipado.accion == Database.ActionType.plantar && (tileActual == tierraAradaTile || tileActual == tierraMojadaTile))
+            {
+                mostrarCursor = true;
+            }
         }
 
         cursorObjeto.gameObject.SetActive(mostrarCursor);
     }
 
-    // El PlayerMovement llamará a esta función
     public void UsarHerramienta()
     {
         int idEnMano = HotbarController.Instance.GetEquippedItemID();
         TileBase tileActual = groundTilemap.GetTile(celdaObjetivo);
 
-        // Si es la azada y hay pasto -> Aramas
-        if (idEnMano == playerMovement.idDeLaAzada && tileActual == pastoTile)
+        if (idEnMano < 0 || idEnMano >= Inventory.Instance.db.dataBase.Length) return;
+
+        // Obtenemos tu struct InventoryItem
+        Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
+
+        if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)
         {
             groundTilemap.SetTile(celdaObjetivo, tierraAradaTile);
         }
-        // Si es la regadera y hay tierra seca -> Mojamos
-        else if (idEnMano == playerMovement.idDeLaRegadera && tileActual == tierraAradaTile)
+        else if (itemEquipado.accion == Database.ActionType.regar && tileActual == tierraAradaTile)
         {
             groundTilemap.SetTile(celdaObjetivo, tierraMojadaTile);
-            Debug.Log("[CULTIVO] ¡Tierra regada!");
         }
+        else if (itemEquipado.accion == Database.ActionType.plantar && (tileActual == tierraAradaTile || tileActual == tierraMojadaTile))
+        {
+            if (!CropController.Instance.HayCultivoEn(celdaObjetivo))
+            {
+                CropController.Instance.PlantarSemilla(celdaObjetivo, idEnMano);
+                HotbarController.Instance.ConsumeItemEquipped();
+            }
+        }
+    }
+    public bool PuedeCosechar()
+    {
+        return CropController.Instance.HayCultivoEn(celdaObjetivo) && CropController.Instance.EsCosechable(celdaObjetivo);
+    }
+
+    public void EjecutarCosecha()
+    {
+        CropController.Instance.Cosechar(celdaObjetivo);
     }
 }

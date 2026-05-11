@@ -39,12 +39,16 @@ public class ControladorCicloDia : MonoBehaviour
                 cicloSiguiente = 0;
             else
                 cicloSiguiente += 1;
+
+            // --- ¡LA MAGIA DE LAS PLANTAS ACÁ! ---
+            // Si el ciclo vuelve a 0 (Amanecer), le avisamos al CropController
+            if (cicloActual == 0)
+            {
+                if (CropController.Instance != null) CropController.Instance.AvanzarDia();
+            }
         }
 
-        
         Color colorLerp = Color.Lerp(cicloDias[cicloActual].colorCiclo, cicloDias[cicloSiguiente].colorCiclo, porcentajeCiclo);
-        
-        
         float intensidadLerp = Mathf.Lerp(cicloDias[cicloActual].intensidad, cicloDias[cicloSiguiente].intensidad, porcentajeCiclo);
 
         AplicarCambios(colorLerp, intensidadLerp);
@@ -52,28 +56,28 @@ public class ControladorCicloDia : MonoBehaviour
 
 
     private void AplicarCambios(Color color, float intensidad)
-{
-    
-    luzGlobal.color = color;
-    luzGlobal.intensity = intensidad;
-    RenderSettings.ambientLight = color * 0.5f; 
-
-    
-    GameObject player = GameObject.FindWithTag("Player");
-    if (player != null)
     {
-        SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            
-            sr.color = Color.white;
-            sr.material.SetColor("_EmissionColor", Color.white);
-            sr.material.SetColor("_Color", Color.white);
-            sr.material.SetFloat("_Exposure", 1.0f);
+        
+        luzGlobal.color = color;
+        luzGlobal.intensity = intensidad;
+        RenderSettings.ambientLight = color * 0.5f; 
 
-            
-            
+        
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                
+                sr.color = Color.white;
+                sr.material.SetColor("_EmissionColor", Color.white);
+                sr.material.SetColor("_Color", Color.white);
+                sr.material.SetFloat("_Exposure", 1.0f);
+
+                
+                
+            }
         }
     }
-}
 }

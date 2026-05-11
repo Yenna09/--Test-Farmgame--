@@ -10,10 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float verticalCompensation = 1.25f;
 
-    [Header("Configuración de Herramientas")]
-    public int idDeLaAzada = 7; 
-    public int idDeLaRegadera = 13;
-
     private Rigidbody rb;
     private Animator animator;
     private Vector3 moveInput;
@@ -56,36 +52,86 @@ public class PlayerMovement : MonoBehaviour
 
         // --- LA MAGIA ACÁ ---
         // Si hace clic izquierdo, preguntamos a la Hotbar si tiene la Azada
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !estaUsandoHerramienta)
         {
-            int itemEquipado = HotbarController.Instance.GetEquippedItemID();
-            
-            if (itemEquipado == idDeLaAzada || itemEquipado == idDeLaRegadera)
+            // --- NUEVO: PRIORIDAD 1 -> COSECHAR ---
+            if (FarmingController.Instance != null && FarmingController.Instance.PuedeCosechar())
             {
-                StartCoroutine(AccionHerramientaRoutine(itemEquipado));
+                StartCoroutine(CosecharRoutine());
+                return; // Cortamos acá la ejecución para que no intente usar una herramienta
+            }
+
+            // --- PRIORIDAD 2 -> USAR HERRAMIENTAS ---
+            int idEnMano = HotbarController.Instance.GetEquippedItemID();
+
+            if (idEnMano >= 0 && idEnMano < Inventory.Instance.db.dataBase.Length)
+            {
+                Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
+
+                if (itemEquipado.accion == Database.ActionType.arar || 
+                    itemEquipado.accion == Database.ActionType.regar || 
+                    itemEquipado.accion == Database.ActionType.plantar)
+                {
+                    StartCoroutine(AccionHerramientaRoutine(itemEquipado.accion));
+                }
             }
         }
     }
 
-    IEnumerator AccionHerramientaRoutine(int itemID)
+    IEnumerator AccionHerramientaRoutine(Database.ActionType accion)
     {
         estaUsandoHerramienta = true;
         rb.linearVelocity = Vector3.zero;
 
-        // Disparamos el trigger según qué tengamos en la mano
-        if (itemID == idDeLaAzada) animator.SetTrigger("doSwing");
-        else if (itemID == idDeLaRegadera) animator.SetTrigger("doWater"); // Asegurate de tener este trigger
+        // Elegimos la animación según la acción
+        if (accion == Database.ActionType.arar) 
+        {
+            animator.SetTrigger("doSwing");
+        }
+        else if (accion == Database.ActionType.regar) 
+        {
+            animator.SetTrigger("doWater");
+        }
+        else if (accion == Database.ActionType.plantar) 
+        {
+            // Podés usar doSwing temporalmente hasta que tengas una animación de plantar
+            animator.SetTrigger("doSwing"); 
+        }
 
+        // Esperamos a la mitad de la animación
         yield return new WaitForSeconds(0.3f);
 
+        // ¡Acá es donde finalmente se llama a plantar/regar/arar!
         if (FarmingController.Instance != null)
         {
             FarmingController.Instance.UsarHerramienta();
         }
 
+        // Terminamos de esperar
         yield return new WaitForSeconds(0.3f);
         estaUsandoHerramienta = false;
     }
+
+    IEnumerator CosecharRoutine()
+    {
+        estaUsandoHerramienta = true;
+        rb.linearVelocity = Vector3.zero;
+
+        // Reproducimos la misma animación temporalmente (o podés crear una animación nueva "doPickup")
+        animator.SetTrigger("doSwing"); 
+
+        // Esperamos a la mitad de la animación
+        yield return new WaitForSeconds(0.3f);
+
+        if (FarmingController.Instance != null)
+        {
+            FarmingController.Instance.EjecutarCosecha();
+        }
+
+        // Terminamos de esperar
+        yield return new WaitForSeconds(0.3f);
+        estaUsandoHerramienta = false;
+    }    
     void FixedUpdate()
     {    
         bool inventarioAbierto = false;

@@ -139,4 +139,31 @@ public class HotbarController : MonoBehaviour
         }
         return -1; // Mano vacía
     }
+    public void ConsumeItemEquipped()
+    {
+        // Asegurate de que esta ruta coincida con cómo tenés armada tu hotbar
+        Transform hotbar = Inventory.Instance.hotbarContainer; 
+        
+        if (selectedSlotIndex < 0 || selectedSlotIndex >= hotbar.childCount) return;
+
+        Transform selectedSlot = hotbar.GetChild(selectedSlotIndex);
+        
+        if (selectedSlot.childCount > 0)
+        {
+            // Usamos TU script ItemUI
+            ItemUI item = selectedSlot.GetChild(0).GetComponent<ItemUI>();
+            
+            if (item != null)
+            {
+                item.quantity--;
+                item.RefreshUI(); // Usamos TU método para actualizar el numerito
+
+                if (item.quantity <= 0)
+                {
+                    Destroy(item.gameObject);
+                    Debug.Log("[HOTBAR] Semilla consumida y eliminada.");
+                }
+            }
+        }
+    }
 }
