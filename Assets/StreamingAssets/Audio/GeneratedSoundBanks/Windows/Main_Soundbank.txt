@@ -1,49 +1,71 @@
 Event	ID	Name			Wwise Object Path	Notes
+	346398545	Play_WateringCan			\Default Work Unit\Play_WateringCan	
+	2577162886	Play_DayNightStart			\Default Work Unit\Play_DayNightStart	
 	2596494084	Play_MusicaYAmbiente			\Default Work Unit\Play_MusicaYAmbiente	
+	2770939616	Play_Plowing			\Default Work Unit\Play_Plowing	
 	3854155799	Play_Footsteps			\Default Work Unit\Play_Footsteps	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	2528658256	Ground			\Default Work Unit\Ground	
+	2654366170	Time			\Default Work Unit\Time	
 
 State	ID	Name	State Group			Notes
 	748895195	None	Ground			
 	841620460	Concrete	Ground			
 	2058049674	Wood	Ground			
 	4248645337	Grass	Ground			
+	311764537	Day	Time			
+	748895195	None	Time			
+	1011622525	Night	Time			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	22958223	Grass_Footsteps-002	.cache\CF\{CF6F9280-87B5-F600-037A-F3C93DF65C67}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-002		5976
-	48705713	AMB_GranjaDia-013	.cache\06\{06AF10C9-3059-B246-F75D-6E9B6C4D4FE4}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-013		41341
-	65093811	MSX_Farm_Day_111BPM	.cache\0B\{0BA686E2-22C3-C60F-47D4-7EE13D1C0447}.wem		\Containers\Default Work Unit\Interactive Music\Musica\MSX_Farm_Day_111BPM		909852
-	81633491	AMB_GranjaDia-001	.cache\D9\{D9FFF1D7-26B1-F53F-0453-CF3229AF2929}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-001		47175
-	83368441	AMB_GranjaDia-006	.cache\21\{21283D80-ED3B-B0D0-D915-69F2117B802C}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-006		47140
+	38766638	MSX_Farm_Night_85BPM	.cache\27\{27ABFAFE-FBA4-D383-D315-9CD8140295A4}.wem		\Containers\Default Work Unit\Interactive Music\Musica\FarmNight\MSX_Farm_Night_85BPM		847549
+	48705713	AMB_GranjaDia-013	.cache\06\{06AF10C9-3059-B246-F75D-6E9B6C4D4FE4}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-013		41341
+	65093811	MSX_Farm_Day_111BPM	.cache\0B\{0BA686E2-22C3-C60F-47D4-7EE13D1C0447}.wem		\Containers\Default Work Unit\Interactive Music\Musica\FarmDay\MSX_Farm_Day_111BPM		909852
+	81633491	AMB_GranjaDia-001	.cache\D9\{D9FFF1D7-26B1-F53F-0453-CF3229AF2929}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-001		47175
+	83368441	AMB_GranjaDia-006	.cache\21\{21283D80-ED3B-B0D0-D915-69F2117B802C}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-006		47140
 	121779137	Concrete_Footsteps-003	.cache\1D\{1DC5B487-6D3A-B594-0335-320AD20D2F49}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-003		3366
-	129130768	AMB_GranjaDia-005	.cache\90\{90AE352D-98F9-79EF-4865-072ACA9B42FB}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-005		58493
+	129130768	AMB_GranjaDia-005	.cache\90\{90AE352D-98F9-79EF-4865-072ACA9B42FB}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-005		58493
 	149283665	Concrete_Footsteps-001	.cache\65\{6527944D-D2E8-618F-DED4-CE7A26B3437E}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-001		3621
+	182770960	Comienzo Noche	.cache\98\{98BD3E40-3A09-5E7C-2BED-DBD14C9D243C}.wem		\Containers\Default Work Unit\Interactive Music\DayNightStart\Comienzo Noche		135261
+	213087547	AMB_GranjaNoche-004	.cache\6A\{6AEA327F-CDEB-5A55-F7D9-EDE37E29B941}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-004		134046
+	214266470	AMB_GranjaNoche-003	.cache\7E\{7EB1801A-E32A-FF17-A677-EDA15565F0EC}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-003		110931
 	241987115	Grass_Footsteps-007	.cache\5D\{5DAFAD2F-8AEB-D572-16AE-8E5D2A1400B8}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-007		7564
-	258778035	AMB_GranjaDia-009	.cache\20\{2070505A-50A8-C82C-F98E-95FEA02E9588}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-009		47088
+	258778035	AMB_GranjaDia-009	.cache\20\{2070505A-50A8-C82C-F98E-95FEA02E9588}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-009		47088
 	266571907	Concrete_Footsteps-004	.cache\7A\{7ABAFBA5-96B6-5B55-CF0C-7FFDABA37302}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-004		2534
-	295632300	AMB_GranjaDia-003	.cache\3F\{3F636228-CBF1-5767-E46E-24187E1E9DA5}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-003		46830
-	370910692	AMB_GranjaDia-011	.cache\77\{77360F2D-3BF2-EDE3-EBB9-35C1260FE8FA}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-011		47301
-	427451120	AMB_GranjaDia-012	.cache\21\{21F8E0BF-FD56-01A4-838C-E83D8C2CFF9C}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-012		26040
+	295632300	AMB_GranjaDia-003	.cache\3F\{3F636228-CBF1-5767-E46E-24187E1E9DA5}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-003		46830
+	334462037	Plowing-001	.cache\F7\{F7A97B71-8CB3-F283-9560-5EB6858D41C4}.wem		\Containers\Default Work Unit\SFX\Plowing\Plowing-001		4261
+	370910692	AMB_GranjaDia-011	.cache\77\{77360F2D-3BF2-EDE3-EBB9-35C1260FE8FA}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-011		47301
+	396635671	SFX_Watering-002	.cache\4B\{4B12412B-8377-D958-9A65-4D59D03C9880}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-002		26161
+	427451120	AMB_GranjaDia-012	.cache\21\{21F8E0BF-FD56-01A4-838C-E83D8C2CFF9C}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-012		26040
 	474198600	Grass_Footsteps-004	.cache\BB\{BB86BDAF-486D-B4C9-20A3-B18FBA466598}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-004		5543
 	484519480	Grass_Footsteps-006	.cache\71\{710B09FA-37B0-A29D-2E16-F2E34171D979}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-006		5121
+	504352500	AMB_GranjaNoche-001	.cache\5F\{5F8AB1E6-CAB6-A6B6-84DD-00AED237CC21}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-001		128790
 	537292352	Concrete_Footsteps-006	.cache\77\{77461C4B-C34A-A47A-130E-09BFE35E469E}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-006		3089
-	548128531	AMB_GranjaDia-008	.cache\12\{12425592-038A-C239-CBDF-5C022EC05FCC}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-008		59181
+	548128531	AMB_GranjaDia-008	.cache\12\{12425592-038A-C239-CBDF-5C022EC05FCC}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-008		59181
 	556381637	Wood_Footsteps-001	.cache\34\{34DE3979-F8D2-FCC1-D952-04CEFF769CBA}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-001		3872
 	570001535	Wood_Footsteps-002	.cache\E5\{E5626DB5-2421-AE20-1F0A-CB394BCFB887}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-002		3003
 	573414573	Grass_Footsteps-001	.cache\27\{275F2668-9EF3-2226-18F9-672C55C25DE2}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-001		4079
 	619598543	Wood_Footsteps-005	.cache\67\{675DE30A-1CCC-BD5F-CC73-A79486E9D9EB}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-005		4218
-	693616081	AMB_GranjaDia-002	.cache\8B\{8BD5ED4F-E5C0-C747-413A-9B2FED33CF13}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-002		59074
+	638975541	SFX_Watering-004	.cache\F6\{F6B1C7D2-64BC-FF2D-F98B-5B42E2EB2D76}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-004		21517
+	647074372	AMB_GranjaNoche-006	.cache\44\{44B095C8-145E-A2E0-9380-9ED80EB87127}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-006		132784
+	690212188	Comienzo Dia	.cache\13\{135F98D8-C1D4-2C0E-B064-4193E1F363E0}.wem		\Containers\Default Work Unit\Interactive Music\DayNightStart\Comienzo Dia		417559
+	693616081	AMB_GranjaDia-002	.cache\8B\{8BD5ED4F-E5C0-C747-413A-9B2FED33CF13}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-002		59074
 	708432397	Concrete_Footsteps-007	.cache\AB\{ABA064B5-0B82-14EF-8418-5CFEFE5D90F9}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-007		3352
-	712536897	AMB_GranjaDia-007	.cache\DF\{DF0084CC-86DB-77CC-3BE2-FA91405695F4}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-007		46613
+	712536897	AMB_GranjaDia-007	.cache\DF\{DF0084CC-86DB-77CC-3BE2-FA91405695F4}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-007		46613
+	726015378	AMB_GranjaNoche-002	.cache\BB\{BB0EEE73-807A-AC2E-BD63-CAA69D812664}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-002		110884
 	751474673	Grass_Footsteps-003	.cache\92\{92124B5F-CC57-A037-2225-584706A58EA7}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-003		3832
 	768718239	Wood_Footsteps-004	.cache\40\{40E4AA98-8E3B-6B55-66A5-2E9117165749}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-004		2881
-	829133488	AMB_GranjaDia-010	.cache\B1\{B1497AA7-5DE3-D838-B39E-D29168D1F6EB}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-010		47530
+	776098298	Plowing-002	.cache\3B\{3B9E4117-8059-EB9D-2B95-ED18C2B1C9DB}.wem		\Containers\Default Work Unit\SFX\Plowing\Plowing-002		3475
+	829133488	AMB_GranjaDia-010	.cache\B1\{B1497AA7-5DE3-D838-B39E-D29168D1F6EB}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-010		47530
 	862825252	Grass_Footsteps-005	.cache\8A\{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-005		6927
+	883429283	SFX_Watering-001	.cache\8A\{8A3FCA38-5105-D224-9B98-49478F0D6172}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-001		22430
+	890741007	SFX_Watering-003	.cache\89\{893F170A-A461-D3C4-7597-102DC0B5B005}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-003		20794
 	898231176	Grass_Footsteps-008	.cache\26\{26C6AC13-B21A-E03B-EF9C-B6CCE3182DEF}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-008		5414
-	950546272	AMB_GranjaDia-004	.cache\D0\{D0CFE2F5-B5B7-57AC-C340-6BB10938EEF1}.wem		\Containers\Default Work Unit\SFX\Ambience Tracks\AMB_GranjaDia-004		47523
+	950546272	AMB_GranjaDia-004	.cache\D0\{D0CFE2F5-B5B7-57AC-C340-6BB10938EEF1}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-004		47523
 	978215307	Concrete_Footsteps-002	.cache\A7\{A7FEE251-E357-41AF-BB14-D2E8EE328CEF}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-002		3507
 	1003821109	Concrete_Footsteps-005	.cache\80\{80FF74D5-8D6C-7B67-CC85-BAE5BFC578CA}.wem		\Containers\Default Work Unit\SFX\Footsteps\Concrete\Concrete_Footsteps-005		3605
+	1014093716	AMB_GranjaNoche-005	.cache\3C\{3CF2E0DE-A977-76B2-0C30-1A021D7344C1}.wem		\Containers\Default Work Unit\SFX\Ambience\NightAmbience\AMB_GranjaNoche-005		132517
 	1030958506	Wood_Footsteps-003	.cache\C3\{C372FD47-FD45-6FC8-9904-F77B78493458}.wem		\Containers\Default Work Unit\SFX\Footsteps\Wood\Wood_Footsteps-003		4068
 

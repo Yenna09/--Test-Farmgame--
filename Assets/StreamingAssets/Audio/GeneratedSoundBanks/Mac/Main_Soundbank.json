@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{13C4886E-2FE5-4AA9-93A9-3CA0642BB8EC}",
     "Language": "SFX",
-    "Hash": "{D791940D-1E1D-6484-A02A-217FEC76181D}",
+    "Hash": "{2DC2520E-AEBA-801B-0ACB-B753F2057619}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_Soundbank",
     "ShortName": "Main_Soundbank",
     "Path": "Main_Soundbank.bnk",
@@ -22,6 +22,14 @@
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-002.wav",
       "CachePath": "CF/{CF6F9280-87B5-F600-037A-F3C93DF65C67}.wem"
+     },
+     {
+      "Id": "38766638",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MSX_Farm_Night_85BPM.wav",
+      "CachePath": "27/{27ABFAFE-FBA4-D383-D315-9CD8140295A4}.wem"
      },
      {
       "Id": "48705713",
@@ -80,6 +88,30 @@
       "CachePath": "65/{6527944D-D2E8-618F-DED4-CE7A26B3437E}.wem"
      },
      {
+      "Id": "182770960",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Comienzo Noche.wav",
+      "CachePath": "98/{98BD3E40-3A09-5E7C-2BED-DBD14C9D243C}.wem"
+     },
+     {
+      "Id": "213087547",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-004.wav",
+      "CachePath": "6A/{6AEA327F-CDEB-5A55-F7D9-EDE37E29B941}.wem"
+     },
+     {
+      "Id": "214266470",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-003.wav",
+      "CachePath": "7E/{7EB1801A-E32A-FF17-A677-EDA15565F0EC}.wem"
+     },
+     {
       "Id": "241987115",
       "Language": "SFX",
       "Streaming": "false",
@@ -112,12 +144,28 @@
       "CachePath": "3F/{3F636228-CBF1-5767-E46E-24187E1E9DA5}.wem"
      },
      {
+      "Id": "334462037",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Plowing-001.wav",
+      "CachePath": "F7/{F7A97B71-8CB3-F283-9560-5EB6858D41C4}.wem"
+     },
+     {
       "Id": "370910692",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "AMB_GranjaDia-011.wav",
       "CachePath": "77/{77360F2D-3BF2-EDE3-EBB9-35C1260FE8FA}.wem"
+     },
+     {
+      "Id": "396635671",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-002.wav",
+      "CachePath": "4B/{4B12412B-8377-D958-9A65-4D59D03C9880}.wem"
      },
      {
       "Id": "427451120",
@@ -142,6 +190,14 @@
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-006.wav",
       "CachePath": "71/{710B09FA-37B0-A29D-2E16-F2E34171D979}.wem"
+     },
+     {
+      "Id": "504352500",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-001.wav",
+      "CachePath": "5F/{5F8AB1E6-CAB6-A6B6-84DD-00AED237CC21}.wem"
      },
      {
       "Id": "537292352",
@@ -192,6 +248,30 @@
       "CachePath": "67/{675DE30A-1CCC-BD5F-CC73-A79486E9D9EB}.wem"
      },
      {
+      "Id": "638975541",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-004.wav",
+      "CachePath": "F6/{F6B1C7D2-64BC-FF2D-F98B-5B42E2EB2D76}.wem"
+     },
+     {
+      "Id": "647074372",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-006.wav",
+      "CachePath": "44/{44B095C8-145E-A2E0-9380-9ED80EB87127}.wem"
+     },
+     {
+      "Id": "690212188",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Comienzo Dia.wav",
+      "CachePath": "13/{135F98D8-C1D4-2C0E-B064-4193E1F363E0}.wem"
+     },
+     {
       "Id": "693616081",
       "Language": "SFX",
       "Streaming": "false",
@@ -216,6 +296,14 @@
       "CachePath": "DF/{DF0084CC-86DB-77CC-3BE2-FA91405695F4}.wem"
      },
      {
+      "Id": "726015378",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-002.wav",
+      "CachePath": "BB/{BB0EEE73-807A-AC2E-BD63-CAA69D812664}.wem"
+     },
+     {
       "Id": "751474673",
       "Language": "SFX",
       "Streaming": "false",
@@ -232,6 +320,14 @@
       "CachePath": "40/{40E4AA98-8E3B-6B55-66A5-2E9117165749}.wem"
      },
      {
+      "Id": "776098298",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Plowing-002.wav",
+      "CachePath": "3B/{3B9E4117-8059-EB9D-2B95-ED18C2B1C9DB}.wem"
+     },
+     {
       "Id": "829133488",
       "Language": "SFX",
       "Streaming": "false",
@@ -246,6 +342,22 @@
       "Location": "Memory",
       "ShortName": "Grass_Footsteps-005.wav",
       "CachePath": "8A/{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem"
+     },
+     {
+      "Id": "883429283",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-001.wav",
+      "CachePath": "8A/{8A3FCA38-5105-D224-9B98-49478F0D6172}.wem"
+     },
+     {
+      "Id": "890741007",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Watering-003.wav",
+      "CachePath": "89/{893F170A-A461-D3C4-7597-102DC0B5B005}.wem"
      },
      {
       "Id": "898231176",
@@ -280,6 +392,14 @@
       "CachePath": "80/{80FF74D5-8D6C-7B67-CC85-BAE5BFC578CA}.wem"
      },
      {
+      "Id": "1014093716",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AMB_GranjaNoche-005.wav",
+      "CachePath": "3C/{3CF2E0DE-A977-76B2-0C30-1A021D7344C1}.wem"
+     },
+     {
       "Id": "1030958506",
       "Language": "SFX",
       "Streaming": "false",
@@ -289,6 +409,95 @@
      }
     ],
     "Events": [
+     {
+      "Id": "2577162886",
+      "Name": "Play_DayNightStart",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_DayNightStart",
+      "GUID": "{7DB6D532-1B11-4080-9DAE-F72D7FE989A8}",
+      "DurationType": "Infinite",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "748895195",
+         "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "690212188"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "311764537",
+         "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "690212188"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "1011622525",
+         "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "182770960"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "748895195",
+         "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "65093811"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "311764537",
+         "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "65093811"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "1011622525",
+         "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38766638"
+         }
+        ]
+       }
+      ]
+     },
      {
       "Id": "3854155799",
       "Name": "Play_Footsteps",
@@ -431,48 +640,213 @@
       "ObjectPath": "\\Events\\Default Work Unit\\Play_MusicaYAmbiente",
       "GUID": "{B83C08D4-8921-4C2C-A5F1-FA1322AE35BA}",
       "DurationType": "Infinite",
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "748895195",
+         "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "65093811"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "311764537",
+         "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "65093811"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "1011622525",
+         "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "38766638"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "748895195",
+         "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}",
+         "Default": "true"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48705713"
+         },
+         {
+          "Id": "81633491"
+         },
+         {
+          "Id": "83368441"
+         },
+         {
+          "Id": "129130768"
+         },
+         {
+          "Id": "258778035"
+         },
+         {
+          "Id": "295632300"
+         },
+         {
+          "Id": "370910692"
+         },
+         {
+          "Id": "427451120"
+         },
+         {
+          "Id": "548128531"
+         },
+         {
+          "Id": "693616081"
+         },
+         {
+          "Id": "712536897"
+         },
+         {
+          "Id": "829133488"
+         },
+         {
+          "Id": "950546272"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "311764537",
+         "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "48705713"
+         },
+         {
+          "Id": "81633491"
+         },
+         {
+          "Id": "83368441"
+         },
+         {
+          "Id": "129130768"
+         },
+         {
+          "Id": "258778035"
+         },
+         {
+          "Id": "295632300"
+         },
+         {
+          "Id": "370910692"
+         },
+         {
+          "Id": "427451120"
+         },
+         {
+          "Id": "548128531"
+         },
+         {
+          "Id": "693616081"
+         },
+         {
+          "Id": "712536897"
+         },
+         {
+          "Id": "829133488"
+         },
+         {
+          "Id": "950546272"
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2654366170",
+         "Id": "1011622525",
+         "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "213087547"
+         },
+         {
+          "Id": "214266470"
+         },
+         {
+          "Id": "504352500"
+         },
+         {
+          "Id": "647074372"
+         },
+         {
+          "Id": "726015378"
+         },
+         {
+          "Id": "1014093716"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "Id": "2770939616",
+      "Name": "Play_Plowing",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_Plowing",
+      "GUID": "{E968F194-FB2E-4A7D-A28B-44DE137318FE}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.24527669",
+      "DurationMax": "0.3065723",
       "MediaRefs": [
        {
-        "Id": "48705713"
+        "Id": "334462037"
        },
        {
-        "Id": "65093811"
+        "Id": "776098298"
+       }
+      ]
+     },
+     {
+      "Id": "346398545",
+      "Name": "Play_WateringCan",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_WateringCan",
+      "GUID": "{4DD04B54-AC1F-404E-ADD7-4E6F51500567}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.91144395",
+      "DurationMax": "1.3955436",
+      "MediaRefs": [
+       {
+        "Id": "396635671"
        },
        {
-        "Id": "81633491"
+        "Id": "638975541"
        },
        {
-        "Id": "83368441"
+        "Id": "883429283"
        },
        {
-        "Id": "129130768"
-       },
-       {
-        "Id": "258778035"
-       },
-       {
-        "Id": "295632300"
-       },
-       {
-        "Id": "370910692"
-       },
-       {
-        "Id": "427451120"
-       },
-       {
-        "Id": "548128531"
-       },
-       {
-        "Id": "693616081"
-       },
-       {
-        "Id": "712536897"
-       },
-       {
-        "Id": "829133488"
-       },
-       {
-        "Id": "950546272"
+        "Id": "890741007"
        }
       ]
      }
@@ -509,10 +883,36 @@
         "GUID": "{A7C44D29-8B46-4237-A8D3-BEB8C2518907}"
        }
       ]
+     },
+     {
+      "Id": "2654366170",
+      "Name": "Time",
+      "ObjectPath": "\\States\\Default Work Unit\\Time",
+      "GUID": "{B8EF5A02-7A0E-4450-837A-D558ECFB324B}",
+      "States": [
+       {
+        "Id": "311764537",
+        "Name": "Day",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\Day",
+        "GUID": "{7194B5BA-7D08-49E5-B88C-80CFC507A43C}"
+       },
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\None",
+        "GUID": "{8E94FB8A-D998-4DD8-B234-5D92C315593C}"
+       },
+       {
+        "Id": "1011622525",
+        "Name": "Night",
+        "ObjectPath": "\\States\\Default Work Unit\\Time\\Night",
+        "GUID": "{DC3753EC-7F65-4F63-960E-3FEDA6B593BB}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{E9F30BE2-D3D9-9830-B8C6-1A42589F7CC7}"
+  "FileHash": "{542DA989-8BCC-AB9E-028F-8E9C3422766B}"
  }
 }

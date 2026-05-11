@@ -20,14 +20,24 @@ public class Enemy : MonoBehaviour
 
     public void Awake() 
     {
+        // Awake se queda solo para inicializar cosas internas del propio enemigo
         StartCoroutine(CalcularDistancia());
     }
 
     private void Start()
     {
-        if (autoseleccionarTarget) 
+        // Start se asegura de que el Jugador (y su singleton) ya tuvieron
+        // tiempo de inicializarse en su propio Awake. ¡Cero errores!
+        if (autoseleccionarTarget && target == null) 
         {
-            target = Personaje.singleton.transform;
+            if (Personaje.singleton != null)
+            {
+                target = Personaje.singleton.transform;
+            }
+            else
+            {
+                Debug.LogWarning("El enemigo nació pero no encontró al Personaje en la escena.");
+            }
         }
     }
 
@@ -50,7 +60,12 @@ public class Enemy : MonoBehaviour
                 vivo = false;
                 break;
             case States.seguir: 
-                transform.LookAt(target, Vector3.up);
+                // 2. EL BLINDAJE CONTRA ERRORES
+                // Solo mira al target si el target existe
+                if (target != null)
+                {
+                    transform.LookAt(target, Vector3.up);
+                }
                 FollowState(); 
                 break;
         }
@@ -61,23 +76,27 @@ public class Enemy : MonoBehaviour
         state = e;
     }
 
-    
     public virtual void IdleState()
     {
-        if (distancia < distanceFollow)
+        // Solo cambiamos de estado si el objetivo existe
+        if (target != null && distancia < distanceFollow)
         {
             ChangeState(States.seguir);
         }
     }
+    
     public virtual void AttackState()
     {
-        if (distancia > distanciaAtacar + 0.4f)
+        if (target != null && distancia > distanciaAtacar + 0.4f)
         {
             ChangeState(States.seguir);
         }
     }
+    
     public virtual void FollowState()
     {
+        if (target == null) return; // Si no hay target, no hacemos nada
+
         if (distancia < distanciaAtacar)
         {
             ChangeState(States.atacar);
@@ -87,6 +106,7 @@ public class Enemy : MonoBehaviour
             ChangeState(States.idle);
         }
     }
+    
     public virtual void DeathState() 
     { 
         
@@ -99,18 +119,14 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(0.2f); 
             if (target != null)
             {
-                
                 distancia = Vector3.Distance(transform.position, target.position);
             }
-
-            
         }
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected() 
     {
-        
         if (this == null) return;
 
         Handles.color = Color.yellow;
@@ -124,7 +140,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos() 
     {
-        
         if (this == null || transform == null) return;
 
         int icono = (int) state;

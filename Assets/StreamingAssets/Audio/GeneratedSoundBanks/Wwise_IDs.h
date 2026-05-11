@@ -13,8 +13,11 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_DAYNIGHTSTART = 2577162886U;
         static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
         static const AkUniqueID PLAY_MUSICAYAMBIENTE = 2596494084U;
+        static const AkUniqueID PLAY_PLOWING = 2770939616U;
+        static const AkUniqueID PLAY_WATERINGCAN = 346398545U;
     } // namespace EVENTS
 
     namespace STATES
@@ -31,6 +34,18 @@ namespace AK
                 static const AkUniqueID WOOD = 2058049674U;
             } // namespace STATE
         } // namespace GROUND
+
+        namespace TIME
+        {
+            static const AkUniqueID GROUP = 2654366170U;
+
+            namespace STATE
+            {
+                static const AkUniqueID DAY = 311764537U;
+                static const AkUniqueID NIGHT = 1011622525U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace TIME
 
     } // namespace STATES
 
