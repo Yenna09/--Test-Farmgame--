@@ -35,6 +35,17 @@ public class CropController : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+    private void OnEnable()
+    {
+        // Cuando el script se activa, le decimos que escuche el evento AlAmanecer
+        DayNightManager.AlAmanecer += AvanzarDia;
+    }
+
+    private void OnDisable()
+    {
+        // Por seguridad, si el script se destruye, dejamos de escuchar el evento
+        DayNightManager.AlAmanecer -= AvanzarDia;
+    }
 
     public void PlantarSemilla(Vector3Int posicion, int idSemillaPlantada)
     {
