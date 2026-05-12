@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2a5eb6fe4785d349aab6b36ffb7442e
+guid: 9bbaa6bd95a927243a8b2e80340e2795
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,51 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TILESET CASASEXTERIOR_0
+      name: TILESET CASASEXTERIOR2_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 96
+        width: 126
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 351eb3b6513831b44a8037b210f210cd
+      internalID: 41194759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TILESET CASASEXTERIOR2_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e7e82cf92a22d4f82a70ef80857792
+      internalID: -1409232388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TILESET CASASEXTERIOR2_2
       rect:
         serializedVersion: 2
         x: 128
@@ -112,19 +156,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d396d8eb2cd42d468283d1d4fce95ca
-      internalID: 961647765
+      spriteID: 16e31b059bb1046439703872399a4973
+      internalID: 1524323192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TILESET CASASEXTERIOR_1
+      name: TILESET CASASEXTERIOR2_3
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 0
-        width: 64
+        width: 128
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -134,74 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27ce27e690063a9459cf3097d1e016e6
-      internalID: -1138066601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TILESET CASASEXTERIOR_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 128
-        height: 134
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90608d8a0869f26468b66182f688e316
-      internalID: -1792411548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TILESET CASASEXTERIOR_10
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 128
-        width: 62
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d1aad9abbd9b4794ca5444bed61b5352
-      internalID: 533620083
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TILESET CASASEXTERIOR_28
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 299b05336f0e7ad4594be003cb98c3dd
-      internalID: 1455569433
+      spriteID: 37b4f9db3cf94ce49bafd874375c5059
+      internalID: 1547927274
       vertices: []
       indices: 
       edges: []
@@ -210,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ebe0f2b78bb5a404ba86806a721045f9
+    spriteID: 336f971343ae2c94aab847e98a860779
     internalID: 0
     vertices: []
     indices: 
@@ -220,48 +198,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      TILESET CASASEXTERIOR_0: 961647765
-      TILESET CASASEXTERIOR_1: -1138066601
-      TILESET CASASEXTERIOR_10: 533620083
-      TILESET CASASEXTERIOR_11: -453947344
-      TILESET CASASEXTERIOR_12: -1040451046
-      TILESET CASASEXTERIOR_13: 492873422
-      TILESET CASASEXTERIOR_14: 1387030651
-      TILESET CASASEXTERIOR_15: 835834133
-      TILESET CASASEXTERIOR_16: -1433598435
-      TILESET CASASEXTERIOR_17: -1777532913
-      TILESET CASASEXTERIOR_18: 547107786
-      TILESET CASASEXTERIOR_19: -1827538602
-      TILESET CASASEXTERIOR_2: -1792411548
-      TILESET CASASEXTERIOR_20: -2051661930
-      TILESET CASASEXTERIOR_21: -1516440623
-      TILESET CASASEXTERIOR_22: 873491836
-      TILESET CASASEXTERIOR_23: 1971575100
-      TILESET CASASEXTERIOR_24: -131466377
-      TILESET CASASEXTERIOR_25: 2040777518
-      TILESET CASASEXTERIOR_26: 1936564476
-      TILESET CASASEXTERIOR_27: -646976402
-      TILESET CASASEXTERIOR_28: 1455569433
-      TILESET CASASEXTERIOR_29: -1080500095
-      TILESET CASASEXTERIOR_3: 1211324791
-      TILESET CASASEXTERIOR_30: 61042955
-      TILESET CASASEXTERIOR_31: 1553227990
-      TILESET CASASEXTERIOR_32: -1524320246
-      TILESET CASASEXTERIOR_33: -1064475297
-      TILESET CASASEXTERIOR_34: -1973964222
-      TILESET CASASEXTERIOR_35: 1741999407
-      TILESET CASASEXTERIOR_36: 2018801295
-      TILESET CASASEXTERIOR_37: 1819156697
-      TILESET CASASEXTERIOR_38: -1442819230
-      TILESET CASASEXTERIOR_39: -449516912
-      TILESET CASASEXTERIOR_4: -297470524
-      TILESET CASASEXTERIOR_5: -1730253104
-      TILESET CASASEXTERIOR_6: -1322289304
-      TILESET CASASEXTERIOR_7: 617549729
-      TILESET CASASEXTERIOR_8: -313627413
-      TILESET CASASEXTERIOR_9: 1651419188
+      TILESET CASASEXTERIOR2_0: 41194759
+      TILESET CASASEXTERIOR2_1: -1409232388
+      TILESET CASASEXTERIOR2_2: 1524323192
+      TILESET CASASEXTERIOR2_3: 1547927274
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
