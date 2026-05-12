@@ -279,7 +279,11 @@ MonoBehaviour:
   target: {fileID: 0}
   distancia: 2
   vivo: 1
-  Waypoints: []
+  Waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   distanciaWaypoints: 2
   damage: 3
   velocidadAtaque: 1.5
