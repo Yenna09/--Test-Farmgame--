@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4987125586628766223}
   - component: {fileID: 7044942812157917941}
   - component: {fileID: -2785079297926529377}
+  - component: {fileID: 8273243245425356998}
   m_Layer: 0
   m_Name: enemyPrefab 2
   m_TagString: Untagged
@@ -191,6 +192,28 @@ MonoBehaviour:
   distanciaWaypoints: 2
   damage: 3
   velocidadAtaque: 1.5
+--- !u!95 &8273243245425356998
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307500185553703765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43a58bdfb8d68a74eba51a744743ff32, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6124651876698105672
 GameObject:
   m_ObjectHideFlags: 0
