@@ -6,6 +6,8 @@ public class PlayerSounds : MonoBehaviour
     private AK.Wwise.Event footstepsEvent;
     [SerializeField]
     private AK.Wwise.Event hoeSFXEvent;
+    [SerializeField]
+    private AK.Wwise.Event wateringSFXEvent;
     public void PlayFootstep()
     {
         footstepsEvent.Post(gameObject);
@@ -15,4 +17,13 @@ public class PlayerSounds : MonoBehaviour
     {
         hoeSFXEvent.Post(gameObject);
     }
+
+    public void WateringSFX()
+    {
+        Debug.Log("Regué");
+        wateringSFXEvent.Post(gameObject);
+    }
+
+
+
 }
