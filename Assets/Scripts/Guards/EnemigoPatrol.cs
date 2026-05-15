@@ -26,8 +26,7 @@ public class EnemigoPatrol : Enemy
 
     public void Awake() 
     {
-        // Esto llama al Awake() de Enemy.cs, que ahora es el encargado
-        // de buscar al jugador de forma totalmente segura.
+        
         base.Awake(); 
         
         agent = GetComponent<NavMeshAgent>();
@@ -38,21 +37,21 @@ public class EnemigoPatrol : Enemy
         distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
     }
 
-    // ¡Cambiamos LateUpdate por Update!
+    
     private void Update() 
     {
-        // Si no hay sprite, no hacemos nada para evitar errores
+        
         if (spriteRenderer == null) return;
 
-        // Leemos hacia dónde está caminando el NavMeshAgent
+        
         float velocidadX = agent.velocity.x;
 
-        // Si camina hacia la derecha (velocidad positiva)
+        
         if (velocidadX > 0.05f)
         {
             spriteRenderer.flipX = false; 
         }
-        // Si camina hacia la izquierda (velocidad negativa)
+        
         else if (velocidadX < -0.05f)
         {
             spriteRenderer.flipX = true; 
@@ -81,7 +80,7 @@ public class EnemigoPatrol : Enemy
     {
         base.FollowState();
         
-        // ¡SEGURO CONTRA CRASHEOS!
+        
         if (target != null) 
         {
             agent.SetDestination(target.position);

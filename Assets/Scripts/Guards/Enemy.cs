@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
     
     public virtual void FollowState()
     {
-        if (target == null) return; // Si no hay target, no hacemos nada
+        if (target == null) return; 
 
         if (distancia < distanciaAtacar)
         {
