@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 318796368940078948}
   - component: {fileID: 4611704864191164450}
   - component: {fileID: 4593306683614491699}
-  - component: {fileID: 7281582489262146322}
   - component: {fileID: 106054957477613852}
   - component: {fileID: 1611426580120147403}
   - component: {fileID: 369999239386227256}
   - component: {fileID: 661310251087544843}
+  - component: {fileID: 4003407171601348830}
   m_Layer: 0
   m_Name: enemyPrefab
   m_TagString: Untagged
@@ -32,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 4289603120688816169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 67.86, y: 2.152, z: 12.76}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 67.86, y: 2.152, z: 12.716405}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2780496847478304380}
@@ -96,29 +96,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7281582489262146322
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289603120688816169}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.420326
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.289837, z: 0}
 --- !u!54 &106054957477613852
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,9 +119,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!195 &1611426580120147403
 NavMeshAgent:
@@ -182,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemigoPatrol
   state: 0
   distanceFollow: 4
-  distanciaAtacar: 1.6
+  distanciaAtacar: 1
   distanciaEscapar: 6
   autoseleccionarTarget: 1
   target: {fileID: 0}
@@ -214,6 +191,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &4003407171601348830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4289603120688816169}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 6.7762636e-21, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5460443930468121750
 GameObject:
   m_ObjectHideFlags: 0

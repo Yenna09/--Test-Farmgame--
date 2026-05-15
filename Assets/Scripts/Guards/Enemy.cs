@@ -43,6 +43,10 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate() 
     {
+        if (target != null)
+        {
+            distancia = Vector3.Distance(transform.position, target.position);
+        }
         CheckState();
     }
 
@@ -60,12 +64,7 @@ public class Enemy : MonoBehaviour
                 vivo = false;
                 break;
             case States.seguir: 
-                // 2. EL BLINDAJE CONTRA ERRORES
-                // Solo mira al target si el target existe
-                if (target != null)
-                {
-                    transform.LookAt(target, Vector3.up);
-                }
+                
                 FollowState(); 
                 break;
         }
