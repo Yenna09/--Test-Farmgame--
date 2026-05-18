@@ -353,7 +353,6 @@ Temp/bin/Debug/
  AK.Wwise.Unity.API.dll
  AK.Wwise.Unity.API.WwiseTypes.dll
  AK.Wwise.Unity.Logging.dll
- AK.Wwise.Unity.ProjectDatabase.dll
  AK.Wwise.Unity.Utilities.dll
 
 [analyzerReferences]

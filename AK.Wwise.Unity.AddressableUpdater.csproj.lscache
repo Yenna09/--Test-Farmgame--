@@ -353,15 +353,12 @@ Library/ScriptAssemblies/
  UnityEngine.TestRunner.dll
  UnityEngine.UI.dll
 Temp/bin/Debug/
- Ak.Wwise.Api.WAAPI.dll
  AK.Wwise.Unity.API.dll
- AK.Wwise.Unity.API.Editor.dll
  AK.Wwise.Unity.API.WwiseTypes.dll
  AK.Wwise.Unity.Logging.dll
  AK.Wwise.Unity.MonoBehaviour.dll
  AK.Wwise.Unity.MonoBehaviour.Editor.dll
  AK.Wwise.Unity.ProjectDatabase.dll
- AK.Wwise.Unity.Utilities.dll
 
 [analyzerReferences]
 ../../Program Files/Unity/Hub/Editor/6000.3.10f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/
