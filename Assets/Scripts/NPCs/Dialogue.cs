@@ -31,6 +31,17 @@ public class Dialogue : MonoBehaviour
     private int lineIndex;
     private float typingTime = 0.05f;
 
+    private GameObject hotbarUI;
+
+    void Start()
+    {
+        hotbarUI = GameObject.FindGameObjectWithTag("HotBar");
+        if (hotbarUI == null)
+        {
+            Debug.LogWarning("No se encontró la HotBar. Asegúrate de que el Tag esté bien escrito y asignado en el Inspector.");
+        }
+    }
+
     void Update()
     {
         if(isPlayerInRange && Input.GetKeyDown(KeyCode.F))
@@ -57,6 +68,11 @@ public class Dialogue : MonoBehaviour
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
         dialogueMark.SetActive(false);
+
+        if (hotbarUI != null)
+        {
+            hotbarUI.SetActive(false);
+        }
         
         lineIndex = 0;
         Time.timeScale = 0f; 
@@ -72,10 +88,23 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            didDialogueStart = false;
-            dialoguePanel.SetActive(false);
-            dialogueMark.SetActive(true);
-            Time.timeScale = 1f; 
+            EndDialogue();
+        }
+
+        
+    }
+
+    private void EndDialogue()
+    {
+        didDialogueStart = false;
+        dialoguePanel.SetActive(false);
+        dialogueMark.SetActive(true);
+        Time.timeScale = 1f; 
+
+        // Reactivamos la HotBar
+        if (hotbarUI != null)
+        {
+            hotbarUI.SetActive(true);
         }
     }
 

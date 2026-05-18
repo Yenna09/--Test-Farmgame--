@@ -8,6 +8,7 @@ TagManager:
   - Item_UI
   - Slot
   - Guards
+  - HotBar
   layers:
   - Default
   - TransparentFX
