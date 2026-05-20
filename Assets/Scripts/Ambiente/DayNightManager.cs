@@ -85,4 +85,26 @@ public class DayNightManager : MonoBehaviour
             Debug.Log("Es de noche. A mimir😴");
         }
     }
+    public void DormirHasta(int horaDestino, bool nuevoDia)
+    {
+        horaActual = horaDestino;
+        minutoActual = 0;
+        temporizador = 0f; // Reseteamos el contador de tiempo real para que no tire un tick inmediatamente
+
+        if (nuevoDia)
+        {
+            esDeDia = true;
+            AlAmanecer?.Invoke(); // ¡Esto hará que el CropController haga crecer las plantas!
+            Debug.Log("[SUEÑO] Amaneció un nuevo día. ¡A laburar!");
+        }
+        else
+        {
+            esDeDia = false;
+            AlAnochecer?.Invoke(); // Avisa al juego que se hizo de noche
+            Debug.Log("[SUEÑO] Te despertaste por la noche.");
+        }
+
+        // Actualizamos a todos los que escuchen la hora (el sol, la UI del reloj, etc.)
+        AlCambiarTiempo?.Invoke(horaActual, minutoActual);
+    }
 }
