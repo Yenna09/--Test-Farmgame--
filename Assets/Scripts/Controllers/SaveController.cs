@@ -9,8 +9,12 @@ public class SaveController : MonoBehaviour
     
     private string saveLocation;
     
-    
     public List<string> destroyedItemsIDs = new List<string>();
+
+    [Header("Opciones de Desarrollo")]
+    [Tooltip("Tildá esto, dale a Play 1 vez, y destildalo. Borra el save fantasma de la PC.")]
+    public bool borrarPartidaAlIniciar = false;
+    public bool cargarPosicionDelGuardado = true; // Dejalo en true para que el juego normal funcione
 
     void Awake()
     {
@@ -20,6 +24,17 @@ public class SaveController : MonoBehaviour
     void Start()
     {
         saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
+
+        // --- EL DESTRUCTOR DE PARTIDAS ---
+        if (borrarPartidaAlIniciar)
+        {
+            if (File.Exists(saveLocation))
+            {
+                File.Delete(saveLocation);
+                Debug.LogWarning("⚠️ [SaveController] Archivo saveData.json eliminado. Arrancando el juego de cero.");
+            }
+        }
+
         LoadGame();
     }
 
