@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 70128457}
   - component: {fileID: 70128456}
   m_Layer: 5
-  m_Name: MASTER
+  m_Name: VOLUME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -501, y: 400}
+  m_AnchoredPosition: {x: -600, y: 400}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70128456
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MASTER VOLUME
+  m_text: VOLUME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}
   m_sharedMaterial: {fileID: 1013986675064051569, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -177.63312, y: 0, z: 0, w: 0}
+  m_margin: {x: 5.685791, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -416,6 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98953435}
   - component: {fileID: 98953436}
+  - component: {fileID: 98953437}
   m_Layer: 5
   m_Name: MasterVolumeSlider
   m_TagString: Untagged
@@ -490,12 +491,40 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1212203677}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 98953437}
+        m_TargetAssemblyTypeName: ChangeVolumeLevels, Assembly-CSharp
+        m_MethodName: SetSpecificValue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Master
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &98953437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98953434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed361e28f73caf4288b30de7bbb6dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeVolumeLevels
+  thisSlider: {fileID: 98953436}
+  masterVolume: 0
+  musicVolume: 0
+  SFXVolume: 0
 --- !u!1 &189034980
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364968403}
   - component: {fileID: 364968404}
+  - component: {fileID: 364968405}
   m_Layer: 5
   m_Name: Music Slider
   m_TagString: Untagged
@@ -936,12 +966,40 @@ MonoBehaviour:
   m_HandleRect: {fileID: 914677847}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 364968405}
+        m_TargetAssemblyTypeName: ChangeVolumeLevels, Assembly-CSharp
+        m_MethodName: SetSpecificValue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Music
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &364968405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364968402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed361e28f73caf4288b30de7bbb6dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeVolumeLevels
+  thisSlider: {fileID: 364968404}
+  masterVolume: 0
+  musicVolume: 0
+  SFXVolume: 0
 --- !u!1 &652150321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 887152832}
   - component: {fileID: 887152833}
+  - component: {fileID: 887152834}
   m_Layer: 5
   m_Name: FX Slider
   m_TagString: Untagged
@@ -1366,12 +1425,40 @@ MonoBehaviour:
   m_HandleRect: {fileID: 92810254}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 887152834}
+        m_TargetAssemblyTypeName: ChangeVolumeLevels, Assembly-CSharp
+        m_MethodName: SetSpecificValue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Effects
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &887152834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887152831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed361e28f73caf4288b30de7bbb6dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeVolumeLevels
+  thisSlider: {fileID: 887152833}
+  masterVolume: 0
+  musicVolume: 0
+  SFXVolume: 0
 --- !u!1 &914677846
 GameObject:
   m_ObjectHideFlags: 0
