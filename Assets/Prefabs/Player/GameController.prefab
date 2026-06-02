@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3082733551674267619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4078932158262604228}
+  - component: {fileID: 4504747714982320657}
+  - component: {fileID: 1731238548406004828}
+  - component: {fileID: 1515642055678014025}
+  - component: {fileID: 8339731076347461149}
+  - component: {fileID: 3963771807776771878}
+  - component: {fileID: 6592617596910873250}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4078932158262604228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 615, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4504747714982320657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd2fbe370d7760468dfdc25df0b029c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveController
+  destroyedItemsIDs: []
+  borrarPartidaAlIniciar: 0
+  cargarPosicionDelGuardado: 1
+--- !u!114 &1731238548406004828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edbab4bff6c04c4f8544bb8f7793ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryController
+  inventoryPanel: {fileID: 0}
+  slotPrefab: {fileID: 4816518812044878512, guid: 3e9202985be95f74cb55ca80358e971c, type: 3}
+  slotCount: 27
+--- !u!114 &1515642055678014025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65804047a66abc74598fc590c25b9600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HotBarController
+  selectedColor: {r: 0.46274513, g: 0.63529414, b: 0.8862746, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedSlotIndex: 0
+--- !u!114 &8339731076347461149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a187d21f8577249b1ebb25370ce5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CropController
+  catalogoSemillas:
+  - idSemilla: 1
+    etapasCrecimiento:
+    - {fileID: 666427363, guid: a2406bda6bee0e5419fdac5dae3b7fed, type: 3}
+    - {fileID: 1988444984, guid: cd3e3a571928c134e8e63afa00a02d44, type: 3}
+    - {fileID: 21300000, guid: 570facf2b7c492249a5668128ed1983d, type: 3}
+    idItemCosecha: 0
+  prefabPlantaBase: {fileID: 8361436939084295293, guid: 5f9ecbe9e4d055943af443e207baa77a, type: 3}
+--- !u!114 &3963771807776771878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead3377e158ec314a8a41e6cdc581690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FarmingController
+  playerTransform: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  playerMovement: {fileID: 0}
+  groundTilemap: {fileID: 0}
+  pastoTile: {fileID: 11400000, guid: 8e57957b46585dd49883418dcd43bc7e, type: 2}
+  tierraAradaTile: {fileID: 11400000, guid: 354922d08fc41e1439e02e7622b567a0, type: 2}
+  tierraMojadaTile: {fileID: 11400000, guid: 62149bfe8f0a4ec4985ed7367b29e5b1, type: 2}
+  cursorObjeto: {fileID: 0}
+--- !u!114 &6592617596910873250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082733551674267619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a164c10b143a1479a0cdf3d2c79061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightManager
+  horaAmanecer: 6
+  horaAnochecer: 20
+  segundosRealesPorTick: 1
+  horaActual: 6
+  minutoActual: 0
+  esDeDia: 1
