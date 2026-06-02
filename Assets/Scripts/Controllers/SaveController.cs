@@ -49,7 +49,13 @@ public class SaveController : MonoBehaviour
 
         SaveContainer(Inventory.Instance.hotbarContainer, saveData.inventorySaveData.savedItems, true);
         SaveContainer(Inventory.Instance.slotsContainer, saveData.inventorySaveData.savedItems, false);
-
+        DayNightManager timeManager = DayNightManager.Instance;
+        if (timeManager != null)
+        {
+            saveData.horaGuardada = timeManager.horaActual; // O como se llame tu variable
+            saveData.minutoGuardado = timeManager.minutoActual;
+            timeManager.ForzarSincronizacion();
+        }
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData, true));
         Debug.Log("Juego guardado en: " + saveLocation);
     }
@@ -91,7 +97,12 @@ public class SaveController : MonoBehaviour
                     }
                 }
             }
-
+            DayNightManager timeManager = DayNightManager.Instance;
+            if (timeManager != null)
+            {
+                timeManager.horaActual = saveData.horaGuardada;
+                timeManager.minutoActual = saveData.minutoGuardado;
+            }
             // --- LIMPIEZA DE ITEMS EN EL SUELO ---
             // Buscamos todas las manzanas/items que hay en el mundo 3D
             BaseItem[] itemsEnElSuelo = FindObjectsOfType<BaseItem>();

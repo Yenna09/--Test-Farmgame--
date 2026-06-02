@@ -22,9 +22,9 @@ public class InventorySaveData
 [System.Serializable]
 public class SaveData
 {
-   public Vector3 playerPosition;
-   public InventorySaveData inventorySaveData;
-   
-   // NUEVO: La lista negra de ítems que ya agarramos del piso
-   public List<string> destroyedItemsIDs = new List<string>(); 
+    public Vector3 playerPosition;
+    public InventorySaveData inventorySaveData;
+    public List<string> destroyedItemsIDs;
+    public int horaGuardada; 
+    public int minutoGuardado; 
 }
