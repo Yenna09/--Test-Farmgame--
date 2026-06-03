@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: borrarPartidaAlIniciar
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4504747714982320657, guid: 24e378cdf5386d84f833906d15f3a799, type: 3}
+      propertyPath: cargarPosicionDelGuardado
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8339731076347461149, guid: 24e378cdf5386d84f833906d15f3a799, type: 3}
       propertyPath: m_Enabled
       value: 1

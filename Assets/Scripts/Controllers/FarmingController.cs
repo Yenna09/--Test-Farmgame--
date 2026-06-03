@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class FarmingController : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class FarmingController : MonoBehaviour
 
     void Update()
     {
-        if (playerTransform == null || playerAnimator == null) return;
+        if (playerTransform == null || playerAnimator == null || groundTilemap == null) return;
 
         Vector3Int celdaDelJugador = groundTilemap.WorldToCell(playerTransform.position);
 
@@ -133,5 +134,32 @@ public class FarmingController : MonoBehaviour
     public void EjecutarCosecha()
     {
         CropController.Instance.Cosechar(celdaObjetivo);
+    }
+    public List<DatosTerrenoGuardado> ExportarTerreno()
+    {
+        List<DatosTerrenoGuardado> lista = new List<DatosTerrenoGuardado>();
+        
+        if (groundTilemap == null) return lista;
+        // Revisamos todo el mapa buscando tierra arada o mojada
+        BoundsInt limites = groundTilemap.cellBounds;
+        foreach (Vector3Int pos in limites.allPositionsWithin)
+        {
+            TileBase tileActual = groundTilemap.GetTile(pos);
+            if (tileActual == tierraAradaTile)
+                lista.Add(new DatosTerrenoGuardado { posicion = pos, estado = "arado" });
+            else if (tileActual == tierraMojadaTile)
+                lista.Add(new DatosTerrenoGuardado { posicion = pos, estado = "mojado" });
+        }
+        return lista;
+    }
+
+    public void ImportarTerreno(List<DatosTerrenoGuardado> lista)
+    {
+        if (lista == null || groundTilemap == null) return;
+        foreach (var guardado in lista)
+        {
+            if (guardado.estado == "arado") groundTilemap.SetTile(guardado.posicion, tierraAradaTile);
+            else if (guardado.estado == "mojado") groundTilemap.SetTile(guardado.posicion, tierraMojadaTile);
+        }
     }
 }
