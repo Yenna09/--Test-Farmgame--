@@ -6,7 +6,7 @@ public class BaseItem : MonoBehaviour
     public int quantity = 1;
     
     [Header("DNI Único en el Mundo")]
-    [Tooltip("Escribí un nombre único para este ítem. Ej: Manzana_Granja_1")]
+    [Tooltip("Escribi un nombre único para este ítem. Ej: Manzana_Granja_1")]
     public string uniqueWorldID;
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,6 @@ public class BaseItem : MonoBehaviour
         }
     }
 
-    // --- TRUCO DE DESARROLLADOR ---
     // Esto te crea un botón en el Inspector para generar IDs al azar y no tener que escribirlos a mano
     [ContextMenu("Generar DNI Aleatorio")]
     private void GenerateID()

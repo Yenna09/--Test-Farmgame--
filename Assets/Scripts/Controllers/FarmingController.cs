@@ -15,7 +15,7 @@ public class FarmingController : MonoBehaviour
     public Tilemap groundTilemap; 
     public TileBase pastoTile;    
     public TileBase tierraAradaTile; 
-    // NUEVO: Agregamos el tile mojado
+    
     public TileBase tierraMojadaTile; 
 
     [Header("Visuales")]
@@ -75,13 +75,13 @@ public class FarmingController : MonoBehaviour
         TileBase tileActual = groundTilemap.GetTile(celdaObjetivo);
         bool mostrarCursor = false;
 
-        // Comprobamos que el ID sea válido dentro de tu base de datos
+        // Comprobamos que el ID sea válido dentro de la base de datos
         if (idEnMano >= 0 && idEnMano < Inventory.Instance.db.dataBase.Length)
         {
-            // Obtenemos tu struct InventoryItem
+            // Obtenemos struct InventoryItem
             Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
 
-            // Usamos TU enum ActionType (en minúsculas como lo definiste)
+            // Usamos enum ActionType 
             if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)
             {
                 mostrarCursor = true;
@@ -106,7 +106,7 @@ public class FarmingController : MonoBehaviour
 
         if (idEnMano < 0 || idEnMano >= Inventory.Instance.db.dataBase.Length) return;
 
-        // Obtenemos tu struct InventoryItem
+        // Obtenemos struct InventoryItem
         Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
 
         if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)

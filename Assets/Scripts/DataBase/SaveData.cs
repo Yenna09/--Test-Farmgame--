@@ -31,7 +31,6 @@ public class InventorySaveData
     public List<SavedSlot> savedItems = new List<SavedSlot>();
 }
 
-// Tu clase principal queda igual, pero ahora sabe qué es InventorySaveData
 [System.Serializable]
 public class SaveData
 {

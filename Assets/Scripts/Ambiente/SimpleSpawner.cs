@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SimpleSpawner : MonoBehaviour
 {
-    [Tooltip("TILDAR SOLO EN EL FELPUDO DE AFUERA (en el mundo)")]
+    [Tooltip("TILDAR SOLO EN EL BOXCOLLIDER DE AFUERA (en el mundo)")]
     public bool SpawnDelMundo = false;
 
     // Al poner IEnumerator, convertimos el Start en una rutina que puede "esperar"

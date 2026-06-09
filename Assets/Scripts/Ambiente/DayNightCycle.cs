@@ -26,9 +26,6 @@ public class DayNightCycle : MonoBehaviour
         anguloObjetivoX = (tiempoEnHoras - 6f) * 15f;
 
         Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
-        
-        // --- NUEVO: Salto instantáneo del sol si acabamos de cargar la partida ---
-        // Forzamos la rotación inmediata para que el Lerp no tenga que "viajar"
         transform.rotation = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
     }
 

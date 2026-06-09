@@ -12,7 +12,6 @@ public class TabController : MonoBehaviour
 
     UnityEngine.Color gray = UnityEngine.Color.gray; //Gray
     UnityEngine.Color white = UnityEngine.Color.white; //White
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ActivateTab(0);

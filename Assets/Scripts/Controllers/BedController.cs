@@ -46,7 +46,7 @@ public class BedController : MonoBehaviour
         }
     }
 
-    // --- FUNCIONES DE LOS BOTONES INSTANTÁNEAS ---
+    // --- FUNCIONES DE LOS BOTONES INSTANTANEAS ---
 
     public void OpcionDormirHastaNoche()
     {
@@ -64,7 +64,7 @@ public class BedController : MonoBehaviour
         CerrarMenu(); // Cerramos el menú y devolvemos el control al instante
     }
 
-    // --- DETECCIÓN DEL JUGADOR ---
+    // --- DETECCION DEL JUGADOR ---
 
     private void OnTriggerEnter(Collider other) 
     {

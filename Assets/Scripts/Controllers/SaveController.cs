@@ -12,9 +12,9 @@ public class SaveController : MonoBehaviour
     public List<string> destroyedItemsIDs = new List<string>();
 
     [Header("Opciones de Desarrollo")]
-    [Tooltip("Tildá esto, dale a Play 1 vez, y destildalo. Borra el save fantasma de la PC.")]
+    [Tooltip("Tilda esto, dale a Play 1 vez, y destildalo. Borra el save fantasma de la PC.")]
     public bool borrarPartidaAlIniciar = false;
-    public bool cargarPosicionDelGuardado = true; // Dejalo en true para que el juego normal funcione
+    public bool cargarPosicionDelGuardado = true; // Dejarlo en true para que el juego normal funcione
 
     void Awake()
     {
@@ -42,14 +42,12 @@ public class SaveController : MonoBehaviour
     {
         SaveData saveData = new SaveData();
 
-        // 1. Rescatamos la granja vieja ANTES de sobreescribir
         if (File.Exists(saveLocation))
         {
             SaveData datosViejos = JsonUtility.FromJson<SaveData>(File.ReadAllText(saveLocation));
             saveData.cultivosGuardados = datosViejos.cultivosGuardados;
             saveData.terrenoGuardado = datosViejos.terrenoGuardado;
             
-            // RASTREADOR 1
             int cantidadMochila = saveData.cultivosGuardados != null ? saveData.cultivosGuardados.Count : 0;
             Debug.Log($"[SAVE-1] Rescatados {cantidadMochila} cultivos de la partida anterior.");
         }
@@ -68,7 +66,6 @@ public class SaveController : MonoBehaviour
             saveData.minutoGuardado = timeManager.minutoActual;
         }
 
-        // 4. EL CANDADO DE LA GRANJA
         if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null)
         {
             if (CropController.Instance != null)
@@ -130,15 +127,14 @@ public class SaveController : MonoBehaviour
                 timeManager.horaActual = saveData.horaGuardada;
                 timeManager.minutoActual = saveData.minutoGuardado;
             }
-            // --- LIMPIEZA DE ITEMS EN EL SUELO ---
             // Buscamos todas las manzanas/items que hay en el mundo 3D
             BaseItem[] itemsEnElSuelo = FindObjectsOfType<BaseItem>();
             foreach (BaseItem item in itemsEnElSuelo)
             {
-                // Si el DNI de este ítem está en la lista negra que acabamos de cargar...
+                // Si el DNI de este ítem está en la lista negra que acabamos de cargar
                 if (this.destroyedItemsIDs.Contains(item.uniqueWorldID))
                 {
-                    Destroy(item.gameObject); // ...lo destruimos.
+                    Destroy(item.gameObject); //lo destruimos.
                 }
             }
             if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null && CropController.Instance != null)

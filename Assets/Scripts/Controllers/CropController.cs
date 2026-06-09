@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class DatosSemilla
 {
     public int idSemilla;
-    public Sprite[] etapasCrecimiento; // Arrastrá los sprites (Semilla, Brote, Planta)
+    public Sprite[] etapasCrecimiento; // Arrastra los sprites (Semilla, Brote, Planta)
     public int idItemCosecha;
 }
 
@@ -16,7 +16,7 @@ public class CultivoActivo
 {
     public int idSemilla;
     public int diasCrecimiento;
-    public GameObject objetoVisual; // El objeto 3D/2.5D en la escena
+    public GameObject objetoVisual; // El objeto 2.5D en la escena
 }
 
 public class CropController : MonoBehaviour
@@ -37,7 +37,7 @@ public class CropController : MonoBehaviour
     }
     private void OnEnable()
     {
-        // En lugar de AlAmanecer, escuchamos cada vez que el reloj hace "tic"
+        // En lugar de AlAmanecer, escuchamos cada vez que el reloj hace un cambio
         DayNightManager.AlCambiarTiempo += ComprobarHoraCrecimiento;
     }
 
@@ -52,7 +52,7 @@ public class CropController : MonoBehaviour
         if (hora == 7 && minuto == 0)
         {
             AvanzarDia();
-            Debug.Log("🌱 [GRANJA] Son las 7:00 AM. ¡Las plantas acaban de crecer!");
+            Debug.Log(" [GRANJA] Son las 7:00 AM. ¡Las plantas acaban de crecer!");
         }
     }
 
@@ -115,7 +115,7 @@ public class CropController : MonoBehaviour
         }
     }
 
-    // Función extra por si querés comprobar si una celda está ocupada
+    // Funcion que comprueba si una celda está ocupada
     public bool HayCultivoEn(Vector3Int posicion)
     {
         return cultivosActivos.ContainsKey(posicion);
@@ -142,7 +142,7 @@ public class CropController : MonoBehaviour
 
             if (datos != null)
             {
-                // 1. Usamos TU función PickUpItem directamente
+                // 1. Usamos la función PickUpItem directamente
                 bool recogidoExitosamente = Inventory.Instance.PickUpItem(datos.idItemCosecha, 1);
 
                 // 2. Si entró en la mochila (devolvió true), destruimos la planta
@@ -158,7 +158,7 @@ public class CropController : MonoBehaviour
                 }
                 else
                 {
-                    // Si devolvió false, la planta se queda ahí esperando a que hagas espacio
+                    // Si devolvio false, la planta se queda ahí esperando a que hagas espacio
                     Debug.Log("[COSECHA] La planta no se cosechó porque no hay espacio en el inventario.");
                 }
             }

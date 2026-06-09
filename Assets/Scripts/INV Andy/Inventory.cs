@@ -9,8 +9,8 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
     public Database db;
     public Transform itemPrefab; // El prefab UI de la manzana/item
-    public Transform slotsContainer; // El panel donde el Controller creó los slots
-    public Transform hotbarContainer; // NUEVO: Acá vamos a arrastrar la Hotbar
+    public Transform slotsContainer; // El panel donde el Controller creo los slots
+    public Transform hotbarContainer; //Acá vamos a arrastrar la Hotbar
 
     public GameObject inventoryToggle;
     public bool isOpen; // Esta es la variable global
@@ -21,28 +21,26 @@ public class Inventory : MonoBehaviour
         inventoryToggle.SetActive(false);
     }
 
-    // Le cambiamos el 'void' por 'bool'
+    
     public bool PickUpItem(int id, int quantity)
     {
         var itemData = db.dataBase[id];
 
-        // 1. Primero intentamos APILAR (Stackear)
+        // Primero Intenta Stackear
         if (itemData.acumulable)
         {
             if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
             if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
         }
 
-        // 2. Buscamos un SLOT VACÍO
+        // Buscamos un SLOT VACIO
         if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) return true; // ¡Éxito!
         if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) return true; // ¡Éxito!
 
-        // 3. Si llega acá, no hay lugar
+        // 3. Si llega aca, no hay lugar
         Debug.LogWarning("¡Inventario y Hotbar llenos! No se pudo agarrar el ítem.");
-        return false; // Falló, no hay espacio
+        return false; // Fallo, no hay espacio
     }
-
-    // --- FUNCIONES AYUDANTES (Hacen que el código de arriba sea más limpio) ---
 
     private bool TryStackItem(Transform container, int id, ref int quantity, int maxStack)
     {
@@ -58,7 +56,7 @@ public class Inventory : MonoBehaviour
                     {
                         itemInSlot.quantity += quantity;
                         itemInSlot.RefreshUI();
-                        return true; // Se acomodó todo el stack
+                        return true; // Se acomodo todo el stack
                     }
                     else
                     {
@@ -87,10 +85,9 @@ public class Inventory : MonoBehaviour
 
     private void SpawnItemInSlot(int id, int quantity, Transform targetSlot)
     {
-        // 1. Instanciamos el objeto SIN emparentarlo en el mismo paso
+        //Instanciamos el objeto
         GameObject newItemGO = Instantiate(itemPrefab.gameObject);
         
-        // 2. EL FIX DEFINITIVO: SetParent con 'false'. 
         // El 'false' le prohíbe a Unity aplicar ese offset de -1920.
         newItemGO.transform.SetParent(targetSlot, false);
 
@@ -103,7 +100,7 @@ public class Inventory : MonoBehaviour
             itemUI.InitializeItem(id, quantity);
         }
 
-        // 3. Forzamos posición 0 por seguridad
+        //Forzamos posición 0 por seguridad
         RectTransform rect = newItemGO.GetComponent<RectTransform>();
         if (rect != null)
         {
@@ -127,7 +124,7 @@ public class Inventory : MonoBehaviour
 
     public void SpawnItemForSave(int id, int quantity, Transform targetSlot)
     {
-        // Reutilizamos la lógica con el SetParent en false
+        // Reutilizamos la logica con el SetParent en false
         GameObject newItemGO = Instantiate(itemPrefab.gameObject);
         newItemGO.transform.SetParent(targetSlot, false);
         newItemGO.name = "Item_UI_ID_" + id;

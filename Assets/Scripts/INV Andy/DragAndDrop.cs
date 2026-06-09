@@ -14,7 +14,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private RectTransform rectTransform; 
     private CanvasGroup canvasGroup;
     
-    // NUEVO: Guardamos de dónde salimos para saber si hay que volver a unir el stack
+    //Guardamos de dónde salimos para saber si hay que volver a unir el stack
     private Transform originalParent; 
 
     void Awake()
@@ -41,13 +41,13 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         originalParent = parentAfterDrag; // Guardamos el slot de origen
         ItemUI itemUI = GetComponent<ItemUI>();
 
-        // --- MAGIA DE DIVIDIR (CLIC DERECHO) ---
+        //DIVIDIR (CLIC DERECHO)
         if (eventData.button == PointerEventData.InputButton.Right && itemUI != null && itemUI.quantity > 1)
         {
             int cantidadParaDejar = itemUI.quantity / 2;
             int cantidadParaLlevar = itemUI.quantity - cantidadParaDejar;
 
-            // 1. Creamos un clon para dejar en el slot
+            //Creamos un clon para dejar en el slot
             GameObject clone = Instantiate(Inventory.Instance.itemPrefab.gameObject, originalParent);
             clone.name = "Item_UI_ID_" + itemUI.id;
 
@@ -66,12 +66,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 cloneRect.localScale = Vector3.one;
             }
 
-            // 2. Modificamos el que nos estamos llevando en el mouse
+            //Modificamos el que nos estamos llevando en el mouse
             itemUI.quantity = cantidadParaLlevar;
             itemUI.RefreshUI();
         }
 
-        // --- ARRASTRE NORMAL ---
+        //ARRASTRE
         dragOffset = transform.position - Input.mousePosition; 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
@@ -86,27 +86,26 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Si el objeto se fusionó con éxito en OnDrop, Unity lo marcó para destruir.
+        // Si el objeto se fusiono con exito en OnDrop, Unity lo marco para destruir.
         if (this == null || gameObject == null) return;
 
-        // SISTEMA ANTI-DUPLICADOS: 
-        // Si cancelaste el arrastre (volviste al slot original) y ahí dejamos un clon...
+        // Si cancelaste el arrastre (volviste al slot original) y ahí dejamos un clon
         if (parentAfterDrag == originalParent && parentAfterDrag.childCount > 0)
         {
             ItemUI itemInSlot = parentAfterDrag.GetChild(0).GetComponent<ItemUI>();
             ItemUI myItemUI = GetComponent<ItemUI>();
 
-            // ...los volvemos a fusionar automáticamente.
+            //los volvemos a fusionar automáticamente.
             if (itemInSlot != null && itemInSlot != myItemUI && itemInSlot.id == myItemUI.id)
             {
                 itemInSlot.quantity += myItemUI.quantity;
                 itemInSlot.RefreshUI();
-                Destroy(gameObject); // Yo me destruyo, el clon asume todo
+                Destroy(gameObject); //Yo me destruyo, el clon asume todo
                 return;
             }
         }
 
-        // Si soltaste en un slot válido
+        //Si soltaste en un slot válido
         transform.SetParent(parentAfterDrag);
         canvasGroup.blocksRaycasts = true; 
 

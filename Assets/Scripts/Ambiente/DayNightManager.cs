@@ -19,8 +19,6 @@ public class DayNightManager : MonoBehaviour
     // Eventos clásicos
     public static event Action AlAmanecer;
     public static event Action AlAnochecer;
-    
-    // ¡NUEVO EVENTO! Útil para actualizar la UI del reloj o cambiar la música
     // Transmite dos números: la hora y el minuto
     public static event Action<int, int> AlCambiarTiempo; 
 
@@ -70,7 +68,7 @@ public class DayNightManager : MonoBehaviour
             }
         }
 
-        // Avisamos a cualquier script que necesite saber la hora exacta (UI, Música)
+        // Avisamos a cualquier script que necesite saber la hora exacta
         AlCambiarTiempo?.Invoke(horaActual, minutoActual);
 
         ComprobarCicloDiaNoche();
@@ -102,7 +100,7 @@ public class DayNightManager : MonoBehaviour
         if (nuevoDia)
         {
             esDeDia = true;
-            AlAmanecer?.Invoke(); // ¡Esto hará que el CropController haga crecer las plantas!
+            AlAmanecer?.Invoke(); //Esto hace que el CropController haga crecer las plantas
             Debug.Log("[SUEÑO] Amaneció un nuevo día. ¡A laburar!");
         }
         else
