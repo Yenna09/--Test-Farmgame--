@@ -20,7 +20,7 @@ public class SaveController : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
-
+    
     void Start()
     {
         saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
@@ -40,18 +40,51 @@ public class SaveController : MonoBehaviour
 
     public void SaveGame()
     {
-        SaveData saveData = new SaveData
+        SaveData saveData = new SaveData();
+
+        // 1. Rescatamos la granja vieja ANTES de sobreescribir
+        if (File.Exists(saveLocation))
         {
-            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position,
-            inventorySaveData = new InventorySaveData(),
-            destroyedItemsIDs = this.destroyedItemsIDs // Guardamos la lista negra
-        };
+            SaveData datosViejos = JsonUtility.FromJson<SaveData>(File.ReadAllText(saveLocation));
+            saveData.cultivosGuardados = datosViejos.cultivosGuardados;
+            saveData.terrenoGuardado = datosViejos.terrenoGuardado;
+            
+            // RASTREADOR 1
+            int cantidadMochila = saveData.cultivosGuardados != null ? saveData.cultivosGuardados.Count : 0;
+            Debug.Log($"[SAVE-1] Rescatados {cantidadMochila} cultivos de la partida anterior.");
+        }
+
+        saveData.playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        saveData.inventorySaveData = new InventorySaveData();
+        saveData.destroyedItemsIDs = this.destroyedItemsIDs;
 
         SaveContainer(Inventory.Instance.hotbarContainer, saveData.inventorySaveData.savedItems, true);
         SaveContainer(Inventory.Instance.slotsContainer, saveData.inventorySaveData.savedItems, false);
 
+        DayNightManager timeManager = DayNightManager.Instance;
+        if (timeManager != null)
+        {
+            saveData.horaGuardada = timeManager.horaActual;
+            saveData.minutoGuardado = timeManager.minutoActual;
+        }
+
+        // 4. EL CANDADO DE LA GRANJA
+        if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null)
+        {
+            if (CropController.Instance != null)
+            {
+                saveData.cultivosGuardados = CropController.Instance.ExportarCultivos();
+                Debug.Log($"[SAVE-2] En el campo. Guardando {saveData.cultivosGuardados.Count} cultivos desde el mapa.");
+            }
+            saveData.terrenoGuardado = FarmingController.Instance.ExportarTerreno();
+        }
+        else
+        {
+            Debug.Log("[SAVE-2] En la casa (Sin tierra). Manteniendo los cultivos viejos intactos.");
+        }
+
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData, true));
-        Debug.Log("Juego guardado en: " + saveLocation);
+        Debug.Log("💾 [GUARDADO EXITOSO] Archivo actualizado.");
     }
 
     public void LoadGame()
@@ -91,7 +124,12 @@ public class SaveController : MonoBehaviour
                     }
                 }
             }
-
+            DayNightManager timeManager = DayNightManager.Instance;
+            if (timeManager != null)
+            {
+                timeManager.horaActual = saveData.horaGuardada;
+                timeManager.minutoActual = saveData.minutoGuardado;
+            }
             // --- LIMPIEZA DE ITEMS EN EL SUELO ---
             // Buscamos todas las manzanas/items que hay en el mundo 3D
             BaseItem[] itemsEnElSuelo = FindObjectsOfType<BaseItem>();
@@ -102,6 +140,18 @@ public class SaveController : MonoBehaviour
                 {
                     Destroy(item.gameObject); // ...lo destruimos.
                 }
+            }
+            if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null && CropController.Instance != null)
+            {
+                int cantidadACargar = saveData.cultivosGuardados != null ? saveData.cultivosGuardados.Count : 0;
+                Debug.Log($"[LOAD] Estamos en el campo. Intentando cargar {cantidadACargar} cultivos.");
+                
+                FarmingController.Instance.ImportarTerreno(saveData.terrenoGuardado);
+                CropController.Instance.ImportarCultivos(saveData.cultivosGuardados);
+            }
+            else
+            {
+                Debug.Log("[LOAD] Estamos en la casa. No se intenta cargar la granja acá.");
             }
         }
         else

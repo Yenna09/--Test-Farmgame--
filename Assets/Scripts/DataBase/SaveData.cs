@@ -10,6 +10,19 @@ public class SavedSlot
     public int quantity;  // Cantidad acumulada
     public bool isHotbar; // true = Hotbar, false = Inventario principal
 }
+[System.Serializable]
+public class DatosCultivoGuardado
+{
+    public Vector3Int posicion;
+    public int idSemilla;
+    public int diasCrecimiento;
+}
+[System.Serializable]
+public class DatosTerrenoGuardado
+{
+    public Vector3Int posicion;
+    public string estado; // Guardaremos "arado" o "mojado"
+}
 
 // Definimos la estructura del inventario guardado
 [System.Serializable]
@@ -22,9 +35,11 @@ public class InventorySaveData
 [System.Serializable]
 public class SaveData
 {
-   public Vector3 playerPosition;
-   public InventorySaveData inventorySaveData;
-   
-   // NUEVO: La lista negra de ítems que ya agarramos del piso
-   public List<string> destroyedItemsIDs = new List<string>(); 
+    public Vector3 playerPosition;
+    public InventorySaveData inventorySaveData;
+    public List<string> destroyedItemsIDs;
+    public int horaGuardada; 
+    public int minutoGuardado; 
+    public List<DatosCultivoGuardado> cultivosGuardados;
+    public List<DatosTerrenoGuardado> terrenoGuardado;
 }

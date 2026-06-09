@@ -27,6 +27,14 @@ public class DayNightManager : MonoBehaviour
     public bool esDeDia = true;
     private float temporizador = 0f;
 
+    // Creamos la instancia global (como hicimos con el SaveController)
+    public static DayNightManager Instance { get; private set; }
+
+    void Awake()
+    {
+        //Siempre me asigno como la instancia oficial al cargar la escena
+        Instance = this;
+    }
     void Start()
     {
         // Determinamos el estado inicial en base a la hora de inicio
@@ -106,5 +114,15 @@ public class DayNightManager : MonoBehaviour
 
         // Actualizamos a todos los que escuchen la hora (el sol, la UI del reloj, etc.)
         AlCambiarTiempo?.Invoke(horaActual, minutoActual);
+    }
+    public void ForzarSincronizacion()
+    {
+        esDeDia = (horaActual >= horaAmanecer && horaActual < horaAnochecer);
+        
+        // Dispara los eventos para cualquier otro script que escuche
+        AlCambiarTiempo?.Invoke(horaActual, minutoActual);
+        
+        // Te lo muestra directo en la consola para que te quedes tranquilo
+        Debug.Log($"[TIEMPO SINCRONIZADO] Acabás de cargar la escena. Son las {horaActual:00}:{minutoActual:00}");
     }
 }
