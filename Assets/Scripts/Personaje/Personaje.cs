@@ -16,5 +16,10 @@ public class Personaje : MonoBehaviour
         {
             DestroyImmediate(this.gameObject);
         }
+
+        if (vida == null)
+        {
+            vida = GetComponent<Vida>();
+        }
     }
 }

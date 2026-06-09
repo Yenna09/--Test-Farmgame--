@@ -34,7 +34,7 @@ public class EnemyBear : Enemy
     public override void AttackState()
     {
         base.AttackState();
-        agent.SetDestination(transform.position); // Se detiene
+        agent.SetDestination(transform.position); 
         
         // Mirar al jugador (Eje Y solamente para que no se incline)
         Vector3 direccion = (target.position - transform.position).normalized;

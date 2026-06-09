@@ -13,7 +13,7 @@ public class NodoSpawner : MonoBehaviour
     [Tooltip("Arrastrá acá los objetos vacíos de la escena que formarán la ruta de este enemigo")]
     public Transform[] waypointsLocales;
 
-    // Referencia interna para saber si nuestro enemigo sigue vivo
+    
     private GameObject enemigoInstanciado; 
 
     private void OnEnable()
@@ -25,14 +25,14 @@ public class NodoSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        // Nos desuscribimos por seguridad cuando este nodo se apaga o destruye
+        
         DayNightManager.AlAnochecer -= IniciarDespertar;
         DayNightManager.AlAmanecer -= LimpiarEnemigo;
     }
 
     private void IniciarDespertar()
     {
-        // Si no hay un enemigo vivo de la noche anterior, arrancamos la corrutina
+        
         if (enemigoInstanciado == null)
         {
             StartCoroutine(RutinaSpawnConRetraso());
@@ -41,20 +41,20 @@ public class NodoSpawner : MonoBehaviour
 
     private IEnumerator RutinaSpawnConRetraso()
     {
-        // 1. Calculamos un retraso aleatorio para que no aparezcan todos de golpe
+        
         float tiempoDeEspera = Random.Range(0f, retrasoMaximo);
         yield return new WaitForSeconds(tiempoDeEspera);
 
-        // 2. Comprobamos nuevamente que se pueda instanciar (por si amaneció durante la espera)
+        
         if (enemigoInstanciado == null)
         {
-            // 3. Instanciamos el prefab exactamente en la posición y rotación de este Nodo
+            
             enemigoInstanciado = Instantiate(enemigoPrefab, transform.position, transform.rotation);
             
-            // 4. Buscamos el script principal en el enemigo que acabamos de crear
+            
             EnemigoPatrol cerebroDelEnemigo = enemigoInstanciado.GetComponent<EnemigoPatrol>();
             
-            // 5. Si lo encontramos, le inyectamos los waypoints locales
+            
             if (cerebroDelEnemigo != null)
             {
                 cerebroDelEnemigo.AsignarWaypoints(waypointsLocales);
@@ -68,13 +68,12 @@ public class NodoSpawner : MonoBehaviour
 
     private void LimpiarEnemigo()
     {
-        // Al amanecer, si el enemigo sigue vivo, lo destruimos
+        
         if (enemigoInstanciado != null)
         {
             Destroy(enemigoInstanciado);
             
-            // Opcional: Acá podrías instanciar un prefab de humo/partículas
-            // Instantiate(efectoHumo, enemigoInstanciado.transform.position, Quaternion.identity);
+            
         }
     }
 }

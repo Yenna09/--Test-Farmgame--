@@ -15,9 +15,9 @@ public class EnemigoPatrol : Enemy
 
     private float tiempoSiguienteAtaque;
     public float velocidadAtaque = 1.5f;
+    private SpriteRenderer spriteRenderer;
 
-    // --- ¡EL ENCHUFE! ---
-    // El NodoSpawner va a llamar a esta función justo después de instanciarlo
+    
     public void AsignarWaypoints(Transform[] rutasDelSpawner)
     {
         Waypoints = rutasDelSpawner;
@@ -26,27 +26,49 @@ public class EnemigoPatrol : Enemy
 
     public void Awake() 
     {
-        // Esto llama al Awake() de Enemy.cs, que ahora es el encargado
-        // de buscar al jugador de forma totalmente segura.
+        
         base.Awake(); 
         
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        
+
         distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
+    }
+
+    
+    private void Update() 
+    {
+        
+        if (spriteRenderer == null) return;
+
+        
+        float velocidadX = agent.velocity.x;
+
+        
+        if (velocidadX > 0.05f)
+        {
+            spriteRenderer.flipX = false; 
+        }
+        
+        else if (velocidadX < -0.05f)
+        {
+            spriteRenderer.flipX = true; 
+        }
     }
     public override void IdleState()
     {
         base.IdleState();
 
-        // --- SEGURO DE VIDA ---
-        // Si el Spawner todavía no nos pasó la ruta, o si nos olvidamos de
-        // ponerle waypoints al Spawner, el enemigo simplemente se queda quieto.
+        
         if (Waypoints == null || Waypoints.Length == 0)
         {
             agent.SetDestination(transform.position);
-            return; // Cortamos la ejecución acá para que no dé error
+            return; 
         }
 
-        // Tu lógica original (¡que está perfecta!)
+    
         agent.SetDestination(Waypoints[indice].position);
         if ((Waypoints[indice].position - transform.position).sqrMagnitude < distanciaWaypoints2)
         {
@@ -58,7 +80,7 @@ public class EnemigoPatrol : Enemy
     {
         base.FollowState();
         
-        // ¡SEGURO CONTRA CRASHEOS!
+        
         if (target != null) 
         {
             agent.SetDestination(target.position);
@@ -68,18 +90,21 @@ public class EnemigoPatrol : Enemy
     public override void AttackState()
     {
         base.AttackState();
-        agent.SetDestination(transform.position); // Se detiene
+        agent.SetDestination(transform.position); 
         
-        // ¡SEGURO CONTRA CRASHEOS!
-        if (target != null)
-        {
-            // Mirar al jugador (Eje Y solamente para que no se incline)
-            Vector3 direccion = (target.position - transform.position).normalized;
-            direccion.y = 0;
-            transform.rotation = Quaternion.LookRotation(direccion);
-        }
+        
+        //if (target != null)
+        //{
+        //    Vector3 direccion = (target.position - transform.position).normalized;
+        //    direccion.y = 0;
+        //    transform.rotation = Quaternion.LookRotation(direccion);
+        //}
 
-        // Lógica de daño por tiempo
+        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+        {
+            agent.SetDestination(transform.position);
+        }
+        
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
