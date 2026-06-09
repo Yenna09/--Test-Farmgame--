@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class EnemigoPatrol : Enemy
 {
     private NavMeshAgent agent;
@@ -15,60 +12,60 @@ public class EnemigoPatrol : Enemy
 
     private float tiempoSiguienteAtaque;
     public float velocidadAtaque = 1.5f;
+    
     private SpriteRenderer spriteRenderer;
 
-    
     public void AsignarWaypoints(Transform[] rutasDelSpawner)
     {
         Waypoints = rutasDelSpawner;
-        Debug.Log("¡EnemigoPatrol recibió su ruta de patrullaje!");
     }
 
     public void Awake() 
     {
-        
-        base.Awake(); 
-        
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
+
+        // --- BLINDAJE 2.5D DEFINITIVO ---
+        if (agent != null)
+        {
+            agent.updateRotation = false; // No lo rota el NavMesh
+            agent.updateUpAxis = false;   // No se inclina con el suelo
+        }
 
         distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
     }
 
-    
+    // El espejo visual
     private void Update() 
     {
-        
-        if (spriteRenderer == null) return;
+        if (spriteRenderer == null || agent == null) return;
 
-        
         float velocidadX = agent.velocity.x;
 
-        
         if (velocidadX > 0.05f)
         {
             spriteRenderer.flipX = false; 
         }
-        
         else if (velocidadX < -0.05f)
         {
             spriteRenderer.flipX = true; 
         }
     }
+
     public override void IdleState()
     {
         base.IdleState();
 
-        
+        if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh) return;
+
+        // Seguro por si no hay waypoints asignados
         if (Waypoints == null || Waypoints.Length == 0)
         {
             agent.SetDestination(transform.position);
             return; 
         }
 
-    
+        // Patrullaje
         agent.SetDestination(Waypoints[indice].position);
         if ((Waypoints[indice].position - transform.position).sqrMagnitude < distanciaWaypoints2)
         {
@@ -80,8 +77,7 @@ public class EnemigoPatrol : Enemy
     {
         base.FollowState();
         
-        
-        if (target != null) 
+        if (target != null && agent.isActiveAndEnabled && agent.isOnNavMesh) 
         {
             agent.SetDestination(target.position);
         }
@@ -90,21 +86,13 @@ public class EnemigoPatrol : Enemy
     public override void AttackState()
     {
         base.AttackState();
-        agent.SetDestination(transform.position); 
         
-        
-        //if (target != null)
-        //{
-        //    Vector3 direccion = (target.position - transform.position).normalized;
-        //    direccion.y = 0;
-        //    transform.rotation = Quaternion.LookRotation(direccion);
-        //}
-
         if (agent.isActiveAndEnabled && agent.isOnNavMesh)
         {
-            agent.SetDestination(transform.position);
+            agent.SetDestination(transform.position); // Se detiene para golpear
         }
-        
+
+        // Ataque con cooldown
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
@@ -115,11 +103,17 @@ public class EnemigoPatrol : Enemy
     public override void DeathState()
     {
         base.IdleState();
-        agent.enabled = false;
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
     }
 
     public void Atacar()
     {
-        Personaje.singleton.vida.CausarDamage(damage);
+        if (Personaje.singleton != null && Personaje.singleton.vida != null)
+        {
+            Personaje.singleton.vida.CausarDamage(damage);
+        }
     }
 }

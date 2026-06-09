@@ -18,35 +18,38 @@ public class Enemy : MonoBehaviour
 
     public bool vivo = true;
 
-    public void Awake() 
-    {
-        // Awake se queda solo para inicializar cosas internas del propio enemigo
-        StartCoroutine(CalcularDistancia());
-    }
-
     private void Start()
     {
-        // Start se asegura de que el Jugador (y su singleton) ya tuvieron
-        // tiempo de inicializarse en su propio Awake. ¡Cero errores!
+        // Búsqueda segura del jugador al nacer
         if (autoseleccionarTarget && target == null) 
         {
             if (Personaje.singleton != null)
             {
                 target = Personaje.singleton.transform;
             }
-            else
+            else 
             {
-                Debug.LogWarning("El enemigo nació pero no encontró al Personaje en la escena.");
+                GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+                if (jugador != null)
+                {
+                    target = jugador.transform;
+                }
             }
         }
     }
 
     private void LateUpdate() 
     {
+        // Medimos la distancia en tiempo real, de forma segura
         if (target != null)
         {
             distancia = Vector3.Distance(transform.position, target.position);
         }
+        else 
+        {
+            distancia = 999f; // Si perdemos la referencia, no perseguimos fantasmas
+        }
+
         CheckState();
     }
 
@@ -64,8 +67,7 @@ public class Enemy : MonoBehaviour
                 vivo = false;
                 break;
             case States.seguir: 
-                
-                FollowState(); 
+                FollowState(); // ¡Cero LookAt! Solo ejecutamos el estado
                 break;
         }
     }
@@ -77,7 +79,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void IdleState()
     {
-        // Solo cambiamos de estado si el objetivo existe
         if (target != null && distancia < distanceFollow)
         {
             ChangeState(States.seguir);
@@ -94,7 +95,7 @@ public class Enemy : MonoBehaviour
     
     public virtual void FollowState()
     {
-        if (target == null) return; 
+        if (target == null) return;
 
         if (distancia < distanciaAtacar)
         {
@@ -109,18 +110,6 @@ public class Enemy : MonoBehaviour
     public virtual void DeathState() 
     { 
         
-    }
-
-    IEnumerator CalcularDistancia()
-    {
-        while(vivo)
-        {
-            yield return new WaitForSeconds(0.2f); 
-            if (target != null)
-            {
-                distancia = Vector3.Distance(transform.position, target.position);
-            }
-        }
     }
 
 #if UNITY_EDITOR
