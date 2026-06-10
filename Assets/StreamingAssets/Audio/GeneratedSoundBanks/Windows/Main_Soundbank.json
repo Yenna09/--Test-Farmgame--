@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{13C4886E-2FE5-4AA9-93A9-3CA0642BB8EC}",
     "Language": "SFX",
-    "Hash": "{35F6D62F-3572-7E12-C3DB-9661C3499712}",
+    "Hash": "{0001BF68-EDFF-A53A-0F3F-764DA7403B76}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Main_Soundbank",
     "ShortName": "Main_Soundbank",
     "Path": "Main_Soundbank.bnk",
@@ -344,6 +344,14 @@
       "CachePath": "8A/{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem"
      },
      {
+      "Id": "883165690",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MSX_MainMenu_99BPM.wav",
+      "CachePath": "35/{35A2E2AC-1491-3757-98A6-3CE0C16333B4}.wem"
+     },
+     {
       "Id": "883429283",
       "Language": "SFX",
       "Streaming": "false",
@@ -635,6 +643,18 @@
       ]
      },
      {
+      "Id": "3738780720",
+      "Name": "Play_MainMenu",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_MainMenu",
+      "GUID": "{F3A99A7A-9E81-4106-9CDF-678325B6FD1C}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "883165690"
+       }
+      ]
+     },
+     {
       "Id": "2596494084",
       "Name": "Play_MusicaYAmbiente",
       "ObjectPath": "\\Events\\Default Work Unit\\Play_MusicaYAmbiente",
@@ -913,6 +933,6 @@
     ]
    }
   ],
-  "FileHash": "{407B6A60-265F-C7C8-B773-7CE6F6AA7D0E}"
+  "FileHash": "{346411F7-8108-C0B9-61D5-C8EAFE89C013}"
  }
 }

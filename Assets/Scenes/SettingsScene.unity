@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 244570895}
   - component: {fileID: 244570894}
   m_Layer: 5
-  m_Name: MUSIC
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,7 +726,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MUSIC
+  m_text: 'SFX
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}
   m_sharedMaterial: {fileID: 1013986675064051569, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}
@@ -1352,7 +1354,7 @@ GameObject:
   - component: {fileID: 887152833}
   - component: {fileID: 887152834}
   m_Layer: 5
-  m_Name: FX Slider
+  m_Name: SFX Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1440,7 +1442,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Effects
+          m_StringArgument: Sounds
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &887152834
@@ -2498,7 +2500,7 @@ GameObject:
   - component: {fileID: 1725814194}
   - component: {fileID: 1725814193}
   m_Layer: 5
-  m_Name: FX
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2543,7 +2545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EFFECTS
+  m_text: Music
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}
   m_sharedMaterial: {fileID: 1013986675064051569, guid: 393beb7edf6649846ae2ce3574d4370d, type: 2}

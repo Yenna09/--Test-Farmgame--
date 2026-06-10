@@ -3,6 +3,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2577162886	Play_DayNightStart			\Default Work Unit\Play_DayNightStart	
 	2596494084	Play_MusicaYAmbiente			\Default Work Unit\Play_MusicaYAmbiente	
 	2770939616	Play_Plowing			\Default Work Unit\Play_Plowing	
+	3738780720	Play_MainMenu			\Default Work Unit\Play_MainMenu	
 	3854155799	Play_Footsteps			\Default Work Unit\Play_Footsteps	
 
 State Group	ID	Name			Wwise Object Path	Notes
@@ -60,6 +61,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	776098298	Plowing-002	.cache\3B\{3B9E4117-8059-EB9D-2B95-ED18C2B1C9DB}.wem		\Containers\Default Work Unit\SFX\Plowing\Plowing-002		3475
 	829133488	AMB_GranjaDia-010	.cache\B1\{B1497AA7-5DE3-D838-B39E-D29168D1F6EB}.wem		\Containers\Default Work Unit\SFX\Ambience\DayAmbience\AMB_GranjaDia-010		47530
 	862825252	Grass_Footsteps-005	.cache\8A\{8AA1D2C6-760F-31C2-D28C-48119D7096A5}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-005		6927
+	883165690	MSX_MainMenu_99BPM	.cache\35\{35A2E2AC-1491-3757-98A6-3CE0C16333B4}.wem		\Containers\Default Work Unit\Interactive Music\MainMenu\MSX_MainMenu_99BPM\MSX_MainMenu_99BPM		635052
 	883429283	SFX_Watering-001	.cache\8A\{8A3FCA38-5105-D224-9B98-49478F0D6172}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-001		22430
 	890741007	SFX_Watering-003	.cache\89\{893F170A-A461-D3C4-7597-102DC0B5B005}.wem		\Containers\Default Work Unit\SFX\WateringCan\SFX_Watering-003		20794
 	898231176	Grass_Footsteps-008	.cache\26\{26C6AC13-B21A-E03B-EF9C-B6CCE3182DEF}.wem		\Containers\Default Work Unit\SFX\Footsteps\Grass\Grass_Footsteps-008		5414
