@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
 
-// 1. Creamos la clase que contiene los datos de cada línea de diálogo
 [System.Serializable]
 public class DialogueLine
 {
@@ -23,7 +22,6 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private TMP_Text npcNameUI; 
 
     [Header("Dialogue Data")]
-    // 2. Reemplazamos los datos sueltos por un array de nuestra nueva clase
     [SerializeField] private DialogueLine[] conversation;
 
     private bool isPlayerInRange;
@@ -40,6 +38,18 @@ public class Dialogue : MonoBehaviour
         {
             Debug.LogWarning("No se encontró la HotBar. Asegúrate de que el Tag esté bien escrito y asignado en el Inspector.");
         }
+
+        if (dialoguePanel != null)
+    {
+        dialoguePanel.SetActive(false);
+    }
+    
+        // Asegura que la marca flotante empiece desactivada 
+        // (se activará cuando el Player entre al Trigger)
+        if (dialogueMark != null)
+        {
+            dialogueMark.SetActive(false);
+        }
     }
 
     void Update()
@@ -50,7 +60,6 @@ public class Dialogue : MonoBehaviour
             {
                 StartDialogue();
             }
-            // Comparamos contra el texto de la línea actual
             else if(dialogueText.text == conversation[lineIndex].text)
             {
                 NextDialogueLine();
@@ -90,18 +99,16 @@ public class Dialogue : MonoBehaviour
         {
             EndDialogue();
         }
-
-        
     }
 
     private void EndDialogue()
     {
+        StopAllCoroutines(); 
         didDialogueStart = false;
         dialoguePanel.SetActive(false);
-        dialogueMark.SetActive(true);
+        dialogueMark.SetActive(isPlayerInRange); 
         Time.timeScale = 1f; 
 
-        // Reactivamos la HotBar
         if (hotbarUI != null)
         {
             hotbarUI.SetActive(true);
@@ -110,17 +117,13 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator ShowLine()
     {
-        // 3. Obtenemos la información de la línea actual
         DialogueLine currentLine = conversation[lineIndex];
 
-        // 4. Actualizamos la UI con la foto y nombre del que habla AHORA
         if (npcNameUI != null) npcNameUI.text = currentLine.speakerName;
         if (npcPhotoUI != null) npcPhotoUI.sprite = currentLine.speakerPhoto;
 
-        // Limpiamos el texto principal
         dialogueText.text = string.Empty;
 
-        // Escribimos el texto letra por letra
         foreach (char ch in currentLine.text)
         {
             dialogueText.text += ch;
@@ -133,7 +136,10 @@ public class Dialogue : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            dialogueMark.SetActive(true);
+            if (!didDialogueStart)
+            {
+                dialogueMark.SetActive(true);
+            }
         }
     }
 
@@ -143,6 +149,11 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = false;
             dialogueMark.SetActive(false);
+
+            if (didDialogueStart)
+            {
+                EndDialogue();
+            }
         }
     }
 }
