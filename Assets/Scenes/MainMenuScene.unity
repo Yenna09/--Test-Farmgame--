@@ -631,7 +631,6 @@ GameObject:
   - component: {fileID: 398918321}
   - component: {fileID: 398918326}
   - component: {fileID: 398918325}
-  - component: {fileID: 398918324}
   - component: {fileID: 398918323}
   m_Layer: 0
   m_Name: WwiseGlobal
@@ -692,40 +691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1365d45f0444ced498f8d4a2ddf8bebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
---- !u!114 &398918324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398918320}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de5f883b0db9a2428e9e8e9f5fd2051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkAmbient
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: c1f014613668e5b4cbd01354d8950e04, type: 2}
-  useCallbacks: 0
-  stopSoundOnDestroy: 0
-  Callbacks: []
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
-  MultiPositionType: 1
-  multiPositionTypeLabel: 0
-  attenuationSphereColor: {r: 1, g: 0, b: 0, a: 0.1}
-  LargeModePositions: []
-  multiPositionArray: []
 --- !u!114 &398918325
 MonoBehaviour:
   m_ObjectHideFlags: 0
