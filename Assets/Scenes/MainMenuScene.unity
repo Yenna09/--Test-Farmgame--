@@ -316,9 +316,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.34901962, g: 0.15294118, b: 0.20392159, a: 1}
-    m_HighlightedColor: {r: 0.5754717, g: 0, b: 0, a: 1}
-    m_PressedColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    m_NormalColor: {r: 0.16470589, g: 0.1254902, b: 0.16470589, a: 1}
+    m_HighlightedColor: {r: 0.2784314, g: 0.23529413, b: 0.2784314, a: 1}
+    m_PressedColor: {r: 0.7725491, g: 0.3372549, b: 0.3137255, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1078,9 +1078,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.3372549, g: 0.1254902, b: 0.1764706, a: 1}
-    m_HighlightedColor: {r: 0.5764706, g: 0, b: 0, a: 1}
-    m_PressedColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    m_NormalColor: {r: 0.16470589, g: 0.1254902, b: 0.16470589, a: 1}
+    m_HighlightedColor: {r: 0.2784314, g: 0.23529413, b: 0.2784314, a: 1}
+    m_PressedColor: {r: 0.7725491, g: 0.3372549, b: 0.3137255, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e47ad6c3ac68fa94588f97135ebd6d71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4416285547b7cc46a971d89ee7a13bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1354,9 +1354,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.3254902, g: 0.0627451, b: 0.12941177, a: 1}
-    m_HighlightedColor: {r: 0.5764706, g: 0, b: 0, a: 1}
-    m_PressedColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    m_NormalColor: {r: 0.16470589, g: 0.1254902, b: 0.16470589, a: 1}
+    m_HighlightedColor: {r: 0.2784314, g: 0.23529413, b: 0.2784314, a: 1}
+    m_PressedColor: {r: 0.7843138, g: 0.3647059, b: 0.31764707, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
