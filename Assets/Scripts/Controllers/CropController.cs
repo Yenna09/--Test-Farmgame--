@@ -65,6 +65,7 @@ public class CropController : MonoBehaviour
             
             // 2. Instanciamos el Prefab verticalmente (Sin rotación acotada)
             GameObject nuevaPlanta = Instantiate(prefabPlantaBase, posicionMundo, Quaternion.identity);
+            nuevaPlanta.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             
             // 3. Registramos la planta en nuestro sistema
             CultivoActivo nuevoCultivo = new CultivoActivo
@@ -188,7 +189,7 @@ public class CropController : MonoBehaviour
             // Instanciamos el cultivo igual que en PlantarSemilla
             Vector3 posicionMundo = FarmingController.Instance.groundTilemap.GetCellCenterWorld(guardado.posicion);
             GameObject nuevaPlanta = Instantiate(prefabPlantaBase, posicionMundo, Quaternion.identity);
-
+            nuevaPlanta.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             CultivoActivo nuevoCultivo = new CultivoActivo
             {
                 idSemilla = guardado.idSemilla,
