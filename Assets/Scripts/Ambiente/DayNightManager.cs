@@ -7,7 +7,7 @@ public class DayNightManager : MonoBehaviour
     [Tooltip("A qué hora de la mañana amanece (ej: 6)")]
     public int horaAmanecer = 6;
     [Tooltip("A qué hora de la tarde/noche anochece (ej: 20 para las 8PM)")]
-    public int horaAnochecer = 20;
+    public int horaAnochecer = 21;
     
     [Tooltip("Cuántos segundos reales tardan en pasar 10 minutos en el juego")]
     public float segundosRealesPorTick = 1.5f; 
