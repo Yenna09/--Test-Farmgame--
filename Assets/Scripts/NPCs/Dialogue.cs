@@ -31,6 +31,10 @@ public class Dialogue : MonoBehaviour
 
     private GameObject hotbarUI;
 
+    [Header("Progression")]
+    [SerializeField]
+    private GameObject objectDisable;
+
     void Start()
     {
         hotbarUI = GameObject.FindGameObjectWithTag("HotBar");
@@ -74,6 +78,7 @@ public class Dialogue : MonoBehaviour
 
     private void StartDialogue()
     {
+        objectDisable.SetActive(false);
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
         dialogueMark.SetActive(false);
