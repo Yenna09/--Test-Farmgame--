@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
                 saliendoDeCasa = true;
             }
 
-           
+        
             // Le decimos al SaveController que guarde el inventario (y todo lo demás)
             // justo antes de que Unity destruya la escena.
             if (SaveController.Instance != null)

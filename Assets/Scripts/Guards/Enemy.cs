@@ -20,26 +20,18 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        // Búsqueda segura del jugador al nacer
-        if (autoseleccionarTarget && target == null) 
-        {
-            if (Personaje.singleton != null)
-            {
-                target = Personaje.singleton.transform;
-            }
-            else 
-            {
-                GameObject jugador = GameObject.FindGameObjectWithTag("Player");
-                if (jugador != null)
-                {
-                    target = jugador.transform;
-                }
-            }
-        }
+        BuscarJugador();
     }
 
     private void LateUpdate() 
     {
+        // CAMBIO: Si estamos vivos, queremos autoseleccionar, y perdimos al target... lo buscamos.
+        // Esto soluciona el problema de cuando el jugador se destruye al cambiar de escena y vuelve a aparecer.
+        if (target == null && autoseleccionarTarget && vivo)
+        {
+            BuscarJugador();
+        }
+
         // Medimos la distancia en tiempo real, de forma segura
         if (target != null)
         {
@@ -47,14 +39,37 @@ public class Enemy : MonoBehaviour
         }
         else 
         {
-            distancia = 999f; // Si perdemos la referencia, no perseguimos fantasmas
+            distancia = 999f; // Si perdimos la referencia, no perseguimos fantasmas
         }
 
         CheckState();
     }
 
+    // Encapsulamos la lógica de búsqueda para mantener el código limpio
+    private void BuscarJugador()
+    {
+        if (Personaje.singleton != null)
+        {
+            target = Personaje.singleton.transform;
+        }
+        else 
+        {
+            // Solo usamos FindGameObjectWithTag como respaldo si no hay singleton
+            GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+            if (jugador != null)
+            {
+                target = jugador.transform;
+            }
+        }
+    }
+
     private void CheckState()
     {
+        if (target == null && state != States.muerto)
+        {
+            state = States.idle;
+        }
+
         switch (state)
         {
             case States.idle: 

@@ -10,6 +10,7 @@ public class SavedSlot
     public int quantity;  // Cantidad acumulada
     public bool isHotbar; // true = Hotbar, false = Inventario principal
 }
+
 [System.Serializable]
 public class DatosCultivoGuardado
 {

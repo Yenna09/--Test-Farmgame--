@@ -4,20 +4,62 @@ using UnityEngine.AI;
 public class EnemigoPatrol : Enemy
 {
     private NavMeshAgent agent;
-    public Transform[] Waypoints;
+    
+    // CAMBIO 1: Guardamos las posiciones como Vector3, no como Transform
+    public Vector3[] waypointsPositions; 
     private int indice;
     public float distanciaWaypoints;
     private float distanciaWaypoints2;
     public float damage = 3;
+    public float tiempoEsperaRetorno = 1f;
+    private float tiempoRetorno;
 
     private float tiempoSiguienteAtaque;
     public float velocidadAtaque = 1.5f;
     
     private SpriteRenderer spriteRenderer;
 
+    // CAMBIO 2: Extraemos las posiciones exactas de los Transforms
     public void AsignarWaypoints(Transform[] rutasDelSpawner)
     {
-        Waypoints = rutasDelSpawner;
+        if (rutasDelSpawner == null || rutasDelSpawner.Length == 0) return;
+
+        waypointsPositions = new Vector3[rutasDelSpawner.Length];
+        for (int i = 0; i < rutasDelSpawner.Length; i++)
+        {
+            waypointsPositions[i] = rutasDelSpawner[i].position;
+        }
+    }
+
+    // CAMBIO 3: Devuelve Vector3 en lugar de Transform
+    private bool TryGetNextValidWaypoint(out Vector3 waypoint)
+    {
+        waypoint = Vector3.zero;
+        if (waypointsPositions == null || waypointsPositions.Length == 0) return false;
+
+        waypoint = waypointsPositions[indice];
+        return true;
+    }
+
+    // CAMBIO 4: Buscamos el ÍNDICE del waypoint más cercano basándonos en los Vector3
+    private int GetClosestWaypointIndex()
+    {
+        if (waypointsPositions == null || waypointsPositions.Length == 0) return 0;
+
+        int closestIndex = 0;
+        float bestSqrDist = float.MaxValue;
+
+        for (int i = 0; i < waypointsPositions.Length; i++)
+        {
+            float sqrDist = (waypointsPositions[i] - transform.position).sqrMagnitude;
+            if (sqrDist < bestSqrDist)
+            {
+                bestSqrDist = sqrDist;
+                closestIndex = i;
+            }
+        }
+
+        return closestIndex;
     }
 
     public void Awake() 
@@ -35,7 +77,6 @@ public class EnemigoPatrol : Enemy
         distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
     }
 
-    // El espejo visual
     private void Update() 
     {
         if (spriteRenderer == null || agent == null) return;
@@ -58,18 +99,48 @@ public class EnemigoPatrol : Enemy
 
         if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh) return;
 
-        // Seguro por si no hay waypoints asignados
-        if (Waypoints == null || Waypoints.Length == 0)
+        if (target != null)
         {
-            agent.SetDestination(transform.position);
-            return; 
+            tiempoRetorno = 0f;
+        }
+        else
+        {
+            if (tiempoRetorno <= 0f) tiempoRetorno = Time.time + tiempoEsperaRetorno;
+            if (Time.time < tiempoRetorno)
+            {
+                agent.SetDestination(transform.position);
+                return;
+            }
         }
 
-        // Patrullaje
-        agent.SetDestination(Waypoints[indice].position);
-        if ((Waypoints[indice].position - transform.position).sqrMagnitude < distanciaWaypoints2)
+        // Verificamos si tenemos coordenadas válidas guardadas
+        if (!TryGetNextValidWaypoint(out Vector3 siguienteWaypoint))
         {
-            indice = (indice + 1) % Waypoints.Length;
+            Debug.LogWarning($"[EnemigoPatrol] No hay waypoints válidos para {gameObject.name}.");
+            agent.SetDestination(transform.position);
+            return;
+        }
+
+        // CAMBIO 5: Si el jugador desaparece (cambio de escena), recalcula el waypoint más cercano a su posición actual
+        if (target == null)
+        {
+            indice = GetClosestWaypointIndex();
+            Vector3 waypointCercano = waypointsPositions[indice];
+            
+            agent.SetDestination(waypointCercano);
+            
+            if ((waypointCercano - transform.position).sqrMagnitude < distanciaWaypoints2)
+            {
+                indice = (indice + 1) % waypointsPositions.Length;
+            }
+            return;
+        }
+
+        // Patrullaje normal
+        agent.SetDestination(siguienteWaypoint);
+        if ((siguienteWaypoint - transform.position).sqrMagnitude < distanciaWaypoints2)
+        {
+            indice = (indice + 1) % waypointsPositions.Length;
         }
     }
 
@@ -92,7 +163,6 @@ public class EnemigoPatrol : Enemy
             agent.SetDestination(transform.position); // Se detiene para golpear
         }
 
-        // Ataque con cooldown
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
