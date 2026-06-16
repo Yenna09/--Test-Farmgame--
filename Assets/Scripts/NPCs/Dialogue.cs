@@ -22,7 +22,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private TMP_Text npcNameUI; 
 
     [Header("Dialogue Data")]
-    [SerializeField] private DialogueLine[] conversation;
+    [SerializeField] public DialogueLine[] conversation;
 
     private bool isPlayerInRange;
     private bool didDialogueStart;
@@ -32,8 +32,8 @@ public class Dialogue : MonoBehaviour
     private GameObject hotbarUI;
 
     [Header("Progression")]
-    [SerializeField]
-    private GameObject objectDisable;
+    [SerializeField] private GameObject[] objectDisable;
+
 
     void Start()
     {
@@ -78,7 +78,7 @@ public class Dialogue : MonoBehaviour
 
     private void StartDialogue()
     {
-        //objectDisable.SetActive(false);
+       
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
         dialogueMark.SetActive(false);
@@ -117,6 +117,11 @@ public class Dialogue : MonoBehaviour
         if (hotbarUI != null)
         {
             hotbarUI.SetActive(true);
+        }
+
+        foreach (var g in objectDisable)
+        {
+            g.SetActive(false);
         }
     }
 
