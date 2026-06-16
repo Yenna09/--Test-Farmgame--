@@ -78,7 +78,7 @@ public class Dialogue : MonoBehaviour
 
     private void StartDialogue()
     {
-        //objectDisable.SetActive(false);
+        
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
         dialogueMark.SetActive(false);
