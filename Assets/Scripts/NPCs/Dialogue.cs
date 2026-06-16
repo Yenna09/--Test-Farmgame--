@@ -58,7 +58,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if(isPlayerInRange && Input.GetKeyDown(KeyCode.F))
+        if(isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             if (!didDialogueStart)
             {
