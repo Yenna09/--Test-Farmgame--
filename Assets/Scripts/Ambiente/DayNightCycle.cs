@@ -5,6 +5,12 @@ public class DayNightCycle : MonoBehaviour
     [Header("Ajustes de Ejes")]
     public float offsetY = -30f; 
     public float offsetZ = 0f;
+    public Material lightMaterial;
+    public Color dayColor;
+    public Color nightColor;
+
+    private float lerpValue;
+    
 
     private float anguloObjetivoX;
 
@@ -23,16 +29,29 @@ public class DayNightCycle : MonoBehaviour
     private void CalcularAnguloSol(int hora, int minuto)
     {
         float tiempoEnHoras = hora + (minuto / 60f);
+        Debug.Log(tiempoEnHoras);
         anguloObjetivoX = (tiempoEnHoras - 6f) * 15f;
+
+        lerpValue = 0.083f;
 
         Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
         transform.rotation = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
+
+        
+        if (tiempoEnHoras > 0 && tiempoEnHoras < 12)
+        {
+            lightMaterial.color = Color.Lerp(dayColor, nightColor, (tiempoEnHoras-12f)/12f*(-1));
+        }
+
+        if (tiempoEnHoras > 12 && tiempoEnHoras < 23)
+        {
+            lightMaterial.color = Color.Lerp(dayColor, nightColor, (tiempoEnHoras-12f) / 12f);
+        }
+
+
+
+
     }
 
-    void Update()
-    {
-        Quaternion rotacionDeseada = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotacionDeseada, Time.deltaTime * 0.5f);
-    }
+    
 }
