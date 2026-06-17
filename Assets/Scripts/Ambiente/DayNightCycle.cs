@@ -32,7 +32,7 @@ public class DayNightCycle : MonoBehaviour
         Debug.Log(tiempoEnHoras);
         anguloObjetivoX = (tiempoEnHoras - 6f) * 15f;
 
-        lerpValue = 0.083f;
+        
 
         Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
         transform.rotation = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
@@ -43,7 +43,7 @@ public class DayNightCycle : MonoBehaviour
             lightMaterial.color = Color.Lerp(dayColor, nightColor, (tiempoEnHoras-12f)/12f*(-1));
         }
 
-        if (tiempoEnHoras > 12 && tiempoEnHoras < 23)
+        if (tiempoEnHoras > 12 && tiempoEnHoras < 24)
         {
             lightMaterial.color = Color.Lerp(dayColor, nightColor, (tiempoEnHoras-12f) / 12f);
         }

@@ -7,7 +7,7 @@ public class DayNightManager : MonoBehaviour
     [Tooltip("A qué hora de la mañana amanece (ej: 6)")]
     public int horaAmanecer = 6;
     [Tooltip("A qué hora de la tarde/noche anochece (ej: 20 para las 8PM)")]
-    public int horaAnochecer = 21;
+    public int horaAnochecer = 20;
     
     [Tooltip("Cuántos segundos reales tardan en pasar 10 minutos en el juego")]
     public float segundosRealesPorTick = 1.5f; 
@@ -77,14 +77,14 @@ public class DayNightManager : MonoBehaviour
     private void ComprobarCicloDiaNoche()
     {
         // Si es de noche, y llegamos a la hora y minuto exacto del amanecer
-        if (!esDeDia && horaActual == horaAmanecer && minutoActual == 0)
+        if (!esDeDia && horaActual == horaAmanecer && minutoActual >= 0)
         {
             esDeDia = true;
             AlAmanecer?.Invoke();
             Debug.Log("Buenos dias! a laburaaaar");
         }
         // Si es de día, y llegamos a la hora y minuto exacto del anochecer
-        else if (esDeDia && horaActual == horaAnochecer && minutoActual == 0)
+        else if (esDeDia && horaActual == horaAnochecer && minutoActual >= 0)
         {
             esDeDia = false;
             AlAnochecer?.Invoke();
