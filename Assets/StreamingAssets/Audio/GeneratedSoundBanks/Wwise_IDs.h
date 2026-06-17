@@ -18,6 +18,7 @@ namespace AK
         static const AkUniqueID PLAY_MAINMENU = 3738780720U;
         static const AkUniqueID PLAY_MUSICAYAMBIENTE = 2596494084U;
         static const AkUniqueID PLAY_PLOWING = 2770939616U;
+        static const AkUniqueID PLAY_SEEDING = 3914981395U;
         static const AkUniqueID PLAY_WATERINGCAN = 346398545U;
     } // namespace EVENTS
 
