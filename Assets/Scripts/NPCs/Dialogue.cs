@@ -25,6 +25,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] public DialogueLine[] conversation;
 
     private bool isPlayerInRange;
+    private bool isAbleTalk = true;
     private bool didDialogueStart;
     private int lineIndex;
     private float typingTime = 0.05f;
@@ -58,7 +59,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if(isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if(isPlayerInRange && Input.GetKeyDown(KeyCode.E) && isAbleTalk)
         {
             if (!didDialogueStart)
             {
@@ -112,7 +113,9 @@ public class Dialogue : MonoBehaviour
         didDialogueStart = false;
         dialoguePanel.SetActive(false);
         dialogueMark.SetActive(isPlayerInRange); 
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
+        isAbleTalk = false;
+        StartCoroutine(waitToTalk());
 
         if (hotbarUI != null)
         {
@@ -123,8 +126,16 @@ public class Dialogue : MonoBehaviour
         {
             g.SetActive(false);
         }
-    }
 
+    }
+    private IEnumerator waitToTalk()
+    {
+        
+        yield return new WaitForSeconds(2f);
+        
+        isAbleTalk = true;
+
+    }
     private IEnumerator ShowLine()
     {
         DialogueLine currentLine = conversation[lineIndex];
