@@ -1,71 +1,84 @@
-using System.Collections;
 using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class Enemy : MonoBehaviour
 {
+    #region State and Target Data
     public States state;
-    [SerializeField] public float distanceFollow;
-    [SerializeField] public float distanciaAtacar;
-    [SerializeField] public float distanciaEscapar;
-
-    public bool autoseleccionarTarget = true;
     public Transform target;
-    public float distancia; 
-
     public bool vivo = true;
+    public float distancia;
+    #endregion
 
-    public void Awake() 
-    {
-        // Awake se queda solo para inicializar cosas internas del propio enemigo
-        StartCoroutine(CalcularDistancia());
-    }
+    #region Configuration
+    [SerializeField] protected float distanceFollow = 10f;
+    [SerializeField] protected float distanciaAtacar = 2f;
+    [SerializeField] protected float distanciaEscapar = 15f;
+    [SerializeField] protected bool autoseleccionarTarget = true;
+    #endregion
 
     private void Start()
     {
-        // Start se asegura de que el Jugador (y su singleton) ya tuvieron
-        // tiempo de inicializarse en su propio Awake. ¡Cero errores!
-        if (autoseleccionarTarget && target == null) 
-        {
-            if (Personaje.singleton != null)
-            {
-                target = Personaje.singleton.transform;
-            }
-            else
-            {
-                Debug.LogWarning("El enemigo nació pero no encontró al Personaje en la escena.");
-            }
-        }
+        BuscarJugador();
     }
 
-    private void LateUpdate() 
+    private void LateUpdate()
     {
+        if (target == null && autoseleccionarTarget && vivo)
+        {
+            BuscarJugador();
+        }
+
         if (target != null)
         {
             distancia = Vector3.Distance(transform.position, target.position);
         }
+        else
+        {
+            distancia = 999f;
+        }
+
         CheckState();
+    }
+
+    private void BuscarJugador()
+    {
+        if (Personaje.singleton != null)
+        {
+            target = Personaje.singleton.transform;
+        }
+        else
+        {
+            GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+            if (jugador != null)
+            {
+                target = jugador.transform;
+            }
+        }
     }
 
     private void CheckState()
     {
+        if (target == null && state != States.muerto)
+        {
+            state = States.idle;
+        }
+
         switch (state)
         {
-            case States.idle: 
-                IdleState(); 
+            case States.idle:
+                IdleState();
                 break;
-            case States.atacar: 
-                AttackState(); 
+            case States.atacar:
+                AttackState();
                 break;
-            case States.muerto: 
+            case States.muerto:
                 vivo = false;
                 break;
-            case States.seguir: 
-                
-                FollowState(); 
+            case States.seguir:
+                FollowState();
                 break;
         }
     }
@@ -77,13 +90,12 @@ public class Enemy : MonoBehaviour
 
     public virtual void IdleState()
     {
-        // Solo cambiamos de estado si el objetivo existe
         if (target != null && distancia < distanceFollow)
         {
             ChangeState(States.seguir);
         }
     }
-    
+
     public virtual void AttackState()
     {
         if (target != null && distancia > distanciaAtacar + 0.4f)
@@ -91,40 +103,27 @@ public class Enemy : MonoBehaviour
             ChangeState(States.seguir);
         }
     }
-    
+
     public virtual void FollowState()
     {
-        if (target == null) return; 
+        if (target == null) return;
 
         if (distancia < distanciaAtacar)
         {
             ChangeState(States.atacar);
         }
-        else if(distancia > distanciaEscapar)
+        else if (distancia > distanciaEscapar)
         {
             ChangeState(States.idle);
         }
     }
-    
-    public virtual void DeathState() 
-    { 
-        
-    }
 
-    IEnumerator CalcularDistancia()
+    public virtual void DeathState()
     {
-        while(vivo)
-        {
-            yield return new WaitForSeconds(0.2f); 
-            if (target != null)
-            {
-                distancia = Vector3.Distance(transform.position, target.position);
-            }
-        }
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmosSelected()
     {
         if (this == null) return;
 
@@ -137,13 +136,13 @@ public class Enemy : MonoBehaviour
     }
 #endif
 
-    private void OnDrawGizmos() 
+    private void OnDrawGizmos()
     {
         if (this == null || transform == null) return;
 
-        int icono = (int) state;
+        int icono = (int)state;
         icono++;
-        
+
         Gizmos.DrawIcon(transform.position + Vector3.up * 2f, "0" + icono + ".png");
     }
 }

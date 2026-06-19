@@ -1,125 +1,254 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections.Generic;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody))]
 public class EnemigoPatrol : Enemy
 {
-    private NavMeshAgent agent;
-    public Transform[] Waypoints;
-    private int indice;
-    public float distanciaWaypoints;
-    private float distanciaWaypoints2;
-    public float damage = 3;
+    #region Graph Data
+    [SerializeField] private List<Vector3> nodosDelGrafo = new List<Vector3>();
+    private int indiceNodoActual;
+    private Vector3 destinoActual;
+    #endregion
 
+    #region Movement Settings
+    [SerializeField] private float velocidadMovimiento = 3f;
+    [SerializeField] private float distanciaCambioNodo = 0.5f;
+    [SerializeField] private float distanciaFrenado = 1.5f; 
+    private float distanciaCambioNodoSqr;
+    private Rigidbody rb;
+    #endregion
+
+    #region Combat Settings
+    [SerializeField] private float damage = 1f;
+    [SerializeField] public float velocidadAtaque = 1.5f;
+    [SerializeField] private float tiempoEsperaRetorno = 1f;
+    
+    [Header("Knockback Settings")]
+    [SerializeField] private float fuerzaKnockback = 10f; 
+    [SerializeField] private float duracionKnockback = 0.2f; 
+
+    // --- NUEVO: TIEMPO DE ESPERA POST-ATAQUE ---
+    [Header("Stun / Recovery Settings")]
+    [SerializeField] private float tiempoEsperaPostAtaque = 4f; 
+
+    private float tiempoRetorno;
     private float tiempoSiguienteAtaque;
-    public float velocidadAtaque = 1.5f;
+    private float tiempoFinRecuperacion; // Guarda el momento exacto en que puede volver a moverse
+    private bool estaEnRecuperacion = false;
+    #endregion
+
+    #region References
     private SpriteRenderer spriteRenderer;
+    #endregion
 
-    
-    public void AsignarWaypoints(Transform[] rutasDelSpawner)
+    public void ConstruirGrafo(Transform[] rutasDelSpawner)
     {
-        Waypoints = rutasDelSpawner;
-        Debug.Log("¡EnemigoPatrol recibió su ruta de patrullaje!");
-    }
+        nodosDelGrafo.Clear();
+        if (rutasDelSpawner == null || rutasDelSpawner.Length == 0) return;
 
-    public void Awake() 
-    {
-        
-        base.Awake(); 
-        
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        
-
-        distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
-    }
-
-    
-    private void Update() 
-    {
-        
-        if (spriteRenderer == null) return;
-
-        
-        float velocidadX = agent.velocity.x;
-
-        
-        if (velocidadX > 0.05f)
+        for (int i = 0; i < rutasDelSpawner.Length; i++)
         {
-            spriteRenderer.flipX = false; 
+            nodosDelGrafo.Add(rutasDelSpawner[i].position);
         }
-        
-        else if (velocidadX < -0.05f)
-        {
-            spriteRenderer.flipX = true; 
-        }
+
+        destinoActual = nodosDelGrafo[0];
     }
+
+    public void Awake()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>(); 
+        distanciaCambioNodoSqr = distanciaCambioNodo * distanciaCambioNodo;
+    }
+
+    #region State Machine Overrides
     public override void IdleState()
     {
         base.IdleState();
 
-        
-        if (Waypoints == null || Waypoints.Length == 0)
+        if (target != null)
         {
-            agent.SetDestination(transform.position);
-            return; 
+            tiempoRetorno = 0f;
+        }
+        else
+        {
+            if (tiempoRetorno <= 0f) tiempoRetorno = Time.time + tiempoEsperaRetorno;
+            if (Time.time < tiempoRetorno) return;
         }
 
-    
-        agent.SetDestination(Waypoints[indice].position);
-        if ((Waypoints[indice].position - transform.position).sqrMagnitude < distanciaWaypoints2)
+        if (nodosDelGrafo.Count == 0) return;
+
+        if (target == null)
         {
-            indice = (indice + 1) % Waypoints.Length;
+            destinoActual = ObtenerPuntoMasCercanoEnGrafo();
+        }
+        else
+        {
+            destinoActual = nodosDelGrafo[indiceNodoActual];
+        }
+
+        MoverHaciaDestino(destinoActual, 0.1f);
+
+        if ((destinoActual - transform.position).sqrMagnitude < distanciaCambioNodoSqr)
+        {
+            indiceNodoActual = (indiceNodoActual + 1) % nodosDelGrafo.Count;
         }
     }
 
     public override void FollowState()
     {
-        base.FollowState();
-        
-        
-        if (target != null) 
+        // Si acaba de golpear, ignoramos el estado de seguimiento y no nos movemos
+        if (estaEnRecuperacion)
         {
-            agent.SetDestination(target.position);
+            if (Time.time >= tiempoFinRecuperacion)
+            {
+                estaEnRecuperacion = false;
+            }
+            return;
+        }
+
+        base.FollowState();
+
+        if (target != null)
+        {
+            MoverHaciaDestino(target.position, distanciaFrenado);
         }
     }
 
     public override void AttackState()
     {
-        base.AttackState();
-        agent.SetDestination(transform.position); 
-        
-        
-        //if (target != null)
-        //{
-        //    Vector3 direccion = (target.position - transform.position).normalized;
-        //    direccion.y = 0;
-        //    transform.rotation = Quaternion.LookRotation(direccion);
-        //}
-
-        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+        // --- NUEVA LÓGICA DE RECUPERACIÓN ---
+        if (estaEnRecuperacion)
         {
-            agent.SetDestination(transform.position);
+            if (Time.time >= tiempoFinRecuperacion)
+            {
+                estaEnRecuperacion = false;
+            }
+            return; // Bloquea cualquier movimiento o ataque extra mientras descansa
         }
-        
+
+        base.AttackState();
+
+        if (target != null)
+        {
+            MoverHaciaDestino(target.position, distanciaFrenado);
+        }
+
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
-            tiempoSiguienteAtaque = Time.time + velocidadAtaque;
+            
+            // Activamos la pausa de 4 segundos justo después de golpear
+            estaEnRecuperacion = true;
+            tiempoFinRecuperacion = Time.time + tiempoEsperaPostAtaque;
+            
+            // El próximo ataque será posible recién cuando termine la recuperación + el cooldown normal
+            tiempoSiguienteAtaque = tiempoFinRecuperacion + velocidadAtaque;
         }
     }
 
     public override void DeathState()
     {
         base.IdleState();
-        agent.enabled = false;
     }
+    #endregion
 
+    #region Combat Logic
     public void Atacar()
     {
-        Personaje.singleton.vida.CausarDamage(damage);
+        Debug.Log("¡El oso intentó atacar!");
+
+        if (Personaje.singleton == null)
+        {
+            Debug.LogError("Falla: Personaje.singleton es NULL");
+            return;
+        }
+        if (Personaje.singleton.vida == null)
+        {
+            Debug.LogError("Falla: Personaje.singleton.vida es NULL");
+            return;
+        }
+
+        Vector3 diferenciaPlana = target.position - transform.position;
+        diferenciaPlana.y = 0;
+        Vector3 direccionEmpuje = diferenciaPlana.normalized;
+
+        Debug.Log($"Aplicando daño y knockback. Dirección: {direccionEmpuje}");
+        Personaje.singleton.vida.RecibirDamageConKnockback(damage, direccionEmpuje, fuerzaKnockback, duracionKnockback);
     }
+    #endregion
+
+    #region Movement Logic
+    private void MoverHaciaDestino(Vector3 destino, float limiteAcercamiento)
+    {
+        Vector3 destinoPlano = new Vector3(destino.x, transform.position.y, destino.z);
+        float distanciaAlDestino = Vector3.Distance(transform.position, destinoPlano);
+
+        if (distanciaAlDestino <= limiteAcercamiento)
+        {
+            return; 
+        }
+
+        float direccionX = destinoPlano.x - transform.position.x;
+        
+        Vector3 nuevaPosicion = Vector3.MoveTowards(transform.position, destinoPlano, velocidadMovimiento * Time.deltaTime);
+        rb.MovePosition(nuevaPosicion);
+
+        ActualizarSprite(direccionX);
+    }
+
+    private void ActualizarSprite(float velocidadX)
+    {
+        if (spriteRenderer == null) return;
+
+        if (velocidadX > 0.05f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (velocidadX < -0.05f)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+    private Vector3 ObtenerPuntoMasCercanoEnGrafo()
+    {
+        if (nodosDelGrafo.Count == 0) return transform.position;
+        if (nodosDelGrafo.Count == 1) return nodosDelGrafo[0];
+
+        Vector3 puntoMasCercano = nodosDelGrafo[0];
+        float distanciaMinimaSqr = float.MaxValue;
+
+        for (int i = 0; i < nodosDelGrafo.Count; i++)
+        {
+            Vector3 nodoA = nodosDelGrafo[i];
+            Vector3 nodoB = nodosDelGrafo[(i + 1) % nodosDelGrafo.Count];
+
+            Vector3 proyeccion = ProyectarPuntoEnSegmento(transform.position, nodoA, nodoB);
+            float distSqr = (transform.position - proyeccion).sqrMagnitude;
+
+            if (distSqr < distanciaMinimaSqr)
+            {
+                distanciaMinimaSqr = distSqr;
+                puntoMasCercano = proyeccion;
+                indiceNodoActual = (i + 1) % nodosDelGrafo.Count;
+            }
+        }
+
+        return puntoMasCercano;
+    }
+
+    private Vector3 ProyectarPuntoEnSegmento(Vector3 punto, Vector3 inicioArista, Vector3 finArista)
+    {
+        Vector3 direccionArista = finArista - inicioArista;
+        float longitudAristaSqr = direccionArista.sqrMagnitude;
+
+        if (longitudAristaSqr == 0f) return inicioArista;
+
+        float t = Vector3.Dot(punto - inicioArista, direccionArista) / longitudAristaSqr;
+        t = Mathf.Clamp01(t);
+
+        return inicioArista + t * direccionArista;
+    }
+    #endregion
 }

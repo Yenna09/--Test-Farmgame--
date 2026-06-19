@@ -1,47 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class EnemyBear : Enemy
+public class EnemyBear : EnemigoPatrol
 {
-    private NavMeshAgent agent;
-    public float damage = 3;
-
-    private float tiempoSiguienteAtaque;
-    public float velocidadAtaque = 1.5f;
-    public void Awake() 
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        //GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -1, 0);
-    }
-
-    public override void IdleState()
-    {
-        base.IdleState();
-        agent.SetDestination(transform.position);
-    }
-
-    public override void FollowState()
-    {
-        base.FollowState();
-        agent.SetDestination(target.position);
-    }
+    [SerializeField] private float multiplicadorFuria = 1.5f;
+    [SerializeField] private float velocidadMovimiento = 2f;
+    // Local copy because base class field is not accessible
+    private float tiempoSiguienteAtaque = 0f;
 
     public override void AttackState()
     {
         base.AttackState();
-        agent.SetDestination(transform.position); 
-        
-        // Mirar al jugador (Eje Y solamente para que no se incline)
-        Vector3 direccion = (target.position - transform.position).normalized;
-        direccion.y = 0;
-        transform.rotation = Quaternion.LookRotation(direccion);
 
-        // Lógica de daño por tiempo
+        if (target != null)
+    {
+            // EnemigoPatrol.MoverHaciaDestino is inaccessible; use local implementation
+            MoverHaciaDestino(target.position);
+        }
+
+        // Lógica de daño
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
@@ -51,12 +27,22 @@ public class EnemyBear : Enemy
 
     public override void DeathState()
     {
-        base.IdleState();
-        agent.enabled = false;
+        base.DeathState();
+        
     }
 
-    public void Atacar()
+    // Local movement implementation because EnemigoPatrol.MoverHaciaDestino is not accessible due to protection level
+    private void MoverHaciaDestino(Vector3 destino)
     {
-        Personaje.singleton.vida.CausarDamage(damage);
+        // Move towards destination at configured speed
+        transform.position = Vector3.MoveTowards(transform.position, destino, velocidadMovimiento * Time.deltaTime);
+
+        // Face the movement direction smoothly
+        Vector3 direccion = destino - transform.position;
+        if (direccion.sqrMagnitude > 0.0001f)
+        {
+            Quaternion objetivo = Quaternion.LookRotation(direccion);
+            transform.rotation = Quaternion.Slerp(transform.rotation, objetivo, 10f * Time.deltaTime);
+        }
     }
 }

@@ -24,7 +24,7 @@ public class DayNightManager : MonoBehaviour
     // Transmite dos números: la hora y el minuto
     public static event Action<int, int> AlCambiarTiempo; 
 
-    public bool esDeDia = true;
+    public static bool esDeDia;
     private float temporizador = 0f;
 
     void Start()
