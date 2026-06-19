@@ -29,12 +29,12 @@ public class DayNightCycle : MonoBehaviour
     private void CalcularAnguloSol(int hora, int minuto)
     {
         float tiempoEnHoras = hora + (minuto / 60f);
-        Debug.Log(tiempoEnHoras);
+        
         anguloObjetivoX = (tiempoEnHoras - 6f) * 15f;
 
         
 
-        Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
+        //Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
         transform.rotation = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
 
         

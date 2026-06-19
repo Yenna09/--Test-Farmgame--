@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class DialogueLine
@@ -34,10 +35,13 @@ public class Dialogue : MonoBehaviour
 
     [Header("Progression")]
     [SerializeField] private GameObject[] objectDisable;
+    private MissionController mision;
 
 
     void Start()
     {
+        mision = GetComponent<MissionController>();
+
         hotbarUI = GameObject.FindGameObjectWithTag("HotBar");
         if (hotbarUI == null)
         {
@@ -126,7 +130,7 @@ public class Dialogue : MonoBehaviour
         {
             g.SetActive(false);
         }
-
+        if (mision != null) mision.Mission1();
     }
     private IEnumerator waitToTalk()
     {

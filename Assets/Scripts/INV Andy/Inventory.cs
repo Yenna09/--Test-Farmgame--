@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using TMPro;
+using System;
 
 public class Inventory : MonoBehaviour
 {
+    //Evento para checkear inventario
+    public static event Action pickUpItem;
     public static Inventory Instance { get; private set; }
     public Database db;
     public Transform itemPrefab; // El prefab UI de la manzana/item
@@ -24,18 +27,22 @@ public class Inventory : MonoBehaviour
     
     public bool PickUpItem(int id, int quantity)
     {
+        //Aviso a demas scripts que se agarró un item
+        
         var itemData = db.dataBase[id];
 
         // Primero Intenta Stackear
         if (itemData.acumulable)
         {
-            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
-            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) return true; // ¡Éxito!
+            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
+            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
         }
 
         // Buscamos un SLOT VACIO
-        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) return true; // ¡Éxito!
-        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) return true; // ¡Éxito!
+        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
+        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
+
+        
 
         // 3. Si llega aca, no hay lugar
         Debug.LogWarning("¡Inventario y Hotbar llenos! No se pudo agarrar el ítem.");
