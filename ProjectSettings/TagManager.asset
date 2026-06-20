@@ -9,6 +9,7 @@ TagManager:
   - Slot
   - Guards
   - HotBar
+  - Audio
   layers:
   - Default
   - TransparentFX

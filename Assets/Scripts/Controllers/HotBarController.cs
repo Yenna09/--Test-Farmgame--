@@ -91,7 +91,7 @@ public class HotbarController : MonoBehaviour
             if (selectedImage != null) selectedImage.color = selectedColor;
         }
 
-        // 3. Revisar qué ítem hay adentro y "equiparlo"
+        // 3. Revisar que item hay adentro y "equiparlo"
         CheckEquippedItem();
     }
 
@@ -113,15 +113,12 @@ public class HotbarController : MonoBehaviour
             {
                 Debug.Log($"[EQUIPADO] Tenés en la mano el Ítem ID: {item.id} (Cantidad: {item.quantity})");
                 
-                // FUTURO: Acá llamarías a tu script de animaciones o combate.
-                // Ej: PlayerEquipment.EquipModel(item.id);
             }
         }
         else
         {
             Debug.Log("[EQUIPADO] Manos vacías.");
             
-            // FUTURO: Acá ocultarías el modelo 3D de la mano.
         }
     }
 
@@ -150,13 +147,13 @@ public class HotbarController : MonoBehaviour
         
         if (selectedSlot.childCount > 0)
         {
-            // Usamos TU script ItemUI
+            // Usamos el script ItemUI
             ItemUI item = selectedSlot.GetChild(0).GetComponent<ItemUI>();
             
             if (item != null)
             {
                 item.quantity--;
-                item.RefreshUI(); // Usamos TU método para actualizar el numerito
+                item.RefreshUI(); // Usamos el metodo para actualizar el numerito
 
                 if (item.quantity <= 0)
                 {

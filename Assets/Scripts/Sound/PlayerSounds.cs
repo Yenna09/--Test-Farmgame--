@@ -8,6 +8,8 @@ public class PlayerSounds : MonoBehaviour
     private AK.Wwise.Event hoeSFXEvent;
     [SerializeField]
     private AK.Wwise.Event wateringSFXEvent;
+    [SerializeField]
+    private AK.Wwise.Event seedingSFXEvent;
     public void PlayFootstep()
     {
         footstepsEvent.Post(gameObject);
@@ -22,6 +24,12 @@ public class PlayerSounds : MonoBehaviour
     {
         Debug.Log("Regué");
         wateringSFXEvent.Post(gameObject);
+    }
+
+    public void Play_Seeding()
+    {
+        Debug.Log("Planté");
+        seedingSFXEvent.Post(gameObject);
     }
 
 

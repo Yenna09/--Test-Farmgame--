@@ -19,14 +19,20 @@ public class DayNightManager : MonoBehaviour
     // Eventos clásicos
     public static event Action AlAmanecer;
     public static event Action AlAnochecer;
-    
-    // ¡NUEVO EVENTO! Útil para actualizar la UI del reloj o cambiar la música
     // Transmite dos números: la hora y el minuto
     public static event Action<int, int> AlCambiarTiempo; 
 
     public static bool esDeDia;
     private float temporizador = 0f;
 
+    // Creamos la instancia global (como hicimos con el SaveController)
+    public static DayNightManager Instance { get; private set; }
+
+    void Awake()
+    {
+        //Siempre me asigno como la instancia oficial al cargar la escena
+        Instance = this;
+    }
     void Start()
     {
         // Determinamos el estado inicial en base a la hora de inicio
@@ -62,7 +68,7 @@ public class DayNightManager : MonoBehaviour
             }
         }
 
-        // Avisamos a cualquier script que necesite saber la hora exacta (UI, Música)
+        // Avisamos a cualquier script que necesite saber la hora exacta
         AlCambiarTiempo?.Invoke(horaActual, minutoActual);
 
         ComprobarCicloDiaNoche();
@@ -71,18 +77,50 @@ public class DayNightManager : MonoBehaviour
     private void ComprobarCicloDiaNoche()
     {
         // Si es de noche, y llegamos a la hora y minuto exacto del amanecer
-        if (!esDeDia && horaActual == horaAmanecer && minutoActual == 0)
+        if (!esDeDia && horaActual == horaAmanecer && minutoActual >= 0)
         {
             esDeDia = true;
             AlAmanecer?.Invoke();
             Debug.Log("Buenos dias! a laburaaaar");
         }
         // Si es de día, y llegamos a la hora y minuto exacto del anochecer
-        else if (esDeDia && horaActual == horaAnochecer && minutoActual == 0)
+        else if (esDeDia && horaActual == horaAnochecer && minutoActual >= 0)
         {
             esDeDia = false;
             AlAnochecer?.Invoke();
             Debug.Log("Es de noche. A mimir😴");
         }
+    }
+    public void DormirHasta(int horaDestino, bool nuevoDia)
+    {
+        horaActual = horaDestino;
+        minutoActual = 0;
+        temporizador = 0f; // Reseteamos el contador de tiempo real para que no tire un tick inmediatamente
+
+        if (nuevoDia)
+        {
+            esDeDia = true;
+            AlAmanecer?.Invoke(); //Esto hace que el CropController haga crecer las plantas
+            Debug.Log("[SUEÑO] Amaneció un nuevo día. ¡A laburar!");
+        }
+        else
+        {
+            esDeDia = false;
+            AlAnochecer?.Invoke(); // Avisa al juego que se hizo de noche
+            Debug.Log("[SUEÑO] Te despertaste por la noche.");
+        }
+
+        // Actualizamos a todos los que escuchen la hora (el sol, la UI del reloj, etc.)
+        AlCambiarTiempo?.Invoke(horaActual, minutoActual);
+    }
+    public void ForzarSincronizacion()
+    {
+        esDeDia = (horaActual >= horaAmanecer && horaActual < horaAnochecer);
+        
+        // Dispara los eventos para cualquier otro script que escuche
+        AlCambiarTiempo?.Invoke(horaActual, minutoActual);
+        
+        // Te lo muestra directo en la consola para que te quedes tranquilo
+        Debug.Log($"[TIEMPO SINCRONIZADO] Acabás de cargar la escena. Son las {horaActual:00}:{minutoActual:00}");
     }
 }

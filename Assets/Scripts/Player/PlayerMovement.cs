@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector3 moveInput;
 
-    private bool estaUsandoHerramienta = false;
+    public bool estaUsandoHerramienta = false;
 
     void Start()
     {
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         else if (accion == Database.ActionType.plantar) 
         {
             // Podés usar doSwing temporalmente hasta que tengas una animación de plantar
-            animator.SetTrigger("doSwing"); 
+            animator.SetTrigger("doSeed"); 
         }
 
         // Esperamos a la mitad de la animación
@@ -152,4 +152,5 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = targetVelocity;
         }
     }
+    
 }

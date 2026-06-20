@@ -9,34 +9,80 @@ public class SaveController : MonoBehaviour
     
     private string saveLocation;
     
-    
     public List<string> destroyedItemsIDs = new List<string>();
+
+    [Header("Opciones de Desarrollo")]
+    [Tooltip("Tilda esto, dale a Play 1 vez, y destildalo. Borra el save fantasma de la PC.")]
+    public bool borrarPartidaAlIniciar = false;
+    public bool cargarPosicionDelGuardado = true; // Dejarlo en true para que el juego normal funcione
 
     void Awake()
     {
         if (Instance == null) Instance = this;
+      
     }
-
+    
     void Start()
     {
         saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
+
+        // --- EL DESTRUCTOR DE PARTIDAS ---
+        if (borrarPartidaAlIniciar)
+        {
+            if (File.Exists(saveLocation))
+            {
+                File.Delete(saveLocation);
+                Debug.LogWarning("⚠️ [SaveController] Archivo saveData.json eliminado. Arrancando el juego de cero.");
+            }
+        }
+
         LoadGame();
     }
 
     public void SaveGame()
     {
-        SaveData saveData = new SaveData
+        SaveData saveData = new SaveData();
+
+        if (File.Exists(saveLocation))
         {
-            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position,
-            inventorySaveData = new InventorySaveData(),
-            destroyedItemsIDs = this.destroyedItemsIDs // Guardamos la lista negra
-        };
+            SaveData datosViejos = JsonUtility.FromJson<SaveData>(File.ReadAllText(saveLocation));
+            saveData.cultivosGuardados = datosViejos.cultivosGuardados;
+            saveData.terrenoGuardado = datosViejos.terrenoGuardado;
+            
+            int cantidadMochila = saveData.cultivosGuardados != null ? saveData.cultivosGuardados.Count : 0;
+            Debug.Log($"[SAVE-1] Rescatados {cantidadMochila} cultivos de la partida anterior.");
+        }
+
+        saveData.playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        saveData.inventorySaveData = new InventorySaveData();
+        saveData.destroyedItemsIDs = this.destroyedItemsIDs;
 
         SaveContainer(Inventory.Instance.hotbarContainer, saveData.inventorySaveData.savedItems, true);
         SaveContainer(Inventory.Instance.slotsContainer, saveData.inventorySaveData.savedItems, false);
 
+        DayNightManager timeManager = DayNightManager.Instance;
+        if (timeManager != null)
+        {
+            saveData.horaGuardada = timeManager.horaActual;
+            saveData.minutoGuardado = timeManager.minutoActual;
+        }
+
+        if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null)
+        {
+            if (CropController.Instance != null)
+            {
+                saveData.cultivosGuardados = CropController.Instance.ExportarCultivos();
+                Debug.Log($"[SAVE-2] En el campo. Guardando {saveData.cultivosGuardados.Count} cultivos desde el mapa.");
+            }
+            saveData.terrenoGuardado = FarmingController.Instance.ExportarTerreno();
+        }
+        else
+        {
+            Debug.Log("[SAVE-2] En la casa (Sin tierra). Manteniendo los cultivos viejos intactos.");
+        }
+
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData, true));
-        Debug.Log("Juego guardado en: " + saveLocation);
+        Debug.Log("💾 [GUARDADO EXITOSO] Archivo actualizado.");
     }
 
     public void LoadGame()
@@ -76,17 +122,33 @@ public class SaveController : MonoBehaviour
                     }
                 }
             }
-
-            // --- LIMPIEZA DE ITEMS EN EL SUELO ---
+            DayNightManager timeManager = DayNightManager.Instance;
+            if (timeManager != null)
+            {
+                timeManager.horaActual = saveData.horaGuardada;
+                timeManager.minutoActual = saveData.minutoGuardado;
+            }
             // Buscamos todas las manzanas/items que hay en el mundo 3D
             BaseItem[] itemsEnElSuelo = FindObjectsOfType<BaseItem>();
             foreach (BaseItem item in itemsEnElSuelo)
             {
-                // Si el DNI de este ítem está en la lista negra que acabamos de cargar...
+                // Si el DNI de este ítem está en la lista negra que acabamos de cargar
                 if (this.destroyedItemsIDs.Contains(item.uniqueWorldID))
                 {
-                    Destroy(item.gameObject); // ...lo destruimos.
+                    Destroy(item.gameObject); //lo destruimos.
                 }
+            }
+            if (FarmingController.Instance != null && FarmingController.Instance.groundTilemap != null && CropController.Instance != null)
+            {
+                int cantidadACargar = saveData.cultivosGuardados != null ? saveData.cultivosGuardados.Count : 0;
+                Debug.Log($"[LOAD] Estamos en el campo. Intentando cargar {cantidadACargar} cultivos.");
+                
+                FarmingController.Instance.ImportarTerreno(saveData.terrenoGuardado);
+                CropController.Instance.ImportarCultivos(saveData.cultivosGuardados);
+            }
+            else
+            {
+                Debug.Log("[LOAD] Estamos en la casa. No se intenta cargar la granja acá.");
             }
         }
         else

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class DatosSemilla
 {
     public int idSemilla;
-    public Sprite[] etapasCrecimiento; // Arrastrá los sprites (Semilla, Brote, Planta)
+    public Sprite[] etapasCrecimiento; // Arrastra los sprites (Semilla, Brote, Planta)
     public int idItemCosecha;
 }
 
@@ -16,7 +16,7 @@ public class CultivoActivo
 {
     public int idSemilla;
     public int diasCrecimiento;
-    public GameObject objetoVisual; // El objeto 3D/2.5D en la escena
+    public GameObject objetoVisual; // El objeto 2.5D en la escena
 }
 
 public class CropController : MonoBehaviour
@@ -37,14 +37,23 @@ public class CropController : MonoBehaviour
     }
     private void OnEnable()
     {
-        // Cuando el script se activa, le decimos que escuche el evento AlAmanecer
-        DayNightManager.AlAmanecer += AvanzarDia;
+        // En lugar de AlAmanecer, escuchamos cada vez que el reloj hace un cambio
+        DayNightManager.AlCambiarTiempo += ComprobarHoraCrecimiento;
     }
 
     private void OnDisable()
     {
-        // Por seguridad, si el script se destruye, dejamos de escuchar el evento
-        DayNightManager.AlAmanecer -= AvanzarDia;
+        DayNightManager.AlCambiarTiempo -= ComprobarHoraCrecimiento;
+    }
+
+    private void ComprobarHoraCrecimiento(int hora, int minuto)
+    {
+        // Si son exactamente las 7:00 AM, hacemos crecer toda la granja
+        if (hora == 7 && minuto == 0)
+        {
+            AvanzarDia();
+            Debug.Log(" [GRANJA] Son las 7:00 AM. ¡Las plantas acaban de crecer!");
+        }
     }
 
     public void PlantarSemilla(Vector3Int posicion, int idSemillaPlantada)
@@ -56,6 +65,7 @@ public class CropController : MonoBehaviour
             
             // 2. Instanciamos el Prefab verticalmente (Sin rotación acotada)
             GameObject nuevaPlanta = Instantiate(prefabPlantaBase, posicionMundo, Quaternion.identity);
+            nuevaPlanta.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             
             // 3. Registramos la planta en nuestro sistema
             CultivoActivo nuevoCultivo = new CultivoActivo
@@ -106,7 +116,7 @@ public class CropController : MonoBehaviour
         }
     }
 
-    // Función extra por si querés comprobar si una celda está ocupada
+    // Funcion que comprueba si una celda está ocupada
     public bool HayCultivoEn(Vector3Int posicion)
     {
         return cultivosActivos.ContainsKey(posicion);
@@ -133,7 +143,7 @@ public class CropController : MonoBehaviour
 
             if (datos != null)
             {
-                // 1. Usamos TU función PickUpItem directamente
+                // 1. Usamos la función PickUpItem directamente
                 bool recogidoExitosamente = Inventory.Instance.PickUpItem(datos.idItemCosecha, 1);
 
                 // 2. Si entró en la mochila (devolvió true), destruimos la planta
@@ -149,10 +159,46 @@ public class CropController : MonoBehaviour
                 }
                 else
                 {
-                    // Si devolvió false, la planta se queda ahí esperando a que hagas espacio
+                    // Si devolvio false, la planta se queda ahí esperando a que hagas espacio
                     Debug.Log("[COSECHA] La planta no se cosechó porque no hay espacio en el inventario.");
                 }
             }
+        }
+    }
+    public List<DatosCultivoGuardado> ExportarCultivos()
+    {
+        List<DatosCultivoGuardado> lista = new List<DatosCultivoGuardado>();
+        foreach (var kvp in cultivosActivos)
+        {
+            lista.Add(new DatosCultivoGuardado {
+                posicion = kvp.Key,
+                idSemilla = kvp.Value.idSemilla,
+                diasCrecimiento = kvp.Value.diasCrecimiento
+            });
+        }
+        return lista;
+    }
+
+    public void ImportarCultivos(List<DatosCultivoGuardado> lista)
+    {
+        if (lista == null) return;
+        cultivosActivos.Clear();
+        
+        foreach (var guardado in lista)
+        {
+            // Instanciamos el cultivo igual que en PlantarSemilla
+            Vector3 posicionMundo = FarmingController.Instance.groundTilemap.GetCellCenterWorld(guardado.posicion);
+            GameObject nuevaPlanta = Instantiate(prefabPlantaBase, posicionMundo, Quaternion.identity);
+            nuevaPlanta.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            CultivoActivo nuevoCultivo = new CultivoActivo
+            {
+                idSemilla = guardado.idSemilla,
+                diasCrecimiento = guardado.diasCrecimiento,
+                objetoVisual = nuevaPlanta
+            };
+
+            cultivosActivos.Add(guardado.posicion, nuevoCultivo);
+            ActualizarVisualCultivo(nuevoCultivo);
         }
     }
 }

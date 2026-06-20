@@ -9,7 +9,7 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler
     private Database db;
 
     [SerializeField]
-    private GameObject Text; // Este no lo estás usando, pero te lo dejo para no romperte el Inspector
+    private GameObject Text; //Actualmente no se usa
 
     public int id;
     public int quantity;
@@ -33,14 +33,11 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler
 
         exParent = transform.parent;
 
-        // EL FIX: Primero chequeamos que el padre exista (!= null) antes de pedirle la Image
+        //Primero chequeamos que el padre exista (!= null) antes de pedirle la Image
         if (exParent != null && exParent.GetComponent<Image>() != null)
         {
             exParent.GetComponent<Image>().fillCenter = true;
         }
-
-        // Borré el InitializeItem() de acá. No hace falta llamarlo en el Awake
-        // porque tu script de Inventory ya lo llama con los datos correctos justo después de crearlo.
     }
     
     public void RefreshUI()
@@ -62,16 +59,16 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler
         this.id = _id;
         this.quantity = _quantity;
 
-        // Red de seguridad: si no asignaste la db en el prefab, usa la del Inventario
+        //si no asignaste la db en el prefab, usa la del Inventario
         if (db == null && Inventory.Instance != null)
         {
             db = Inventory.Instance.db;
         }
 
-        // Accedemos a la base de datos
+        //Accedemos a la base de datos
         itemData = db.dataBase[id];
 
-        // Configuramos lo visual
+        //Configuramos lo visual
         if (iconoImage != null)
         {
             iconoImage.sprite = itemData.icono;

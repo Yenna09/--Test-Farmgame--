@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class FarmingController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class FarmingController : MonoBehaviour
     public Tilemap groundTilemap; 
     public TileBase pastoTile;    
     public TileBase tierraAradaTile; 
-    // NUEVO: Agregamos el tile mojado
+    
     public TileBase tierraMojadaTile; 
 
     [Header("Visuales")]
@@ -43,7 +44,7 @@ public class FarmingController : MonoBehaviour
 
     void Update()
     {
-        if (playerTransform == null || playerAnimator == null) return;
+        if (playerTransform == null || playerAnimator == null || groundTilemap == null) return;
 
         Vector3Int celdaDelJugador = groundTilemap.WorldToCell(playerTransform.position);
 
@@ -74,13 +75,13 @@ public class FarmingController : MonoBehaviour
         TileBase tileActual = groundTilemap.GetTile(celdaObjetivo);
         bool mostrarCursor = false;
 
-        // Comprobamos que el ID sea válido dentro de tu base de datos
+        // Comprobamos que el ID sea válido dentro de la base de datos
         if (idEnMano >= 0 && idEnMano < Inventory.Instance.db.dataBase.Length)
         {
-            // Obtenemos tu struct InventoryItem
+            // Obtenemos struct InventoryItem
             Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
 
-            // Usamos TU enum ActionType (en minúsculas como lo definiste)
+            // Usamos enum ActionType 
             if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)
             {
                 mostrarCursor = true;
@@ -105,7 +106,7 @@ public class FarmingController : MonoBehaviour
 
         if (idEnMano < 0 || idEnMano >= Inventory.Instance.db.dataBase.Length) return;
 
-        // Obtenemos tu struct InventoryItem
+        // Obtenemos struct InventoryItem
         Database.InventoryItem itemEquipado = Inventory.Instance.db.dataBase[idEnMano];
 
         if (itemEquipado.accion == Database.ActionType.arar && tileActual == pastoTile)
@@ -133,5 +134,32 @@ public class FarmingController : MonoBehaviour
     public void EjecutarCosecha()
     {
         CropController.Instance.Cosechar(celdaObjetivo);
+    }
+    public List<DatosTerrenoGuardado> ExportarTerreno()
+    {
+        List<DatosTerrenoGuardado> lista = new List<DatosTerrenoGuardado>();
+        
+        if (groundTilemap == null) return lista;
+        // Revisamos todo el mapa buscando tierra arada o mojada
+        BoundsInt limites = groundTilemap.cellBounds;
+        foreach (Vector3Int pos in limites.allPositionsWithin)
+        {
+            TileBase tileActual = groundTilemap.GetTile(pos);
+            if (tileActual == tierraAradaTile)
+                lista.Add(new DatosTerrenoGuardado { posicion = pos, estado = "arado" });
+            else if (tileActual == tierraMojadaTile)
+                lista.Add(new DatosTerrenoGuardado { posicion = pos, estado = "mojado" });
+        }
+        return lista;
+    }
+
+    public void ImportarTerreno(List<DatosTerrenoGuardado> lista)
+    {
+        if (lista == null || groundTilemap == null) return;
+        foreach (var guardado in lista)
+        {
+            if (guardado.estado == "arado") groundTilemap.SetTile(guardado.posicion, tierraAradaTile);
+            else if (guardado.estado == "mojado") groundTilemap.SetTile(guardado.posicion, tierraMojadaTile);
+        }
     }
 }
