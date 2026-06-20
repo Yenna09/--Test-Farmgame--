@@ -5,19 +5,15 @@ using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
-    #region State and Target Data
     public States state;
     public Transform target;
     public bool vivo = true;
     public float distancia;
-    #endregion
 
-    #region Configuration
     [SerializeField] protected float distanceFollow = 10f;
     [SerializeField] protected float distanciaAtacar = 2f;
     [SerializeField] protected float distanciaEscapar = 15f;
     [SerializeField] protected bool autoseleccionarTarget = true;
-    #endregion
 
     private void Start()
     {

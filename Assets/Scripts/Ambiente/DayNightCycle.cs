@@ -25,7 +25,7 @@ public class DayNightCycle : MonoBehaviour
         float tiempoEnHoras = hora + (minuto / 60f);
         anguloObjetivoX = (tiempoEnHoras - 6f) * 15f;
 
-        //Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
+        Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
         
         //Debug.Log($"[Sol] El nuevo ángulo objetivo en X es: {anguloObjetivoX}°");
     }

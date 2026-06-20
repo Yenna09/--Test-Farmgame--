@@ -27,13 +27,12 @@ public class EnemigoPatrol : Enemy
     [SerializeField] private float fuerzaKnockback = 10f; 
     [SerializeField] private float duracionKnockback = 0.2f; 
 
-    // --- NUEVO: TIEMPO DE ESPERA POST-ATAQUE ---
     [Header("Stun / Recovery Settings")]
     [SerializeField] private float tiempoEsperaPostAtaque = 4f; 
 
     private float tiempoRetorno;
     private float tiempoSiguienteAtaque;
-    private float tiempoFinRecuperacion; // Guarda el momento exacto en que puede volver a moverse
+    private float tiempoFinRecuperacion;
     private bool estaEnRecuperacion = false;
     #endregion
 
@@ -97,7 +96,6 @@ public class EnemigoPatrol : Enemy
 
     public override void FollowState()
     {
-        // Si acaba de golpear, ignoramos el estado de seguimiento y no nos movemos
         if (estaEnRecuperacion)
         {
             if (Time.time >= tiempoFinRecuperacion)
@@ -117,14 +115,13 @@ public class EnemigoPatrol : Enemy
 
     public override void AttackState()
     {
-        // --- NUEVA LÓGICA DE RECUPERACIÓN ---
         if (estaEnRecuperacion)
         {
             if (Time.time >= tiempoFinRecuperacion)
             {
                 estaEnRecuperacion = false;
             }
-            return; // Bloquea cualquier movimiento o ataque extra mientras descansa
+            return;
         }
 
         base.AttackState();
@@ -138,11 +135,8 @@ public class EnemigoPatrol : Enemy
         {
             Atacar();
             
-            // Activamos la pausa de 4 segundos justo después de golpear
             estaEnRecuperacion = true;
             tiempoFinRecuperacion = Time.time + tiempoEsperaPostAtaque;
-            
-            // El próximo ataque será posible recién cuando termine la recuperación + el cooldown normal
             tiempoSiguienteAtaque = tiempoFinRecuperacion + velocidadAtaque;
         }
     }
@@ -156,25 +150,14 @@ public class EnemigoPatrol : Enemy
     #region Combat Logic
     public void Atacar()
     {
-        Debug.Log("¡El oso intentó atacar!");
-
-        if (Personaje.singleton == null)
+        if (Personaje.singleton != null && Personaje.singleton.vida != null && target != null)
         {
-            Debug.LogError("Falla: Personaje.singleton es NULL");
-            return;
-        }
-        if (Personaje.singleton.vida == null)
-        {
-            Debug.LogError("Falla: Personaje.singleton.vida es NULL");
-            return;
-        }
+            Vector3 diferenciaPlana = target.position - transform.position;
+            diferenciaPlana.y = 0;
+            Vector3 direccionEmpuje = diferenciaPlana.normalized;
 
-        Vector3 diferenciaPlana = target.position - transform.position;
-        diferenciaPlana.y = 0;
-        Vector3 direccionEmpuje = diferenciaPlana.normalized;
-
-        Debug.Log($"Aplicando daño y knockback. Dirección: {direccionEmpuje}");
-        Personaje.singleton.vida.RecibirDamageConKnockback(damage, direccionEmpuje, fuerzaKnockback, duracionKnockback);
+            Personaje.singleton.vida.RecibirDamageConKnockback(damage, direccionEmpuje, fuerzaKnockback, duracionKnockback);
+        }
     }
     #endregion
 

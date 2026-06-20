@@ -8,8 +8,8 @@ public class VidaPlayer : MonoBehaviour
     private float saludActual;
 
     [Header("Knockback e Invulnerabilidad")]
-    [SerializeField] private float tiempoInvulnerabilidad = 3.5f; 
-    private float tiempoUltimoGolpe;    
+    [SerializeField] private float tiempoInvulnerabilidad = 0.5f; 
+    private float tiempoUltimoGolpe; 
 
     private bool estaSiendoEmpujado = false;
     private float tiempoRestanteEmpuje;
@@ -29,13 +29,11 @@ public class VidaPlayer : MonoBehaviour
 
     public void RecibirDamageConKnockback(float damage, Vector3 direccion, float fuerza, float duracion)
     {
-        // Si todavía estamos en el tiempo de invulnerabilidad, ignoramos el ataque
         if (Time.time < tiempoUltimoGolpe + tiempoInvulnerabilidad)
         {
             return;
         }
 
-        // Registramos en qué momento exacto nos pegaron
         tiempoUltimoGolpe = Time.time;
 
         CausarDamage(damage);
@@ -71,7 +69,6 @@ public class VidaPlayer : MonoBehaviour
     public void CausarDamage(float d)
     {
         saludActual -= d;
-        Debug.Log($"¡Au! Salud actual: {saludActual}"); // Agregamos un log para ver cómo baja la vida
 
         if (saludActual <= 0)
         {
@@ -81,7 +78,6 @@ public class VidaPlayer : MonoBehaviour
 
     private void Morir()
     {
-        Debug.Log("¡El jugador ha muerto!");
         gameObject.SetActive(false);
     }
 }
