@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Personaje : MonoBehaviour
 {
-    public static Personaje singleton;
-    public VidaPlayer vida;
+    public static Personaje singleton; 
+    public VidaPlayer vida; 
 
     private void Awake()
     {
@@ -13,7 +13,7 @@ public class Personaje : MonoBehaviour
         }
         else if (singleton != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
     }
 }

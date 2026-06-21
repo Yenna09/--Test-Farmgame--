@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1611426580120147403}
   - component: {fileID: 369999239386227256}
   - component: {fileID: 661310251087544843}
-  - component: {fileID: 4003407171601348830}
+  - component: {fileID: 2593888399670249008}
   m_Layer: 0
   m_Name: enemyPrefab
   m_TagString: Untagged
@@ -158,17 +158,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemigoPatrol
   state: 0
+  target: {fileID: 0}
+  vivo: 1
+  distancia: 2
   distanceFollow: 4
   distanciaAtacar: 1
   distanciaEscapar: 6
   autoseleccionarTarget: 1
-  target: {fileID: 0}
-  distancia: 2
-  vivo: 1
-  Waypoints: []
-  distanciaWaypoints: 2
-  damage: 3
+  nodosDelGrafo: []
+  velocidadMovimiento: 3
+  distanciaCambioNodo: 0.5
+  distanciaFrenado: 1.5
+  damage: 1
   velocidadAtaque: 1.5
+  tiempoEsperaRetorno: 1
+  fuerzaKnockback: 10
+  duracionKnockback: 0.2
+  tiempoEsperaPostAtaque: 4
 --- !u!95 &661310251087544843
 Animator:
   serializedVersion: 7
@@ -191,8 +197,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &4003407171601348830
-BoxCollider:
+--- !u!136 &2593888399670249008
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -209,9 +215,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 6.7762636e-21, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.9200153
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!1 &5460443930468121750
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class DayNightCycle : MonoBehaviour
 
         
 
-        //Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
+        Debug.Log($"[Reloj del Juego] Avanzaron 10 minutos. Hora exacta: {hora:00}:{minuto:00}");
         transform.rotation = Quaternion.Euler(anguloObjetivoX, offsetY, offsetZ);
 
         

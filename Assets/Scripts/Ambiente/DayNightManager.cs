@@ -22,7 +22,7 @@ public class DayNightManager : MonoBehaviour
     // Transmite dos números: la hora y el minuto
     public static event Action<int, int> AlCambiarTiempo; 
 
-    public bool esDeDia = true;
+    public static bool esDeDia = true;
     private float temporizador = 0f;
 
     // Creamos la instancia global (como hicimos con el SaveController)

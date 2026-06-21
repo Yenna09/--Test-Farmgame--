@@ -13,7 +13,7 @@ public class EnemigoPatrol : Enemy
     #region Movement Settings
     [SerializeField] private float velocidadMovimiento = 3f;
     [SerializeField] private float distanciaCambioNodo = 0.5f;
-    [SerializeField] private float distanciaFrenado = 1.5f;
+    [SerializeField] private float distanciaFrenado = 1.5f; 
     private float distanciaCambioNodoSqr;
     private Rigidbody rb;
     #endregion
@@ -22,13 +22,13 @@ public class EnemigoPatrol : Enemy
     [SerializeField] private float damage = 1f;
     [SerializeField] private float velocidadAtaque = 1.5f;
     [SerializeField] private float tiempoEsperaRetorno = 1f;
-
+    
     [Header("Knockback Settings")]
-    [SerializeField] private float fuerzaKnockback = 10f;
-    [SerializeField] private float duracionKnockback = 0.2f;
+    [SerializeField] private float fuerzaKnockback = 10f; 
+    [SerializeField] private float duracionKnockback = 0.2f; 
 
     [Header("Stun / Recovery Settings")]
-    [SerializeField] private float tiempoEsperaPostAtaque = 4f;
+    [SerializeField] private float tiempoEsperaPostAtaque = 4f; 
 
     private float tiempoRetorno;
     private float tiempoSiguienteAtaque;
@@ -56,7 +56,7 @@ public class EnemigoPatrol : Enemy
     public void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); 
         distanciaCambioNodoSqr = distanciaCambioNodo * distanciaCambioNodo;
     }
 
@@ -134,7 +134,7 @@ public class EnemigoPatrol : Enemy
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
-
+            
             estaEnRecuperacion = true;
             tiempoFinRecuperacion = Time.time + tiempoEsperaPostAtaque;
             tiempoSiguienteAtaque = tiempoFinRecuperacion + velocidadAtaque;
@@ -169,11 +169,11 @@ public class EnemigoPatrol : Enemy
 
         if (distanciaAlDestino <= limiteAcercamiento)
         {
-            return;
+            return; 
         }
 
         float direccionX = destinoPlano.x - transform.position.x;
-
+        
         Vector3 nuevaPosicion = Vector3.MoveTowards(transform.position, destinoPlano, velocidadMovimiento * Time.deltaTime);
         rb.MovePosition(nuevaPosicion);
 

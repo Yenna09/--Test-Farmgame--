@@ -8,8 +8,8 @@ public class VidaPlayer : MonoBehaviour
     private float saludActual;
 
     [Header("Knockback e Invulnerabilidad")]
-    [SerializeField] private float tiempoInvulnerabilidad = 0.5f;
-    private float tiempoUltimoGolpe;
+    [SerializeField] private float tiempoInvulnerabilidad = 0.5f; 
+    private float tiempoUltimoGolpe; 
 
     private bool estaSiendoEmpujado = false;
     private float tiempoRestanteEmpuje;
