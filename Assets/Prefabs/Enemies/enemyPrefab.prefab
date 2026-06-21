@@ -162,7 +162,7 @@ MonoBehaviour:
   vivo: 1
   distancia: 2
   distanceFollow: 4
-  distanciaAtacar: 1
+  distanciaAtacar: 3
   distanciaEscapar: 6
   autoseleccionarTarget: 1
   nodosDelGrafo: []
@@ -172,9 +172,11 @@ MonoBehaviour:
   damage: 1
   velocidadAtaque: 1.5
   tiempoEsperaRetorno: 1
-  fuerzaKnockback: 10
+  fuerzaKnockback: 5
   duracionKnockback: 0.2
-  tiempoEsperaPostAtaque: 4
+  tiempoEsperaPostAtaque: 2
+  tiempoAnticipacion: 0.4
+  colorAnticipacion: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!95 &661310251087544843
 Animator:
   serializedVersion: 7

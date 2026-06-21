@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -29,11 +30,14 @@ public class EnemigoPatrol : Enemy
 
     [Header("Stun / Recovery Settings")]
     [SerializeField] private float tiempoEsperaPostAtaque = 4f; 
+    [SerializeField] private float tiempoAnticipacion = 0.4f; 
+    [SerializeField] private Color colorAnticipacion = new Color(1f, 0.5f, 0.5f); 
 
     private float tiempoRetorno;
     private float tiempoSiguienteAtaque;
-    private float tiempoFinRecuperacion;
     private bool estaEnRecuperacion = false;
+    private bool estaAtacando = false;
+    private Color colorOriginal;
     #endregion
 
     #region References
@@ -56,6 +60,8 @@ public class EnemigoPatrol : Enemy
     public void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null) colorOriginal = spriteRenderer.color;
+        
         rb = GetComponent<Rigidbody>(); 
         distanciaCambioNodoSqr = distanciaCambioNodo * distanciaCambioNodo;
     }
@@ -96,14 +102,7 @@ public class EnemigoPatrol : Enemy
 
     public override void FollowState()
     {
-        if (estaEnRecuperacion)
-        {
-            if (Time.time >= tiempoFinRecuperacion)
-            {
-                estaEnRecuperacion = false;
-            }
-            return;
-        }
+        if (estaEnRecuperacion || estaAtacando) return;
 
         base.FollowState();
 
@@ -115,14 +114,7 @@ public class EnemigoPatrol : Enemy
 
     public override void AttackState()
     {
-        if (estaEnRecuperacion)
-        {
-            if (Time.time >= tiempoFinRecuperacion)
-            {
-                estaEnRecuperacion = false;
-            }
-            return;
-        }
+        if (estaEnRecuperacion || estaAtacando) return;
 
         base.AttackState();
 
@@ -133,11 +125,7 @@ public class EnemigoPatrol : Enemy
 
         if (Time.time >= tiempoSiguienteAtaque)
         {
-            Atacar();
-            
-            estaEnRecuperacion = true;
-            tiempoFinRecuperacion = Time.time + tiempoEsperaPostAtaque;
-            tiempoSiguienteAtaque = tiempoFinRecuperacion + velocidadAtaque;
+            StartCoroutine(RutinaAtacar());
         }
     }
 
@@ -158,6 +146,27 @@ public class EnemigoPatrol : Enemy
 
             Personaje.singleton.vida.RecibirDamageConKnockback(damage, direccionEmpuje, fuerzaKnockback, duracionKnockback);
         }
+    }
+
+    private IEnumerator RutinaAtacar()
+    {
+        estaAtacando = true;
+
+        if (spriteRenderer != null) spriteRenderer.color = colorAnticipacion;
+        yield return new WaitForSeconds(tiempoAnticipacion);
+        if (spriteRenderer != null) spriteRenderer.color = colorOriginal;
+
+        if (target != null && Vector3.Distance(transform.position, target.position) <= distanciaAtacar)
+        {
+            Atacar();
+        }
+        estaAtacando = false;
+
+        estaEnRecuperacion = true;
+        yield return new WaitForSeconds(tiempoEsperaPostAtaque);
+        estaEnRecuperacion = false;
+
+        tiempoSiguienteAtaque = Time.time + velocidadAtaque;
     }
     #endregion
 
