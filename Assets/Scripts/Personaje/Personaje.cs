@@ -1,10 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
 public class Personaje : MonoBehaviour
 {
     public static Personaje singleton;
-    public Vida vida;
+    public VidaPlayer vida;
 
     private void Awake()
     {
@@ -12,14 +11,9 @@ public class Personaje : MonoBehaviour
         {
             singleton = this;
         }
-        else
+        else if (singleton != this)
         {
-            DestroyImmediate(this.gameObject);
-        }
-
-        if (vida == null)
-        {
-            vida = GetComponent<Vida>();
+            Destroy(gameObject);
         }
     }
 }

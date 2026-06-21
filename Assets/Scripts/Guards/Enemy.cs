@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -8,53 +6,47 @@ using UnityEditor;
 public class Enemy : MonoBehaviour
 {
     public States state;
-    [SerializeField] public float distanceFollow;
-    [SerializeField] public float distanciaAtacar;
-    [SerializeField] public float distanciaEscapar;
-
-    public bool autoseleccionarTarget = true;
     public Transform target;
-    public float distancia; 
-
     public bool vivo = true;
+    public float distancia;
+
+    [SerializeField] protected float distanceFollow = 10f;
+    [SerializeField] protected float distanciaAtacar = 2f;
+    [SerializeField] protected float distanciaEscapar = 15f;
+    [SerializeField] protected bool autoseleccionarTarget = true;
 
     private void Start()
     {
         BuscarJugador();
     }
 
-    private void LateUpdate() 
+    private void LateUpdate()
     {
-        // CAMBIO: Si estamos vivos, queremos autoseleccionar, y perdimos al target... lo buscamos.
-        // Esto soluciona el problema de cuando el jugador se destruye al cambiar de escena y vuelve a aparecer.
         if (target == null && autoseleccionarTarget && vivo)
         {
             BuscarJugador();
         }
 
-        // Medimos la distancia en tiempo real, de forma segura
         if (target != null)
         {
             distancia = Vector3.Distance(transform.position, target.position);
         }
-        else 
+        else
         {
-            distancia = 999f; // Si perdimos la referencia, no perseguimos fantasmas
+            distancia = 999f;
         }
 
         CheckState();
     }
 
-    // Encapsulamos la lógica de búsqueda para mantener el código limpio
     private void BuscarJugador()
     {
         if (Personaje.singleton != null)
         {
             target = Personaje.singleton.transform;
         }
-        else 
+        else
         {
-            // Solo usamos FindGameObjectWithTag como respaldo si no hay singleton
             GameObject jugador = GameObject.FindGameObjectWithTag("Player");
             if (jugador != null)
             {
@@ -72,17 +64,17 @@ public class Enemy : MonoBehaviour
 
         switch (state)
         {
-            case States.idle: 
-                IdleState(); 
+            case States.idle:
+                IdleState();
                 break;
-            case States.atacar: 
-                AttackState(); 
+            case States.atacar:
+                AttackState();
                 break;
-            case States.muerto: 
+            case States.muerto:
                 vivo = false;
                 break;
-            case States.seguir: 
-                FollowState(); // ¡Cero LookAt! Solo ejecutamos el estado
+            case States.seguir:
+                FollowState();
                 break;
         }
     }
@@ -99,7 +91,7 @@ public class Enemy : MonoBehaviour
             ChangeState(States.seguir);
         }
     }
-    
+
     public virtual void AttackState()
     {
         if (target != null && distancia > distanciaAtacar + 0.4f)
@@ -107,7 +99,7 @@ public class Enemy : MonoBehaviour
             ChangeState(States.seguir);
         }
     }
-    
+
     public virtual void FollowState()
     {
         if (target == null) return;
@@ -116,19 +108,18 @@ public class Enemy : MonoBehaviour
         {
             ChangeState(States.atacar);
         }
-        else if(distancia > distanciaEscapar)
+        else if (distancia > distanciaEscapar)
         {
             ChangeState(States.idle);
         }
     }
-    
-    public virtual void DeathState() 
-    { 
-        
+
+    public virtual void DeathState()
+    {
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmosSelected()
     {
         if (this == null) return;
 
@@ -141,13 +132,13 @@ public class Enemy : MonoBehaviour
     }
 #endif
 
-    private void OnDrawGizmos() 
+    private void OnDrawGizmos()
     {
         if (this == null || transform == null) return;
 
-        int icono = (int) state;
+        int icono = (int)state;
         icono++;
-        
+
         Gizmos.DrawIcon(transform.position + Vector3.up * 2f, "0" + icono + ".png");
     }
 }

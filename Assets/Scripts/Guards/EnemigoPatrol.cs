@@ -1,103 +1,69 @@
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
 public class EnemigoPatrol : Enemy
 {
-    private NavMeshAgent agent;
-    
-    // CAMBIO 1: Guardamos las posiciones como Vector3, no como Transform
-    public Vector3[] waypointsPositions; 
-    private int indice;
-    public float distanciaWaypoints;
-    private float distanciaWaypoints2;
-    public float damage = 3;
-    public float tiempoEsperaRetorno = 1f;
+    #region Graph Data
+    [SerializeField] private List<Vector3> nodosDelGrafo = new List<Vector3>();
+    private int indiceNodoActual;
+    private Vector3 destinoActual;
+    #endregion
+
+    #region Movement Settings
+    [SerializeField] private float velocidadMovimiento = 3f;
+    [SerializeField] private float distanciaCambioNodo = 0.5f;
+    [SerializeField] private float distanciaFrenado = 1.5f;
+    private float distanciaCambioNodoSqr;
+    private Rigidbody rb;
+    #endregion
+
+    #region Combat Settings
+    [SerializeField] private float damage = 1f;
+    [SerializeField] private float velocidadAtaque = 1.5f;
+    [SerializeField] private float tiempoEsperaRetorno = 1f;
+
+    [Header("Knockback Settings")]
+    [SerializeField] private float fuerzaKnockback = 10f;
+    [SerializeField] private float duracionKnockback = 0.2f;
+
+    [Header("Stun / Recovery Settings")]
+    [SerializeField] private float tiempoEsperaPostAtaque = 4f;
+
     private float tiempoRetorno;
-
     private float tiempoSiguienteAtaque;
-    public float velocidadAtaque = 1.5f;
-    
-    private SpriteRenderer spriteRenderer;
+    private float tiempoFinRecuperacion;
+    private bool estaEnRecuperacion = false;
+    #endregion
 
-    // CAMBIO 2: Extraemos las posiciones exactas de los Transforms
-    public void AsignarWaypoints(Transform[] rutasDelSpawner)
+    #region References
+    private SpriteRenderer spriteRenderer;
+    #endregion
+
+    public void ConstruirGrafo(Transform[] rutasDelSpawner)
     {
+        nodosDelGrafo.Clear();
         if (rutasDelSpawner == null || rutasDelSpawner.Length == 0) return;
 
-        waypointsPositions = new Vector3[rutasDelSpawner.Length];
         for (int i = 0; i < rutasDelSpawner.Length; i++)
         {
-            waypointsPositions[i] = rutasDelSpawner[i].position;
+            nodosDelGrafo.Add(rutasDelSpawner[i].position);
         }
+
+        destinoActual = nodosDelGrafo[0];
     }
 
-    // CAMBIO 3: Devuelve Vector3 en lugar de Transform
-    private bool TryGetNextValidWaypoint(out Vector3 waypoint)
+    public void Awake()
     {
-        waypoint = Vector3.zero;
-        if (waypointsPositions == null || waypointsPositions.Length == 0) return false;
-
-        waypoint = waypointsPositions[indice];
-        return true;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>();
+        distanciaCambioNodoSqr = distanciaCambioNodo * distanciaCambioNodo;
     }
 
-    // CAMBIO 4: Buscamos el ÍNDICE del waypoint más cercano basándonos en los Vector3
-    private int GetClosestWaypointIndex()
-    {
-        if (waypointsPositions == null || waypointsPositions.Length == 0) return 0;
-
-        int closestIndex = 0;
-        float bestSqrDist = float.MaxValue;
-
-        for (int i = 0; i < waypointsPositions.Length; i++)
-        {
-            float sqrDist = (waypointsPositions[i] - transform.position).sqrMagnitude;
-            if (sqrDist < bestSqrDist)
-            {
-                bestSqrDist = sqrDist;
-                closestIndex = i;
-            }
-        }
-
-        return closestIndex;
-    }
-
-    public void Awake() 
-    {
-        agent = GetComponent<NavMeshAgent>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
-
-        // --- BLINDAJE 2.5D DEFINITIVO ---
-        if (agent != null)
-        {
-            agent.updateRotation = false; // No lo rota el NavMesh
-            agent.updateUpAxis = false;   // No se inclina con el suelo
-        }
-
-        distanciaWaypoints2 = distanciaWaypoints * distanciaWaypoints;
-    }
-
-    private void Update() 
-    {
-        if (spriteRenderer == null || agent == null) return;
-
-        float velocidadX = agent.velocity.x;
-
-        if (velocidadX > 0.05f)
-        {
-            spriteRenderer.flipX = false; 
-        }
-        else if (velocidadX < -0.05f)
-        {
-            spriteRenderer.flipX = true; 
-        }
-    }
-
+    #region State Machine Overrides
     public override void IdleState()
     {
         base.IdleState();
-
-        if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh) return;
 
         if (target != null)
         {
@@ -106,84 +72,166 @@ public class EnemigoPatrol : Enemy
         else
         {
             if (tiempoRetorno <= 0f) tiempoRetorno = Time.time + tiempoEsperaRetorno;
-            if (Time.time < tiempoRetorno)
-            {
-                agent.SetDestination(transform.position);
-                return;
-            }
+            if (Time.time < tiempoRetorno) return;
         }
 
-        // Verificamos si tenemos coordenadas válidas guardadas
-        if (!TryGetNextValidWaypoint(out Vector3 siguienteWaypoint))
-        {
-            Debug.LogWarning($"[EnemigoPatrol] No hay waypoints válidos para {gameObject.name}.");
-            agent.SetDestination(transform.position);
-            return;
-        }
+        if (nodosDelGrafo.Count == 0) return;
 
-        // CAMBIO 5: Si el jugador desaparece (cambio de escena), recalcula el waypoint más cercano a su posición actual
         if (target == null)
         {
-            indice = GetClosestWaypointIndex();
-            Vector3 waypointCercano = waypointsPositions[indice];
-            
-            agent.SetDestination(waypointCercano);
-            
-            if ((waypointCercano - transform.position).sqrMagnitude < distanciaWaypoints2)
-            {
-                indice = (indice + 1) % waypointsPositions.Length;
-            }
-            return;
+            destinoActual = ObtenerPuntoMasCercanoEnGrafo();
+        }
+        else
+        {
+            destinoActual = nodosDelGrafo[indiceNodoActual];
         }
 
-        // Patrullaje normal
-        agent.SetDestination(siguienteWaypoint);
-        if ((siguienteWaypoint - transform.position).sqrMagnitude < distanciaWaypoints2)
+        MoverHaciaDestino(destinoActual, 0.1f);
+
+        if ((destinoActual - transform.position).sqrMagnitude < distanciaCambioNodoSqr)
         {
-            indice = (indice + 1) % waypointsPositions.Length;
+            indiceNodoActual = (indiceNodoActual + 1) % nodosDelGrafo.Count;
         }
     }
 
     public override void FollowState()
     {
-        base.FollowState();
-        
-        if (target != null && agent.isActiveAndEnabled && agent.isOnNavMesh) 
+        if (estaEnRecuperacion)
         {
-            agent.SetDestination(target.position);
+            if (Time.time >= tiempoFinRecuperacion)
+            {
+                estaEnRecuperacion = false;
+            }
+            return;
+        }
+
+        base.FollowState();
+
+        if (target != null)
+        {
+            MoverHaciaDestino(target.position, distanciaFrenado);
         }
     }
 
     public override void AttackState()
     {
-        base.AttackState();
-        
-        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+        if (estaEnRecuperacion)
         {
-            agent.SetDestination(transform.position); // Se detiene para golpear
+            if (Time.time >= tiempoFinRecuperacion)
+            {
+                estaEnRecuperacion = false;
+            }
+            return;
+        }
+
+        base.AttackState();
+
+        if (target != null)
+        {
+            MoverHaciaDestino(target.position, distanciaFrenado);
         }
 
         if (Time.time >= tiempoSiguienteAtaque)
         {
             Atacar();
-            tiempoSiguienteAtaque = Time.time + velocidadAtaque;
+
+            estaEnRecuperacion = true;
+            tiempoFinRecuperacion = Time.time + tiempoEsperaPostAtaque;
+            tiempoSiguienteAtaque = tiempoFinRecuperacion + velocidadAtaque;
         }
     }
 
     public override void DeathState()
     {
         base.IdleState();
-        if (agent != null)
+    }
+    #endregion
+
+    #region Combat Logic
+    public void Atacar()
+    {
+        if (Personaje.singleton != null && Personaje.singleton.vida != null && target != null)
         {
-            agent.enabled = false;
+            Vector3 diferenciaPlana = target.position - transform.position;
+            diferenciaPlana.y = 0;
+            Vector3 direccionEmpuje = diferenciaPlana.normalized;
+
+            Personaje.singleton.vida.RecibirDamageConKnockback(damage, direccionEmpuje, fuerzaKnockback, duracionKnockback);
+        }
+    }
+    #endregion
+
+    #region Movement Logic
+    private void MoverHaciaDestino(Vector3 destino, float limiteAcercamiento)
+    {
+        Vector3 destinoPlano = new Vector3(destino.x, transform.position.y, destino.z);
+        float distanciaAlDestino = Vector3.Distance(transform.position, destinoPlano);
+
+        if (distanciaAlDestino <= limiteAcercamiento)
+        {
+            return;
+        }
+
+        float direccionX = destinoPlano.x - transform.position.x;
+
+        Vector3 nuevaPosicion = Vector3.MoveTowards(transform.position, destinoPlano, velocidadMovimiento * Time.deltaTime);
+        rb.MovePosition(nuevaPosicion);
+
+        ActualizarSprite(direccionX);
+    }
+
+    private void ActualizarSprite(float velocidadX)
+    {
+        if (spriteRenderer == null) return;
+
+        if (velocidadX > 0.05f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (velocidadX < -0.05f)
+        {
+            spriteRenderer.flipX = true;
         }
     }
 
-    public void Atacar()
+    private Vector3 ObtenerPuntoMasCercanoEnGrafo()
     {
-        if (Personaje.singleton != null && Personaje.singleton.vida != null)
+        if (nodosDelGrafo.Count == 0) return transform.position;
+        if (nodosDelGrafo.Count == 1) return nodosDelGrafo[0];
+
+        Vector3 puntoMasCercano = nodosDelGrafo[0];
+        float distanciaMinimaSqr = float.MaxValue;
+
+        for (int i = 0; i < nodosDelGrafo.Count; i++)
         {
-            Personaje.singleton.vida.CausarDamage(damage);
+            Vector3 nodoA = nodosDelGrafo[i];
+            Vector3 nodoB = nodosDelGrafo[(i + 1) % nodosDelGrafo.Count];
+
+            Vector3 proyeccion = ProyectarPuntoEnSegmento(transform.position, nodoA, nodoB);
+            float distSqr = (transform.position - proyeccion).sqrMagnitude;
+
+            if (distSqr < distanciaMinimaSqr)
+            {
+                distanciaMinimaSqr = distSqr;
+                puntoMasCercano = proyeccion;
+                indiceNodoActual = (i + 1) % nodosDelGrafo.Count;
+            }
         }
+
+        return puntoMasCercano;
     }
+
+    private Vector3 ProyectarPuntoEnSegmento(Vector3 punto, Vector3 inicioArista, Vector3 finArista)
+    {
+        Vector3 direccionArista = finArista - inicioArista;
+        float longitudAristaSqr = direccionArista.sqrMagnitude;
+
+        if (longitudAristaSqr == 0f) return inicioArista;
+
+        float t = Vector3.Dot(punto - inicioArista, direccionArista) / longitudAristaSqr;
+        t = Mathf.Clamp01(t);
+
+        return inicioArista + t * direccionArista;
+    }
+    #endregion
 }
