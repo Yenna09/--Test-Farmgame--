@@ -34,13 +34,13 @@ public class Inventory : MonoBehaviour
         // Primero Intenta Stackear
         if (itemData.acumulable)
         {
-            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
-            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
+            if (TryStackItem(hotbarContainer, id, ref quantity, itemData.maxStack)) { pickUpItem?.Invoke(); ; return true; } // ¡Éxito!
+            if (TryStackItem(slotsContainer, id, ref quantity, itemData.maxStack)) { pickUpItem?.Invoke(); return true; } // ¡Éxito!
         }
 
         // Buscamos un SLOT VACIO
-        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
-        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) { pickUpItem.Invoke(); return true; } // ¡Éxito!
+        if (TrySpawnInEmptySlot(hotbarContainer, id, quantity)) { pickUpItem?.Invoke(); return true; } // ¡Éxito!
+        if (TrySpawnInEmptySlot(slotsContainer, id, quantity)) { pickUpItem?.Invoke(); return true; } // ¡Éxito!
 
         
 
