@@ -11,10 +11,14 @@ public class EnemigoPatrol : Enemy
     private Vector3 destinoActual;
     #endregion
 
-    #region Movement Settings
-    [SerializeField] private float velocidadMovimiento = 3f;
+    #region Movement Speeds
+    [Header("Movement Speeds")]
+    [SerializeField] private float velocidadPatrullaje = 3f;
+    [SerializeField] private float velocidadPersecucion = 8f;
+    private float velocidadActual;
+
     [SerializeField] private float distanciaCambioNodo = 0.5f;
-    [SerializeField] private float distanciaFrenado = 1.5f; 
+    [SerializeField] private float distanciaFrenado = 1.3f; 
     private float distanciaCambioNodoSqr;
     private Rigidbody rb;
     #endregion
@@ -26,14 +30,13 @@ public class EnemigoPatrol : Enemy
     
     [Header("Knockback Settings")]
     [SerializeField] private float fuerzaKnockback = 10f; 
-    [SerializeField] private float duracionKnockback = 0.2f; 
+    [SerializeField] private float duracionKnockback = 0.15f; 
 
     [Header("Stun / Recovery Settings")]
-    [SerializeField] private float tiempoEsperaPostAtaque = 4f; 
-    [SerializeField] private float tiempoAnticipacion = 0.4f; 
+    [SerializeField] private float tiempoEsperaPostAtaque = 1.6f; 
+    [SerializeField] private float tiempoAnticipacion = 0.3f; 
     [SerializeField] private Color colorAnticipacion = new Color(1f, 0.5f, 0.5f); 
 
-    private float tiempoRetorno;
     private float tiempoSiguienteAtaque;
     private bool estaEnRecuperacion = false;
     private bool estaAtacando = false;
@@ -54,7 +57,7 @@ public class EnemigoPatrol : Enemy
             nodosDelGrafo.Add(rutasDelSpawner[i].position);
         }
 
-        destinoActual = nodosDelGrafo[0];
+        destinoActual = ObtenerPuntoMasCercanoEnGrafo();
     }
 
     public void Awake()
@@ -64,47 +67,46 @@ public class EnemigoPatrol : Enemy
         
         rb = GetComponent<Rigidbody>(); 
         distanciaCambioNodoSqr = distanciaCambioNodo * distanciaCambioNodo;
+        velocidadActual = velocidadPatrullaje;
     }
 
     #region State Machine Overrides
     public override void IdleState()
     {
-        base.IdleState();
+        velocidadActual = velocidadPatrullaje;
+        base.IdleState(); // Esto chequea si el jugador entró en el rango de visión
 
-        if (target != null)
-        {
-            tiempoRetorno = 0f;
-        }
-        else
-        {
-            if (tiempoRetorno <= 0f) tiempoRetorno = Time.time + tiempoEsperaRetorno;
-            if (Time.time < tiempoRetorno) return;
-        }
+        // Si base.IdleState nos pasó al estado de Seguir, abortamos el patrullaje
+        if (state != States.idle) return;
 
         if (nodosDelGrafo.Count == 0) return;
 
-        if (target == null)
-        {
-            destinoActual = ObtenerPuntoMasCercanoEnGrafo();
-        }
-        else
-        {
-            destinoActual = nodosDelGrafo[indiceNodoActual];
-        }
-
+        // Caminamos tranquilos hacia el siguiente nodo
         MoverHaciaDestino(destinoActual, 0.1f);
 
+        // Si llegamos al nodo, pasamos al siguiente
         if ((destinoActual - transform.position).sqrMagnitude < distanciaCambioNodoSqr)
         {
             indiceNodoActual = (indiceNodoActual + 1) % nodosDelGrafo.Count;
+            destinoActual = nodosDelGrafo[indiceNodoActual];
         }
     }
 
     public override void FollowState()
     {
+        velocidadActual = velocidadPersecucion;
+
         if (estaEnRecuperacion || estaAtacando) return;
 
-        base.FollowState();
+        base.FollowState(); // Esto chequea si el jugador logró alejarse
+
+        // ¡Si el código base acaba de pasarnos a Idle, significa que perdimos el aggro!
+        if (state == States.idle)
+        {
+            // Recalculamos el camino más corto para no volver cruzando todo el mapa
+            destinoActual = ObtenerPuntoMasCercanoEnGrafo();
+            return;
+        }
 
         if (target != null)
         {
@@ -114,6 +116,8 @@ public class EnemigoPatrol : Enemy
 
     public override void AttackState()
     {
+        velocidadActual = velocidadPersecucion;
+
         if (estaEnRecuperacion || estaAtacando) return;
 
         base.AttackState();
@@ -183,7 +187,7 @@ public class EnemigoPatrol : Enemy
 
         float direccionX = destinoPlano.x - transform.position.x;
         
-        Vector3 nuevaPosicion = Vector3.MoveTowards(transform.position, destinoPlano, velocidadMovimiento * Time.deltaTime);
+        Vector3 nuevaPosicion = Vector3.MoveTowards(transform.position, destinoPlano, velocidadActual * Time.deltaTime);
         rb.MovePosition(nuevaPosicion);
 
         ActualizarSprite(direccionX);
