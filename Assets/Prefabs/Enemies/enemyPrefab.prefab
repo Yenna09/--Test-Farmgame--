@@ -139,21 +139,21 @@ MonoBehaviour:
   vivo: 1
   distancia: 2
   distanceFollow: 3
-  distanciaAtacar: 1.5
-  distanciaEscapar: 6
+  distanciaAtacar: 1.2
+  distanciaEscapar: 4
   autoseleccionarTarget: 1
   nodosDelGrafo: []
   velocidadPatrullaje: 5
-  velocidadPersecucion: 3
+  velocidadPersecucion: 4.4
   distanciaCambioNodo: 0.5
-  distanciaFrenado: 1.3
+  distanciaFrenado: 0.5
   damage: 1
-  velocidadAtaque: 1.5
+  velocidadAtaque: 1
   tiempoEsperaRetorno: 1
   fuerzaKnockback: 10
   duracionKnockback: 0.15
-  tiempoEsperaPostAtaque: 3
-  tiempoAnticipacion: 0.3
+  tiempoEsperaPostAtaque: 0.3
+  tiempoAnticipacion: 0.2
   colorAnticipacion: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!95 &661310251087544843
 Animator:
