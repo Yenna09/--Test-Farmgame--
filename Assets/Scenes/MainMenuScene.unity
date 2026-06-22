@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 398918326}
   - component: {fileID: 398918325}
   - component: {fileID: 398918323}
+  - component: {fileID: 398918327}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Audio
@@ -740,6 +741,19 @@ MonoBehaviour:
   unloadTriggerList: 
   bankNameInternal: 
   valueGuidInternal: 
+--- !u!114 &398918327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398918320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0224205ef67b97d478846b8efb1ae64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnTimeChangeAudio
+  dayNightManager: {fileID: 0}
 --- !u!1 &608790983
 GameObject:
   m_ObjectHideFlags: 0

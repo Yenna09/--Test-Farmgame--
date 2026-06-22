@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+using UnityEngine.SceneManagement;
+using UnityEditor.SearchService;
+
+
 public class DayNightManager : MonoBehaviour
 {
     [Header("Configuración del Tiempo")]
@@ -25,6 +29,10 @@ public class DayNightManager : MonoBehaviour
     public static bool esDeDia = true;
     private float temporizador = 0f;
 
+    string sceneName;
+    UnityEngine.SceneManagement.Scene m_Scene;
+
+
     // Creamos la instancia global (como hicimos con el SaveController)
     public static DayNightManager Instance { get; private set; }
 
@@ -37,18 +45,24 @@ public class DayNightManager : MonoBehaviour
     {
         // Determinamos el estado inicial en base a la hora de inicio
         esDeDia = (horaActual >= horaAmanecer && horaActual < horaAnochecer);
+        m_Scene = SceneManager.GetActiveScene();
+        sceneName = m_Scene.name;
     }
 
     void Update()
     {
-        // Acumulamos el tiempo real que pasa
-        temporizador += Time.deltaTime;
 
-        // Si el tiempo acumulado supera nuestro límite, avanzamos el reloj del juego
-        if (temporizador >= segundosRealesPorTick)
+        if (sceneName != "Casa")
         {
-            temporizador -= segundosRealesPorTick; // Reseteamos el temporizador
-            AvanzarTiempo();
+            // Acumulamos el tiempo real que pasa
+            temporizador += Time.deltaTime;
+
+            // Si el tiempo acumulado supera nuestro límite, avanzamos el reloj del juego
+            if (temporizador >= segundosRealesPorTick)
+            {
+                temporizador -= segundosRealesPorTick; // Reseteamos el temporizador
+                AvanzarTiempo();
+            }
         }
     }
 

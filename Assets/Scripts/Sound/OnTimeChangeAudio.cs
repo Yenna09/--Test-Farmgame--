@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OnTimeChangeAudio : MonoBehaviour
 {
@@ -7,7 +8,16 @@ public class OnTimeChangeAudio : MonoBehaviour
     [Header("Pongan el DayNightManager acá.")]
     private DayNightManager dayNightManager;
 
-  
+    string sceneName;
+    UnityEngine.SceneManagement.Scene m_Scene;
+
+    private void Start()
+    {
+        m_Scene = SceneManager.GetActiveScene();
+        sceneName = m_Scene.name;
+    }
+
+
     private void OnEnable()
     {
         DayNightManager.AlAmanecer += setDayState;
@@ -21,13 +31,16 @@ public class OnTimeChangeAudio : MonoBehaviour
    
     private void setDayState()
     {
+        Debug.Log("ESTADO DIA");
         AkUnitySoundEngine.SetState("Time", "Day");
-        AkUnitySoundEngine.PostEvent("Play_DayNightStart", this.gameObject);
+        if (sceneName == "PrototipoMain") AkUnitySoundEngine.PostEvent("Play_DayNightStart", this.gameObject);
+
     }
     private void setNightState()
     {
+        Debug.Log("ESTADO NOCHE");
         AkUnitySoundEngine.SetState("Time", "Night");
-        AkUnitySoundEngine.PostEvent("Play_DayNightStart", this.gameObject);
+        if (sceneName == "PrototipoMain") AkUnitySoundEngine.PostEvent("Play_DayNightStart", this.gameObject);
     }
 
 }
