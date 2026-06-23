@@ -8,6 +8,7 @@ public class OnTimeChangeAudio : MonoBehaviour
     [Header("Pongan el DayNightManager acá.")]
     private DayNightManager dayNightManager;
 
+    public GameObject AudioPlayer;
     string sceneName;
     UnityEngine.SceneManagement.Scene m_Scene;
 

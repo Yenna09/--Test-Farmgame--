@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     string sceneName;
@@ -16,15 +16,20 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
     private void Start()
     {
+        
         m_Scene = SceneManager.GetActiveScene();
         sceneName = m_Scene.name;
-        if ( sceneName == "MainMenuScene" & menuAudioisPlaying == false)
+        if (sceneName == "MainMenuScene" & menuAudioisPlaying == false)
         {
             AkUnitySoundEngine.PostEvent("Play_MainMenu", this.gameObject);
             menuAudioisPlaying = true;
         }
-
     }
+    
+
+    
+
 }
