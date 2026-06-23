@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
+
 
 
 public class DayNightManager : MonoBehaviour
