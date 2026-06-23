@@ -144,7 +144,7 @@ MonoBehaviour:
   autoseleccionarTarget: 1
   nodosDelGrafo: []
   velocidadPatrullaje: 5
-  velocidadPersecucion: 4.4
+  velocidadPersecucion: 4
   distanciaCambioNodo: 0.5
   distanciaFrenado: 0.5
   damage: 1
