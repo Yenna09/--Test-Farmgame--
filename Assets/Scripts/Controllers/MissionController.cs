@@ -11,8 +11,9 @@ public class MissionController : MonoBehaviour
     [SerializeField] private int requiredQuantity;
     private bool missionFinished = false;
 
-    [SerializeField] private GameObject disableObject;
-    [SerializeField] private GameObject enableObject;
+    [SerializeField] private Dialogue disableObject;
+    [SerializeField] private Dialogue enableObject;
+
 
     //Para otorgar objetos al jugador.
     [SerializeField] Inventory playerIntentory;
@@ -43,8 +44,8 @@ public class MissionController : MonoBehaviour
             missionFinished = true;
 
             //Esto se podria hacer mucho mas eficiente y modular, pero por ahora pongo los cambios que produce la mision acá en codigo
-            disableObject.SetActive(false);
-            enableObject.SetActive(true);
+            disableObject.enabled = false;
+            enableObject.enabled = true;
 
             Debug.Log("Mision cumplida!");
 
